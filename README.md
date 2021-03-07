@@ -7,9 +7,8 @@
 - your diet, 
 - your restrictions, 
 - your favorite cuisine
-- ...or simply gives out simple suggestions if you feel uninspired!
+- *...or simply gives out simple suggestions if you feel uninspired!*
 
-- There is a wine section as well that helps you choose the right kind of wine to go with your meal!
+**There is a wine section as well that helps you choose the right kind of wine to go with your meal & blog section where you can post your own concoction!**
 
-- There is a blog section where you can post your own concoction
 
