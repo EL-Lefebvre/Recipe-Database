@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -18,7 +18,7 @@ ul {
 li {
     list-style-type: none;
 }
-html { font-family: 'Shippori Mincho B1', serif;}
+html { font-family: 'Shippori Mincho', serif;}
 
 
 
@@ -29,4 +29,4 @@ html { font-family: 'Shippori Mincho B1', serif;}
 
 
 `;
-export default GlobalStyles
+export default GlobalStyles;
