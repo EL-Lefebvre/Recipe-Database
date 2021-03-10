@@ -20,6 +20,7 @@ li {
 }
 html { font-family: 'Shippori Mincho', serif;}
 
+*{   outline:none;}
 
 
 

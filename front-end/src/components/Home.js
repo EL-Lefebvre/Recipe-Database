@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { COLORS } from "../constants";
 import styled from "styled-components";
 import Logo from "../assets/food.png";
 const Home = () => {
+  const [data, setData] = useState();
+  const profileInfo = async () => {
+    try {
+      const response = await fetch("/recipes/random")
+        .then((data) => data.json())
+        .then((data) => data);
+     console.log(response)
+    } catch (err) {
+      console.log("error");
+    }
+  };
+  useEffect(() => {
+
+      profileInfo();
+    
+  }, [data]);
+  console.log(data);
   return (
     <Wrapper>
       <Layout>
@@ -28,28 +45,49 @@ const Wrapper = styled.div`
   padding-top: 50px;
 `;
 const Layout = styled.div`
-margin-top:0px;
+  margin-top: 0px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  border: 5px double black;
   align-items: center;
   background-color: ${COLORS.third};
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  height:150px;
-  margin-bottom:50px;
+  height: 150px;
+  margin-bottom: 50px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 85vw;
+    margin-top: -30px;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 85vw;
+    margin-top: -30px;
+  }
 `;
 const Title = styled.div`
-color:white;
+  color: white;
+  text-decoration: underline;
 `;
-const Search = styled.div``;
-const SearchBar = styled.input`
+const Search = styled.div`
+  height: 150px;
   width: 500px;
+`;
+const SearchBar = styled.input`
+  width: 450px;
   height: 35px;
   border-radius: 15px;
   border: none;
+  outline: none;
+  box-sizing: border-box;
+  padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 80vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 80vw;
+  }
 `;
 const Main = styled.div`
   display: flex;

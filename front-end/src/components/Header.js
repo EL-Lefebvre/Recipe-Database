@@ -20,7 +20,7 @@ const Header = () => {
           <Logo alt="Logo" src={LogoSrc} height="250vh" />
         </Link>
       </Image>
-      <Border></Border>
+
       <Main>
         <Menu>
           <Item>
@@ -29,16 +29,17 @@ const Header = () => {
               <Search size={20} /> <Text>Browse</Text>
             </Link>
           </Item>
-          <Item>
-            <Link to="/wine">
-              {" "}
-              <Wine size={20} /> <Text>Wine Pairing</Text>
-            </Link>
-          </Item>
+       
           <Item>
             <Link to="/blog">
               {" "}
               <Blog size={20} /> <Text>Blog</Text>
+            </Link>
+          </Item>
+          <Item>
+            <Link to="/wine">
+              {" "}
+              <Wine size={20} /> <Text>Wine Pairing</Text>
             </Link>
           </Item>
           <Item>
@@ -54,21 +55,23 @@ const Header = () => {
 };
 
 const Wrapper = styled.div`
-  width: 100vw;
+
+  max-width: 100vw;
   display: flex;
   flex-direction: column;
-
   background-size: cover;
-  height: 60vh;
-`;
-const Border = styled.div`
-  margin-top: -130px;
+  min-height: 40vh;
 
-  margin-bottom: 30px;
-  z-index: 1;
-  border: 1px solid black;
+  @media (max-width: 768px) and (max-height: 900px) {
+    background-position: center;
+    justify-content: space-around;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
+
 const Main = styled.div`
+
   z-index: 2;
   margin-top: 100px;
 `;
@@ -77,7 +80,7 @@ const Menu = styled.ul`
   list-style-position: inside;
   margin-left: -50px;
   margin-top: 20px;
-
+border-top: 3px double  lightslategray;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -91,6 +94,7 @@ const Link = styled(NavLink)`
   display: flex;
   align-items: center;
   padding-right: 10px;
+  transition: 0.3s;
   &:hover {
     color: ${COLORS.primary};
   }
@@ -98,7 +102,7 @@ const Link = styled(NavLink)`
 const Text = styled.h3`
   padding-left: 10px;
   padding-bottom: 4px;
-  border-bottom: 2px  solid;
+  border-bottom: 2px solid;
   &:hover {
     border-bottom: 2px ${COLORS.primary} solid;
   }
@@ -110,21 +114,26 @@ const Text = styled.h3`
   }
 `;
 const Image = styled.div`
-
-  margin-bottom: 10px;
   z-index: 2;
   display: flex;
   justify-content: center;
-  
+  height: 240px;
 `;
 const Logo = styled.img`
   border: 5px black double;
-  height: 240px;
-  border-radius:60px;
+  margin-top:15px;
+  border-radius: 120%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+    height: 200px;
+    margin-top: 250px;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    height: 200px;
   }
 `;
 const Icon = styled.img``;
