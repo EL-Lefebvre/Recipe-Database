@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+
 import { createBrowserHistory } from 'history';
 import GlobalStyles from "../globalstyles";
 const App = () => {

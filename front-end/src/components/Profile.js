@@ -3,9 +3,9 @@ import { COLORS } from "../constants";
 import styled from "styled-components";
 import Logo from "../assets/food.png";
 import { RecipeContext } from "../RecipeContext";
-const Home = () => {
-  const { data } = useContext(RecipeContext);
-  console.log(data);
+const Profile = () => {
+
+
   return (
     <Wrapper>
       <Layout>
@@ -91,4 +91,4 @@ const Image = styled.img`
 
 const Category = styled.div``;
 
-export default Home;
+export default Profile;
