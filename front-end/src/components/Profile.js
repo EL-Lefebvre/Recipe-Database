@@ -10,11 +10,9 @@ const Profile = () => {
     <Wrapper>
       <Layout>
         <Title>
-          <h1>Find a Recipe</h1>
+          <h1>Profile</h1>
         </Title>
-        <Search>
-          <SearchBar type="text" />
-        </Search>
+      
       </Layout>
       <Main>Find all the recipes you need</Main>
     </Wrapper>
@@ -41,6 +39,7 @@ const Layout = styled.div`
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   height: 150px;
+  width: 500px;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;

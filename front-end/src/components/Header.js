@@ -17,7 +17,7 @@ const Header = () => {
     >
       <Image>
         <Link to="/">
-          <Logo alt="Logo" src={LogoSrc} height="250vh" />
+          <Logo alt="Logo" src={LogoSrc} height="200vh" width="200vw" />
         </Link>
       </Image>
 
@@ -29,7 +29,7 @@ const Header = () => {
               <Search size={20} /> <Text>Browse</Text>
             </Link>
           </Item>
-       
+
           <Item>
             <Link to="/blog">
               {" "}
@@ -55,7 +55,6 @@ const Header = () => {
 };
 
 const Wrapper = styled.div`
-
   max-width: 100vw;
   display: flex;
   flex-direction: column;
@@ -71,7 +70,6 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-
   z-index: 2;
   margin-top: 100px;
 `;
@@ -80,7 +78,7 @@ const Menu = styled.ul`
   list-style-position: inside;
   margin-left: -50px;
   margin-top: 20px;
-border-top: 3px double  lightslategray;
+  border-top: 3px double lightslategray;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -121,12 +119,12 @@ const Image = styled.div`
 `;
 const Logo = styled.img`
   border: 5px black double;
-  margin-top:15px;
+
   border-radius: 120%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   &:hover {
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   }
   @media (max-width: 768px) and (max-height: 900px) {
     height: 200px;

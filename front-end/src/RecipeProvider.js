@@ -4,27 +4,17 @@ import { useParams, useHistory } from "react-router-dom";
 import { RecipeContext } from "./RecipeContext";
 
 export const RecipeProvider = ({ children }) => {
-  // ProfileInfo of Current user (treasurymog)
-  // const profileInfo = async () => {
-  //     try {
-  //       const response = await fetch(`/api/me/profile`)
-  //         .then((data) => data.json())
-  //         .then((data) => data.profile);
-  //       setCurrentUser(response);
-  //       setMainUserHandle(response.handle);
-  //     } catch (err) {
-  //       setStatus("error");
-  //     }
-  //   };
 
   const [data, setData] = useState();
-  const profileInfo = async () => {
+const [individualData, setIndividualData] = useState();
+
+  const randomRecipe = async () => {
     try {
       const response = await fetch("/recipes/random")
         .then((res) => res.json())
-        .then((data) => data.data);
-
-      console.log(response);
+        .then((data) => data.data)
+        .then((data) => data.recipes);
+ 
       setData(response);
       return response;
     } catch (err) {
@@ -32,12 +22,12 @@ export const RecipeProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-
-      profileInfo();
-
-    
+    randomRecipe();
   }, []);
-  console.log(data);
+ 
+
+
+
   return (
     <RecipeContext.Provider value={{ data }}>{children}</RecipeContext.Provider>
   );

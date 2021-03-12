@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { COLORS } from "../constants";
+import { COLORS } from "../../constants";
 import styled from "styled-components";
-import Logo from "../assets/food.png";
-import { RecipeContext } from "../RecipeContext";
+
+import { RecipeContext } from "../../RecipeContext";
 const Browse = () => {
-
-
   return (
     <Wrapper>
       <Layout>
@@ -29,6 +27,7 @@ const Wrapper = styled.div`
   align-items: center;
   text-align: center;
   padding-top: 50px;
+  
 `;
 const Layout = styled.div`
   margin-top: 0px;

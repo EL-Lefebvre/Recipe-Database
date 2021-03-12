@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../constants";
 import styled from "styled-components";
-import Logo from "../assets/food.png";
+import SmallRecipe from "./Recipes/SmallRecipe";
 import { RecipeContext } from "../RecipeContext";
+
+
 const Home = () => {
   const { data } = useContext(RecipeContext);
   console.log(data);
@@ -16,7 +18,10 @@ const Home = () => {
           <SearchBar type="text" />
         </Search>
       </Layout>
-      <Main>Find all the recipes you need</Main>
+      <Main>
+        <h2>Find all the recipes you need</h2>
+        <Recipes>{data && <SmallRecipe data={data} />}</Recipes>
+      </Main>
     </Wrapper>
   );
 };
@@ -77,7 +82,8 @@ const SearchBar = styled.input`
 `;
 const Main = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   border: 1px solid black;
   min-height: 60vh;
@@ -88,7 +94,11 @@ const Image = styled.img`
   width: 500px;
   height: 300px;
 `;
-
+const Recipes = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const IndividualRecipe = styled.div``;
 const Category = styled.div``;
 
 export default Home;

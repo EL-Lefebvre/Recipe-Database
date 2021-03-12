@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const port = 8000;
 
-const { getRandomRecipes, singleRecipe } = require("./handlers");
+const { getRandomRecipes, singleRecipe, searchRecipe } = require("./handlers");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,7 +19,8 @@ app.get("/", (req, res) => {
 
 app.get("/recipes/random", getRandomRecipes);
 app.get("/recipes/:id", singleRecipe);
-
+app.get("/recipes/search/:food", searchRecipe);
+searchRecipe
 app.listen(port, () => {
   console.log("listening on port 8000");
 });

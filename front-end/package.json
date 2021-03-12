@@ -2,7 +2,7 @@
   "name": "front-end",
   "version": "0.1.0",
   "private": true,
- "proxy": "http://localhost:8000",
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "cra-template": "1.1.2",
     "dotenv": "^8.2.0",
@@ -10,6 +10,7 @@
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.2",
+    "react-responsive-carousel": "^3.2.13",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
