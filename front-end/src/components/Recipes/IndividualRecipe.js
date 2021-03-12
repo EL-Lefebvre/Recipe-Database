@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { COLORS } from "../../constants";
+// import { COLORS } from "../../constants";
 import styled from "styled-components";
 import BigRecipe from "./BigRecipe";
-import { RecipeContext } from "../../RecipeContext";
+// import { RecipeContext } from "../../RecipeContext";
 const IndividualRecipe = () => {
   const [individualData, setIndividualData] = useState();
   const { id } = useParams();
@@ -36,6 +36,5 @@ const Wrapper = styled.div`
   background-color: #f0f0e8;
   padding-top: 50px;
 `;
-
 
 export default IndividualRecipe;

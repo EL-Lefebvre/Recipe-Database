@@ -3,7 +3,7 @@ import { COLORS } from "../constants";
 import styled from "styled-components";
 import SmallRecipe from "./Recipes/SmallRecipe";
 import { RecipeContext } from "../RecipeContext";
-
+import SearchBar from "./Search/SearchBar";
 
 const Home = () => {
   const { data } = useContext(RecipeContext);
@@ -64,22 +64,7 @@ const Search = styled.div`
   height: 150px;
   width: 500px;
 `;
-const SearchBar = styled.input`
-  width: 450px;
-  height: 35px;
-  border-radius: 15px;
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-  padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 80vw;
-  }
-  @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 80vw;
-  }
-`;
+
 const Main = styled.div`
   display: flex;
   flex-direction: column;

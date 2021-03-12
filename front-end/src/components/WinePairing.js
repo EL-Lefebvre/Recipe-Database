@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../constants";
 import styled from "styled-components";
 
-import { RecipeContext } from "../RecipeContext";
+// import { RecipeContext } from "../RecipeContext";
 const WinePairing = () => {
   return (
     <Wrapper>
