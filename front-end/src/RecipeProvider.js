@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { RecipeContext } from "./RecipeContext";
 
 export const RecipeProvider = ({ children }) => {
-
+  const [toggle, setToggle] = useState(false);
   const [data, setData] = useState();
 const [individualData, setIndividualData] = useState();
 
@@ -29,6 +29,6 @@ const [individualData, setIndividualData] = useState();
 
 
   return (
-    <RecipeContext.Provider value={{ data }}>{children}</RecipeContext.Provider>
+    <RecipeContext.Provider value={{ data, toggle, setToggle }}>{children}</RecipeContext.Provider>
   );
 };

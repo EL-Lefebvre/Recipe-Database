@@ -28,11 +28,24 @@ const BigRecipe = ({ individualData }) => {
 
 const Wrapper = styled.div`
   min-height: 60vw;
+  @media (max-width: 768px) and (max-height: 900px) {
+    min-height: 100vh;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    min-height: 100vh;
+  }
 `;
 const Main = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  @media (max-width: 768px) and (max-height: 900px) {
+    flex-direction: column;
+    align-items: space-evenly;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    flex-direction: column;
+  }
 `;
 const Layout = styled.div`
   margin-top: 0px;
@@ -58,17 +71,36 @@ const Layout = styled.div`
   }
 `;
 
-const Description = styled.div``;
+const Description = styled.div`
+  @media (max-width: 768px) and (max-height: 900px) {
+    border-top: 1px solid black;
+    padding-top: 15px;
+    margin-top: 50px;
+    padding-bottom: 15px;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    margin-top: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+`;
 const Image = styled.img`
   max-height: 300px;
   border-radius: 20px;
   padding: 10px;
 `;
 const Title = styled.div`
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-decoration: underline;
+  border-radius: 15px;
+  border: 3px double ${COLORS.primary};
+  height: 40px;
   max-width: 40vw;
-  background-color: black;
-  border-radius: 10px;
+  background-color: #f0f0e8;
+  padding: 15px;
 `;
 export default BigRecipe;
 

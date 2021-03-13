@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Suggestion from "./Suggestion";
 import { useHistory } from "react-router-dom";
-
+import { RecipeContext } from "../../RecipeContext";
 // import { COLORS } from "../../constants";
 
 const SearchBar = () => {
+  const { toggle, setToggle } = useContext(RecipeContext);
   let history = useHistory();
   const [value, setValue] = useState("");
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(0);
@@ -19,7 +20,7 @@ const SearchBar = () => {
 
   return (
     <div>
-      <TypeheadWrapper>
+      <TypeheadWrapper onClick={() => setToggle(true)}>
         <Input
           value={value}
           onKeyDown={(ev) => {
@@ -46,12 +47,16 @@ const SearchBar = () => {
         />
       </TypeheadWrapper>
       <SuggestionWrapper>
-        <Suggestion
-          value={value}
-          handleSelect={handleSelect}
-          selectedSuggestionIndex={selectedSuggestionIndex}
-          setSelectedSuggestionIndex={setSelectedSuggestionIndex}
-        ></Suggestion>
+        {value && (
+          <Suggestion
+            toggle={toggle}
+            setToggle={setToggle}
+            value={value}
+            handleSelect={handleSelect}
+            selectedSuggestionIndex={selectedSuggestionIndex}
+            setSelectedSuggestionIndex={setSelectedSuggestionIndex}
+          />
+        )}
       </SuggestionWrapper>
     </div>
   );
@@ -76,7 +81,5 @@ const Input = styled.input`
   }
 `;
 
-const SuggestionWrapper = styled.div`
-
-`;
+const SuggestionWrapper = styled.div``;
 export default SearchBar;

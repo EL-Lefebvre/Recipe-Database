@@ -2,21 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-
+import { RecipeContext } from "../../RecipeContext";
 const Suggestion = ({
   value,
   handleSelect,
   setSelectedSuggestionIndex,
   selectedSuggestionIndex,
+  toggle,
+  setToggle,
 }) => {
-  const [suggestion, setSuggestion] = useState();
-  const [toggle, setToggle] = useState(false);
+  const [suggestion, setSuggestion] = useState([]);
 
   const newSuggestion = async () => {
     try {
       const response = await fetch(`/recipes/search/${value}`)
         .then((res) => res.json())
-        .then((data) => data.data);
+        .then((data) => data.data)
+        .then((data) => data.results);
       setSuggestion(response);
       return response;
     } catch (err) {
@@ -24,65 +26,86 @@ const Suggestion = ({
     }
   };
   useEffect(() => {
-    if (value.length <= 1) {
-      return "";
+    if (value.length <= 2) {
+      setSuggestion();
     } else {
       newSuggestion();
+      setToggle(true);
     }
+    return () => {
+      setSuggestion(); //whenever the component removes it will executes
+    };
   }, [value]);
 
   useEffect(() => {
     if (suggestion) {
       setToggle(true);
+    } else if (value === "") {
+      setSuggestion();
+      setToggle(false);
+    } else {
+      setToggle(false);
     }
-    else{
-        setToggle(false)
+  }, [suggestion]);
+
+  useEffect(() => {
+    if (suggestion === []) {
+      setToggle(false);
+    } else {
+      setToggle(true);
     }
-  }, [value]);
+  }, [suggestion]);
+  console.log(suggestion);
+  console.log(value);
 
   return (
-    <Wrapper
-      style={{
-        visibility: toggle ? "visible" : "hidden",
-      }}
-    >
-      {suggestion &&
-        suggestion.results.map((result, i) => {
-          return (
-            <SearchResult
-              key={i}
-              onMouseEnter={() => {
-                setSelectedSuggestionIndex(i);
-              }}
-              onClick={() => handleSelect(result.id)}
-              onKeyDown={(ev) => {
-                switch (ev.key) {
-                  case "Enter": {
-                    handleSelect(result.id);
-                    return;
+    <div>
+      {!suggestion || suggestion === [] ? (
+        <NoResults >No Results</NoResults>
+      ) : (
+        <Wrapper
+          style={{
+            visibility: toggle ? "visible" : "hidden",
+          }}
+        >
+          {suggestion.map((result, i) => {
+            return (
+              <SearchResult
+                key={i}
+                onMouseEnter={() => {
+                  setSelectedSuggestionIndex(i);
+                }}
+                onClick={() => handleSelect(result.id)}
+                onKeyDown={(ev) => {
+                  switch (ev.key) {
+                    case "Enter": {
+                      handleSelect(result.id);
+                      return;
+                    }
+                    default:
+                      return;
                   }
-                  default:
-                    return;
-                }
-              }}
-              style={{
-                background:
-                  i === selectedSuggestionIndex
-                    ? "hsla(50deg, 100%, 80%, 0.25)"
-                    : "transparent",
-                visibility: toggle ? "visible" : "hidden",
-              }}
-            >
-              <NavigationLink exact to={`/recipe/${result.id}`}>
-                <SuggestionColumn>
-                  <Regular>{result.title}</Regular>
-                  <Image src={result.image} />
-                </SuggestionColumn>
-              </NavigationLink>
-            </SearchResult>
-          );
-        })}
-    </Wrapper>
+                }}
+                style={{
+                  background:
+                    i === selectedSuggestionIndex
+                      ? "hsla(50deg, 100%, 80%, 0.25)"
+                      : "transparent",
+                  visibility: toggle ? "visible" : "hidden",
+                }}
+              >
+                <NavigationLink exact to={`/recipe/${result.id}`}>
+                  <SuggestionColumn>
+                    <Regular>{result.title}</Regular>
+                    <Image src={result.image} />
+                  </SuggestionColumn>
+                </NavigationLink>
+              </SearchResult>
+            );
+          })}
+        </Wrapper>
+      )}
+    </div>
   );
 };
 
@@ -141,4 +164,8 @@ const NavigationLink = styled(NavLink)`
   }
 `;
 
+const NoResults = styled.div`
+  height: 100px;
+  background-color: white;
+`;
 export default Suggestion;

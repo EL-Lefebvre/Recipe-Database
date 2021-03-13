@@ -15,7 +15,7 @@ const Home = () => {
           <h1>Find a Recipe</h1>
         </Title>
         <Search>
-          <SearchBar type="text" />
+          <SearchBar />
         </Search>
       </Layout>
       <Main>

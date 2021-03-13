@@ -2,38 +2,70 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../constants";
 import styled from "styled-components";
 
-
-
 const Blog = () => {
-
+  const [details, setDetails] = useState("");
   return (
     <Wrapper>
       <Layout>
         <Title>
           <h1>Blog</h1>
         </Title>
-        <Search>
-          <SearchBar type="text" />
-        </Search>
+        <TextDiv>
+          {/* <Form
+            onSubmit={(ev) => {
+              ev.preventDefault();
+              fetch("/recipes/post", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  details,
+                }),
+              })
+                .then((res) => res.json())
+                .then((json) => {
+                  if (json.success) {
+                    console.error("201");
+                  } else {
+                    console.error("404");
+                  }
+                })
+                .catch((err) => {
+                  console.error("err");
+                });
+            }}
+          >
+            <TextArea
+              type="text"
+              placeholder="What's cooking?"
+              onChange={(ev) => setDetails(ev.currentTarget.value)}
+              minLength="0"
+              value={details}
+            />
+          </Form> */}
+        </TextDiv>
+        <SubmitBar>
+          <Button type="submit">Submit</Button>
+        </SubmitBar>
       </Layout>
+
       <Main>
         <h2>Share all your recipes !</h2>
-     
       </Main>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  background-color: #f0f0e8;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding-top: 50px;
+  padding-top: 20px;
 `;
 const Layout = styled.div`
+  width: 60vw;
   margin-top: 0px;
   display: flex;
   flex-direction: column;
@@ -43,7 +75,7 @@ const Layout = styled.div`
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  height: 150px;
+  min-height: 30vh;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
@@ -54,29 +86,18 @@ const Layout = styled.div`
     margin-top: -30px;
   }
 `;
-const Title = styled.div`
-  color: white;
-  text-decoration: underline;
+const Form = styled.form``;
+const TextDiv = styled.div`
+  display: flex;
+  justify-content: center;
 `;
-const Search = styled.div`
-  height: 150px;
-  width: 500px;
-`;
-const SearchBar = styled.input`
-  width: 450px;
-  height: 35px;
-  border-radius: 15px;
+const TextArea = styled.textarea`
   border: none;
-  outline: none;
-  box-sizing: border-box;
   padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 80vw;
-  }
-  @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 80vw;
-  }
+  width: 45vw;
+  height: 140px;
+  text-indent: 10px;
+  padding: none;
 `;
 const Main = styled.div`
   display: flex;
@@ -88,10 +109,37 @@ const Main = styled.div`
   min-width: 80vw;
   margin-bottom: 200px;
 `;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
+const SubmitBar = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  width: 95%;
+
+  margin-top: 10px;
+  justify-content: flex-end;
+  border: none;
+  padding: 10px;
+
+  text-indent: 10px;
+  padding: none;
 `;
+
+const Button = styled.button`
+  background-color: ${COLORS.primary};
+  font-weight: bolder;
+  font-size: 100%;
+  color: white;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  border: none;
+`;
+
+const Title = styled.div`
+  color: white;
+  text-decoration: underline;
+`;
+
 const Recipes = styled.div`
   display: flex;
   flex-direction: column;

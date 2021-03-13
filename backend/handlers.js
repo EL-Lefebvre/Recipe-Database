@@ -1,4 +1,7 @@
 require("dotenv").config();
+const { MongoClient } = require("mongodb");
+// const mongoose = require("mongoose");
+const { MONGO_URI } = process.env;
 const apiKey = process.env.API_KEY;
 const api_url = "https://api.spoonacular.com/recipes";
 const fetch = require("isomorphic-fetch");
@@ -9,7 +12,8 @@ const options = {
     "Content-Type": "application/json",
   },
 };
-
+console.log(require("dotenv").config({ MONGO_URI }));
+console.log(MONGO_URI);
 // Get 10 random recipes
 const getRandomRecipes = async (req, res) => {
   const response = await fetch(
@@ -55,4 +59,35 @@ const searchRecipe = async (req, res) => {
 
 //Post your own recipe
 
-module.exports = { getRandomRecipes, singleRecipe, searchRecipe };
+const recipePosting = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  try {
+    const addingNewUser = async (dbName) => {
+      await client.connect();
+      console.log("connected");
+      const db = await client.db(dbName);
+      const data = await db
+        .collection("postedRecipes")
+        .insertOne({ name: "Tom Adams" });
+
+      console.log("close");
+      return db;
+    };
+    const addedUser = await addingNewUser("recipes");
+
+    res.status(201).json({ status: 201, addedUser });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: "error mongodb" });
+  }
+  client.close();
+};
+
+module.exports = {
+  getRandomRecipes,
+  singleRecipe,
+  searchRecipe,
+  recipePosting,
+};

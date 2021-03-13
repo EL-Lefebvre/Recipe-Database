@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import styled from "styled-components";
@@ -7,9 +7,13 @@ import Browse from "./Search/Browse";
 import WinePairing from "./WinePairing";
 import Blog from "./Blog";
 import IndividualRecipe from "./Recipes/IndividualRecipe";
+import { RecipeContext } from "../RecipeContext";
 const Body = () => {
+  const { toggle, setToggle } = useContext(RecipeContext);
   return (
-    <Wrapper>
+    <Wrapper   onClick={() => {
+      setToggle(false);
+    }}>
       <Switch>
         <Route exact path="/profile">
           <Profile />
