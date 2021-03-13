@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Profile from "./Profile";
 import Browse from "./Search/Browse";
 import WinePairing from "./WinePairing";
-import Blog from "./Blog";
+import Blog from "./Blog/Blog";
 import IndividualRecipe from "./Recipes/IndividualRecipe";
 import { RecipeContext } from "../RecipeContext";
 const Body = () => {

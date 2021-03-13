@@ -12,7 +12,7 @@ const {
   getRandomRecipes,
   singleRecipe,
   searchRecipe,
-  recipePosting,
+  newPost,
 } = require("./handlers");
 express()
   .use(bodyParser.urlencoded({ extended: false }))
@@ -24,7 +24,7 @@ express()
   .get("/", (req, res) => {
     res.send("Port 8000 working");
   })
-  .post("/recipes/post", recipePosting)
+  .post("/recipes/post", newPost)
   .get("/recipes/random", getRandomRecipes)
   .get("/recipes/:id", singleRecipe)
   .get("/recipes/search/:food", searchRecipe)
