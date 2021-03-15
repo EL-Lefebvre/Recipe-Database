@@ -19,7 +19,8 @@ function Form({
             type="text"
             placeholder="Username"
             onChange={(ev) => setUserName(ev.currentTarget.value)}
-            value={userName}          />
+            value={userName}
+          />
           <Info
             type="text"
             placeholder="Title of your recipe"
@@ -47,11 +48,19 @@ const MainForm = styled.form``;
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
 `;
-const Info = styled.input``;
+const Info = styled.input`
+  height: 20px;
+  border: none;
+  margin-bottom: 10px;
+  font-family: Shippori Mincho, serif;
+  padding-left:20px;
+`;
 const TextArea = styled.textarea`
   border: none;
+ 
+  font-family: Shippori Mincho, serif;
   padding: 10px;
   width: 45vw;
   height: 140px;

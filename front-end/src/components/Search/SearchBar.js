@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Suggestion from "./Suggestion";
 import { useHistory } from "react-router-dom";
 import { RecipeContext } from "../../RecipeContext";
+import { AiOutlineSearch as IconSearch } from "react-icons/ai";
 // import { COLORS } from "../../constants";
 
 const SearchBar = () => {
@@ -45,6 +46,7 @@ const SearchBar = () => {
             setValue(ev.target.value);
           }}
         />
+        <Icon size={20} />
       </TypeheadWrapper>
       <SuggestionWrapper>
         {value && (
@@ -62,7 +64,9 @@ const SearchBar = () => {
   );
 };
 
-const TypeheadWrapper = styled.div``;
+const TypeheadWrapper = styled.div`
+padding:auto;
+`;
 
 const Input = styled.input`
   width: 450px;
@@ -72,6 +76,7 @@ const Input = styled.input`
   outline: none;
   box-sizing: border-box;
   padding: 10px;
+
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 80vw;
@@ -81,5 +86,11 @@ const Input = styled.input`
   }
 `;
 
+const Icon = styled(IconSearch)`
+  display: inline-block;
+  margin-left: -40px;
+
+
+`;
 const SuggestionWrapper = styled.div``;
 export default SearchBar;

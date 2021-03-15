@@ -34,16 +34,20 @@ const SmallRecipe = ({ data }) => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   align-items: center;
   background-color: white;
+  margin: 10px;
 `;
 
 const Main = styled.div`
   display: flex;
   flex-direction: column;
+  padding: auto;
   justify-content: center;
   align-items: center;
-transition: 0.7s;
+  transition: 0.7s;
+  width: 5/90vh;
   &:hover {
     cursor: pointer;
     background-color: ${COLORS.primary};
@@ -51,8 +55,10 @@ transition: 0.7s;
 `;
 const Layout = styled.div``;
 const Image = styled.img`
-  height: 140px;
-  width: 200px;
+  height: 120px;
+  width: 15vw;
+  padding: 10px;
+  padding-top:20px;
 `;
 const Title = styled.div`
   max-width: 15vw;
