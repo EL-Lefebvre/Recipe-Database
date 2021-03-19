@@ -5,32 +5,41 @@ import SearchBar from "./SearchBar";
 import Cuisine from "./Cuisine";
 import Diet from "./Diet";
 import Intolerances from "./Intolerances";
-import Occasion from "./Occasion";
 import Type from "./Type";
+import Results from "./Results";
 import { RecipeContext } from "../../RecipeContext";
 import { RiArrowDropDownLine as DropDownArray } from "react-icons/ri";
 const Browse = () => {
-  const [cuisine, setCuisine] = useState(false);
-  const [type, setType] = useState(false);
-  const [intolerances, setIntolerances] = useState(false);
-  const [diet, setDiet] = useState(false);
+  const [toggleCuisine, setToggleCuisine] = useState(false);
+  const [toggleType, setToggleType] = useState(false);
+  const [toggleIntolerances, setToggleIntolerances] = useState(false);
+  const [toggleDiet, setToggleDiet] = useState(false);
+  const [cuisine, setCuisine] = useState("");
+  const [type, setType] = useState("");
+  const [intolerances, setIntolerances] = useState("");
+  const [diet, setDiet] = useState("");
+  const [keyword, setKeyword] = useState('pasta');
 
   const handleCuisine = (ev) => {
     ev.preventDefault();
-    setCuisine(!cuisine);
+    setToggleCuisine(!toggleCuisine);
   };
   const handleType = (ev) => {
     ev.preventDefault();
-    setType(!type);
+    setToggleType(!toggleType);
   };
   const handleIntolerances = (ev) => {
     ev.preventDefault();
-    setIntolerances(!intolerances);
+    setToggleIntolerances(!toggleIntolerances);
   };
   const handleDiet = (ev) => {
     ev.preventDefault();
-    setDiet(!diet);
+    setToggleDiet(!toggleDiet);
   };
+  console.log(cuisine);
+  console.log(type);
+  console.log(intolerances);
+  console.log(diet);
 
   return (
     <Wrapper>
@@ -51,7 +60,7 @@ const Browse = () => {
                   Cuisine
                   <DropDownArray size={20} />
                 </Arrow>
-                {cuisine && (
+                {toggleCuisine && (
                   <Cuisine cuisine={cuisine} setCuisine={setCuisine} />
                 )}
               </Column>
@@ -62,7 +71,7 @@ const Browse = () => {
                   Type
                   <DropDownArray size={20} />
                 </Arrow>
-                {type && <Type type={type} setType={setType} />}
+                {toggleType && <Type type={type} setType={setType} />}
               </Column>
             </Item>
             <Item onClick={handleDiet}>
@@ -70,7 +79,7 @@ const Browse = () => {
                 <Arrow>
                   Diet <DropDownArray size={20} />
                 </Arrow>
-                {diet && <Diet diet={diet} setDiet={setDiet} />}
+                {toggleDiet && <Diet diet={diet} setDiet={setDiet} />}
               </Column>
             </Item>
             <Item onClick={handleIntolerances}>
@@ -78,7 +87,7 @@ const Browse = () => {
                 <Arrow>
                   Intolerances <DropDownArray size={20} />
                 </Arrow>
-                {intolerances && (
+                {toggleIntolerances && (
                   <Intolerances
                     intolerances={intolerances}
                     setIntolerances={setIntolerances}
@@ -88,7 +97,15 @@ const Browse = () => {
             </Item>
           </List>
         </ListWrapper>
-        <Results></Results>
+        <ResultsDiv>
+          <Results
+          keyword={keyword}
+            cuisine={cuisine}
+            type={type}
+            diet={diet}
+            intolerances={intolerances}
+          />
+        </ResultsDiv>
       </Main>
     </Wrapper>
   );
@@ -135,18 +152,22 @@ const Search = styled.div`
 
 const Main = styled.div`
   display: flex;
-
+  flex-direction: column;
   border: 1px solid black;
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
 `;
+const ResultsDiv = styled.div`
+  min-height: 100vw;
+`;
 const ListWrapper = styled.div`
   background-color: white;
   width: 80vw;
   height: 20px;
+  z-index: 3;
 `;
-const Results = styled.div``;
+
 const List = styled.ul`
   display: flex;
   height: 20px;
@@ -161,16 +182,14 @@ const Column = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 `;
 const Arrow = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-font-weight:bolder;
+  font-weight: bolder;
   &:hover {
     color: ${COLORS.secondary};
- 
   }
 `;
 const BlockWrapper = styled.div`

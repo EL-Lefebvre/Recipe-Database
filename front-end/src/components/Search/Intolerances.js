@@ -7,7 +7,16 @@ const Intolerances = ({ intolerances, setIntolerances }) => {
     <Wrapper>
       <List>
         {intolerancesData.map((data) => {
-          return <Item>{data.name}</Item>;
+          return (
+            <Item
+              value={data}
+              onClick={() => {
+                setIntolerances(data.name);
+              }}
+            >
+              {data.name}
+            </Item>
+          );
         })}
       </List>
     </Wrapper>

@@ -7,7 +7,7 @@ const Type = ({ type, setType }) => {
     <Wrapper>
       <List>
       {typeData.map((data) => {
-          return <Item>{data.name}</Item>;
+          return <Item value={data} onClick={()=>{setType(data.name)}}>{data.name}</Item>;
         })}
       </List>
     </Wrapper>

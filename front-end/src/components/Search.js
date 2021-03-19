@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
-import Results from "./Results";
+import Suggestion from "./Suggestion";
 import { useHistory } from "react-router-dom";
-import { RecipeContext } from "../../RecipeContext";
+import { RecipeContext } from "../RecipeContext";
 import { AiOutlineSearch as IconSearch } from "react-icons/ai";
 // import { COLORS } from "../../constants";
 
@@ -19,7 +19,10 @@ const SearchBar = () => {
     setValue("");
   };
 
-  useEffect(() => {}, []);
+  useEffect(()=>{
+
+
+  },[]);
   return (
     <div>
       <TypeheadWrapper onClick={() => setToggle(true)}>
@@ -49,12 +52,24 @@ const SearchBar = () => {
         />
         <Icon size={20} />
       </TypeheadWrapper>
+      <SuggestionWrapper>
+        {value && (
+          <Suggestion
+            toggle={toggle}
+            setToggle={setToggle}
+            value={value}
+            handleSelect={handleSelect}
+            selectedSuggestionIndex={selectedSuggestionIndex}
+            setSelectedSuggestionIndex={setSelectedSuggestionIndex}
+          />
+        )}
+      </SuggestionWrapper>
     </div>
   );
 };
 
 const TypeheadWrapper = styled.div`
-  padding: auto;
+padding:auto;
 `;
 
 const Input = styled.input`
@@ -78,6 +93,8 @@ const Input = styled.input`
 const Icon = styled(IconSearch)`
   display: inline-block;
   margin-left: -40px;
+
+
 `;
 const SuggestionWrapper = styled.div``;
 export default SearchBar;

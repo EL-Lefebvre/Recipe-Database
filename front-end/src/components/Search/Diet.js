@@ -7,7 +7,7 @@ const Diet = ({ diet, setDiet }) => {
     <Wrapper>
       <List>
         {dietsData.map((data) => {
-          return <Item>{data.name}</Item>;
+          return <Item value={data} onClick={()=>{setDiet(data.name)}}>{data.name}</Item>;
         })}
       </List>
     </Wrapper>

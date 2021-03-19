@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { RecipeContext } from "../../RecipeContext";
+import { RecipeContext } from "../RecipeContext";
 const Suggestion = ({
   value,
   handleSelect,
@@ -61,7 +61,7 @@ const Suggestion = ({
   return (
     <div>
       {!suggestion || suggestion === [] ? (
-        <NoResults >No Results</NoResults>
+        <NoResults>No Results</NoResults>
       ) : (
         <Wrapper
           style={{

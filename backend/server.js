@@ -13,6 +13,7 @@ const {
   singleRecipe,
   searchRecipe,
   newPost,
+  filterRecipe,
 } = require("./handlers");
 express()
   .use(bodyParser.urlencoded({ extended: false }))
@@ -28,7 +29,10 @@ express()
   .get("/recipes/random", getRandomRecipes)
   .get("/recipes/:id", singleRecipe)
   .get("/recipes/search/:food", searchRecipe)
-
+  .get(
+    "/recipes/filter/:keyword/:cuisine?/:type?/:diet?/:intolerances?",
+    filterRecipe
+  )
   .listen(PORT, () => {
     console.log("listening on port 8000");
   });

@@ -3,7 +3,7 @@ import { COLORS } from "../constants";
 import styled from "styled-components";
 import SmallRecipe from "./Recipes/SmallRecipe";
 import { RecipeContext } from "../RecipeContext";
-import SearchBar from "./Search/SearchBar";
+import SearchBar from "./Search";
 
 const Home = () => {
   const { data } = useContext(RecipeContext);

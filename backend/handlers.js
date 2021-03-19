@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-const { addingRecipe } = require('./helpers')
+const { addingRecipe } = require("./helpers");
 
 const apiKey = process.env.API_KEY;
 const api_url = "https://api.spoonacular.com/recipes";
@@ -52,22 +52,35 @@ const searchRecipe = async (req, res) => {
   res.status(200).json({ status: 200, data });
 };
 
+const filterRecipe = async (req, res) => {
+  const keyword = req.params.keyword;
+  const cuisine = req.params.cuisine;
+  const type = req.params.type;
+  const diet = req.params.diet;
+  const intolerances = req.params.intolerances;
+  console.log(cuisine);
+  const response = await fetch(
+    `${api_url}/complexSearch/?apiKey=${apiKey}&query=${keyword}&cuisine=${cuisine}&type=${type}&diet=${diet}&intolerances=${intolerances}`,
+    options
+  );
+  const data = await response.json();
+
+  res.status(200).json({ status: 200, data });
+};
 //Get similar recipes as a particular one
 
 //Wine pairing with recipe
 
 //Post your own recipe
 
-// const recipePosting = async (req, res) => {
-  const newPost = async (req, res, ) => {
-
-      await addingRecipe(req, res );
-
+const newPost = async (req, res) => {
+  await addingRecipe(req, res);
 };
 
 module.exports = {
   getRandomRecipes,
   singleRecipe,
   searchRecipe,
-  newPost
+  newPost,
+  filterRecipe,
 };
