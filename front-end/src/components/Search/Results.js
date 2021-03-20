@@ -9,7 +9,7 @@ const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
   const newSuggestion = async () => {
     try {
       const response = await fetch(
-        `/recipes/filter/${keyword}?/${cuisine}?/${type}?/${diet}?/${intolerances}?`
+        `/recipes?keyword=${keyword}&cuisine=${cuisine}&type=${type}&diet=${diet}&intolerances=${intolerances}`
       )
         .then((res) => res.json())
         .then((data) => data.data)
@@ -24,19 +24,8 @@ const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
   useEffect(() => {
     newSuggestion();
 
-  }, [suggestion]);
-  //   useEffect(() => {
-  //     newSuggestion();
-  //   }, [cuisine]);
-  //   useEffect(() => {
-  //     newSuggestion();
-  //   }, [type]);
-  //   useEffect(() => {
-  //     newSuggestion();
-  //   }, [diet]);
-  //   useEffect(() => {
-  //     newSuggestion();
-  //   }, [intolerances]);
+  }, [keyword, cuisine, type, diet, intolerances]);
+
   //   useEffect(() => {
   //     if (suggestion) {
   //       setToggle(true);
@@ -58,8 +47,23 @@ const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
   //   console.log(suggestion);
   //   console.log(value);
 
-  return <Wrapper>hi</Wrapper>;
-};
+  return (<Wrapper> { suggestion && suggestion.map((result, i) => {
+    return (
+      <SearchResult
+        key={i}
+
+     
+        
+      >
+        <NavigationLink exact to={`/recipe/${result.id}`}>
+          <SuggestionColumn>
+            <Regular>{result.title}</Regular>
+            <Image src={result.image} />
+          </SuggestionColumn>
+        </NavigationLink>
+      </SearchResult> )})}
+      </Wrapper>)
+}
 
 const Wrapper = styled.div`
   z-index: 1;

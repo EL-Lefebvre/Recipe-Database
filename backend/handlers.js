@@ -53,12 +53,13 @@ const searchRecipe = async (req, res) => {
 };
 
 const filterRecipe = async (req, res) => {
-  const keyword = req.params.keyword;
-  const cuisine = req.params.cuisine;
-  const type = req.params.type;
-  const diet = req.params.diet;
-  const intolerances = req.params.intolerances;
-  console.log(cuisine);
+
+  const keyword= req.query.keyword;
+  const cuisine = req.query.cuisine;
+  const type = req.query.type;
+  const diet = req.query.diet;
+  const intolerances = req.query.intolerances;
+
   const response = await fetch(
     `${api_url}/complexSearch/?apiKey=${apiKey}&query=${keyword}&cuisine=${cuisine}&type=${type}&diet=${diet}&intolerances=${intolerances}`,
     options

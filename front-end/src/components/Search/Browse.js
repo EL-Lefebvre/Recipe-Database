@@ -36,10 +36,7 @@ const Browse = () => {
     ev.preventDefault();
     setToggleDiet(!toggleDiet);
   };
-  console.log(cuisine);
-  console.log(type);
-  console.log(intolerances);
-  console.log(diet);
+
 
   return (
     <Wrapper>

@@ -19,10 +19,7 @@ const SearchBar = () => {
     setValue("");
   };
 
-  useEffect(()=>{
 
-
-  },[]);
   return (
     <div>
       <TypeheadWrapper onClick={() => setToggle(true)}>

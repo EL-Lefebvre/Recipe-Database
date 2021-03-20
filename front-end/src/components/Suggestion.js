@@ -55,8 +55,7 @@ const Suggestion = ({
       setToggle(true);
     }
   }, [suggestion]);
-  console.log(suggestion);
-  console.log(value);
+
 
   return (
     <div>
