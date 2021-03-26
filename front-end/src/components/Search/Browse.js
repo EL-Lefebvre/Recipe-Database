@@ -9,16 +9,36 @@ import Type from "./Type";
 import Results from "./Results";
 import { RecipeContext } from "../../RecipeContext";
 import { RiArrowDropDownLine as DropDownArray } from "react-icons/ri";
+import { intolerancesData } from "./Utilities";
 const Browse = () => {
+  const {        cuisineList,
+    setCuisineList,
+    typeList,
+    setTypeList,
+    dietList,
+    setDietList,
+    intoleranceList,
+    setIntoleranceList} = useContext(RecipeContext);
   const [toggleCuisine, setToggleCuisine] = useState(false);
   const [toggleType, setToggleType] = useState(false);
   const [toggleIntolerances, setToggleIntolerances] = useState(false);
   const [toggleDiet, setToggleDiet] = useState(false);
-  const [cuisine, setCuisine] = useState("");
-  const [type, setType] = useState("");
-  const [intolerances, setIntolerances] = useState("");
-  const [diet, setDiet] = useState("");
-  const [keyword, setKeyword] = useState('pasta');
+  // const [toggles, setToggles] = useState({
+  //   cuisine: false,
+  //   type: false,
+  //   intolerances: false,
+  //   diet: false
+  // })
+  // setToggles({...toggles, diet: !toggles.diet})
+  const [cuisine, setCuisine] = useState([]);
+  const [type, setType] = useState([]);
+  const [intolerances, setIntolerances] = useState([]);
+  const [diet, setDiet] = useState([]);
+  const [keyword, setKeyword] = useState("");
+
+
+  console.log(intolerances);
+
 
   const handleCuisine = (ev) => {
     ev.preventDefault();
@@ -37,7 +57,6 @@ const Browse = () => {
     setToggleDiet(!toggleDiet);
   };
 
-
   return (
     <Wrapper>
       <Layout>
@@ -45,7 +64,7 @@ const Browse = () => {
           <h1>Find a Recipe</h1>
         </Title>
         <Search>
-          <SearchBar type="text" />
+          <SearchBar keyword={keyword} setKeyword={setKeyword} type="text" />
         </Search>
       </Layout>
       <Main>
@@ -57,8 +76,11 @@ const Browse = () => {
                   Cuisine
                   <DropDownArray size={20} />
                 </Arrow>
+
                 {toggleCuisine && (
-                  <Cuisine cuisine={cuisine} setCuisine={setCuisine} />
+                  <form>
+                    <Cuisine cuisine={cuisine} setCuisine={setCuisine} />
+                  </form>
                 )}
               </Column>
             </Item>
@@ -84,19 +106,28 @@ const Browse = () => {
                 <Arrow>
                   Intolerances <DropDownArray size={20} />
                 </Arrow>
+                {/* {toggleIntolerances &&
+                  intoleranceList.map(({ label, selected, id }) => {
+                    return ( */}
                 {toggleIntolerances && (
-                  <Intolerances
-                    intolerances={intolerances}
-                    setIntolerances={setIntolerances}
-                  />
+                  <Fieldset>
+                    <Intolerances
+                      list={intoleranceList}
+                      setIntoleranceList={setIntoleranceList}
+                      intolerances={intolerances}
+                      setIntolerances={setIntolerances}
+                    
+                    />
+                  </Fieldset>
                 )}
+         
               </Column>
             </Item>
           </List>
         </ListWrapper>
         <ResultsDiv>
           <Results
-          keyword={keyword}
+            keyword={keyword}
             cuisine={cuisine}
             type={type}
             diet={diet}
@@ -138,6 +169,13 @@ const Layout = styled.div`
     margin-top: -30px;
   }
 `;
+const Fieldset = styled.fieldset`
+  background-color: white;
+  max-height: 30vh;
+  overflow-x: scroll;
+  scrollbar-width: thin;
+  width: 10vw;
+`;
 const Title = styled.div`
   color: white;
   text-decoration: underline;
@@ -177,7 +215,7 @@ const Item = styled.li`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 const Arrow = styled.div`

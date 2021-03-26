@@ -25,6 +25,7 @@ const Suggestion = ({
       console.log("error");
     }
   };
+  
   useEffect(() => {
     if (value.length <= 2) {
       setSuggestion();

@@ -6,45 +6,20 @@ import { RecipeContext } from "../../RecipeContext";
 import { AiOutlineSearch as IconSearch } from "react-icons/ai";
 // import { COLORS } from "../../constants";
 
-const SearchBar = () => {
-  const { toggle, setToggle } = useContext(RecipeContext);
-  let history = useHistory();
-  const [value, setValue] = useState("");
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(0);
+const SearchBar = ({keyword, setKeyword}) => {
 
-  const handleSelect = (suggestion) => {
-    history.push(`/recipe/${suggestion}`);
-    history.push("/temp");
-    history.goBack();
-    setValue("");
-  };
 
+
+console.log(keyword)
   useEffect(() => {}, []);
   return (
     <div>
-      <TypeheadWrapper onClick={() => setToggle(true)}>
+      <TypeheadWrapper >
         <Input
-          value={value}
-          onKeyDown={(ev) => {
-            switch (ev.key) {
-              case "ArrowUp": {
-                setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
-                return;
-              }
-              case "ArrowDown": {
-                setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
-                return;
-              }
-              case "Escape": {
-                setValue("");
-                return;
-              }
-              default:
-                return;
-            }
-          }}
+          value={keyword}
+          
           onChange={(ev) => {
-            setValue(ev.target.value);
+            setKeyword(ev.target.value);
           }}
         />
         <Icon size={20} />

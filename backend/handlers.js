@@ -61,7 +61,7 @@ const filterRecipe = async (req, res) => {
   const intolerances = req.query.intolerances;
 
   const response = await fetch(
-    `${api_url}/complexSearch/?apiKey=${apiKey}&query=${keyword}&cuisine=${cuisine}&type=${type}&diet=${diet}&intolerances=${intolerances}`,
+    `${api_url}/complexSearch/?apiKey=${apiKey}&query=${keyword}&number=20&cuisine=${cuisine}&type=${type}&diet=${diet}&intolerances=${intolerances}`,
     options
   );
   const data = await response.json();

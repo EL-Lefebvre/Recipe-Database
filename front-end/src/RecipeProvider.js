@@ -1,12 +1,46 @@
 import React, { useEffect, useState, useContext } from "react";
 // import { useParams, useHistory } from "react-router-dom";
-
+import {
+  intolerancesData,
+  dietsData,
+  cuisinesData,
+  typeData,
+} from "./components/Search/Utilities";
 import { RecipeContext } from "./RecipeContext";
 
 export const RecipeProvider = ({ children }) => {
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState();
 const [individualData, setIndividualData] = useState();
+const [cuisineList, setCuisineList] = useState(
+  intolerancesData.map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  }))
+);
+const [typeList, setTypeList] = useState(
+  intolerancesData.map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  }))
+);
+const [dietList, setDietList] = useState(
+  intolerancesData.map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  }))
+);
+
+const [intoleranceList, setIntoleranceList] = useState(
+  intolerancesData.map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  }))
+);
 
   const randomRecipe = async () => {
     try {
@@ -29,6 +63,22 @@ const [individualData, setIndividualData] = useState();
 
 
   return (
-    <RecipeContext.Provider value={{ data, toggle, setToggle }}>{children}</RecipeContext.Provider>
+    <RecipeContext.Provider
+      value={{
+        data,
+        toggle,
+        setToggle,
+        cuisineList,
+        setCuisineList,
+        typeList,
+        setTypeList,
+        dietList,
+        setDietList,
+        intoleranceList,
+        setIntoleranceList,
+      }}
+    >
+      {children}
+    </RecipeContext.Provider>
   );
 };

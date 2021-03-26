@@ -4,8 +4,18 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { RecipeContext } from "../../RecipeContext";
 const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
-  const [suggestion, setSuggestion] = useState([]);
 
+  let history = useHistory();
+  const [value, setValue] = useState("");
+  const [suggestion, setSuggestion] = useState([]);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(0);
+
+  const handleSelect = (suggestion) => {
+    history.push(`/recipe/${suggestion}`);
+    history.push("/temp");
+    history.goBack();
+    setValue("");
+  };
   const newSuggestion = async () => {
     try {
       const response = await fetch(
@@ -26,33 +36,29 @@ const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
 
   }, [keyword, cuisine, type, diet, intolerances]);
 
-  //   useEffect(() => {
-  //     if (suggestion) {
-  //       setToggle(true);
-  //     } else if (value === "") {
-  //       setSuggestion();
-  //       setToggle(false);
-  //     } else {
-  //       setToggle(false);
-  //     }
-  //   }, [suggestion]);
 
-  //   useEffect(() => {
-  //     if (suggestion === []) {
-  //       setToggle(false);
-  //     } else {
-  //       setToggle(true);
-  //     }
-  //   }, [suggestion]);
-  //   console.log(suggestion);
-  //   console.log(value);
 
   return (<Wrapper> { suggestion && suggestion.map((result, i) => {
     return (
       <SearchResult
         key={i}
-
-     
+        // onKeyDown={(ev) => {
+        //   switch (ev.key) {
+        //     case "ArrowUp": {
+        //       setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
+        //       return;
+        //     }
+        //     case "ArrowDown": {
+        //       setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
+        //       return;
+        //     }
+        //     case "Escape": {
+        //       setValue("");
+        //       return;
+        //     }
+        //     default:
+        //       return;
+        //   }}}     
         
       >
         <NavigationLink exact to={`/recipe/${result.id}`}>
