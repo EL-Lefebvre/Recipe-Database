@@ -11,36 +11,37 @@ import { RecipeContext } from "./RecipeContext";
 export const RecipeProvider = ({ children }) => {
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState();
-const [individualData, setIndividualData] = useState();
-const [cuisineList, setCuisineList] = useState(
-  intolerancesData.map(({ name }, id) => ({
-    id,
-    label: name,
-    selected: false,
-  }))
-);
-const [typeList, setTypeList] = useState(
-  intolerancesData.map(({ name }, id) => ({
-    id,
-    label: name,
-    selected: false,
-  }))
-);
-const [dietList, setDietList] = useState(
-  intolerancesData.map(({ name }, id) => ({
-    id,
-    label: name,
-    selected: false,
-  }))
-);
+  const [individualData, setIndividualData] = useState();
 
-const [intoleranceList, setIntoleranceList] = useState(
-  intolerancesData.map(({ name }, id) => ({
-    id,
-    label: name,
-    selected: false,
-  }))
-);
+  const [cuisineList, setCuisineList] = useState(
+    cuisinesData.map(({ name }, id) => ({
+      id,
+      label: name,
+      selected: false,
+    }))
+  );
+  const [typeList, setTypeList] = useState(
+    typeData.map(({ name }, id) => ({
+      id,
+      label: name,
+      selected: false,
+    }))
+  );
+  const [dietList, setDietList] = useState(
+    dietsData.map(({ name }, id) => ({
+      id,
+      label: name,
+      selected: false,
+    }))
+  );
+
+  const [intoleranceList, setIntoleranceList] = useState(
+    intolerancesData.map(({ name }, id) => ({
+      id,
+      label: name,
+      selected: false,
+    }))
+  );
 
   const randomRecipe = async () => {
     try {
@@ -48,7 +49,7 @@ const [intoleranceList, setIntoleranceList] = useState(
         .then((res) => res.json())
         .then((data) => data.data)
         .then((data) => data.recipes);
- 
+
       setData(response);
       return response;
     } catch (err) {
@@ -58,9 +59,6 @@ const [intoleranceList, setIntoleranceList] = useState(
   useEffect(() => {
     randomRecipe();
   }, []);
- 
-
-
 
   return (
     <RecipeContext.Provider

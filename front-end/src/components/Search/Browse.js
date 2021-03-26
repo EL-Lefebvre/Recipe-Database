@@ -11,50 +11,47 @@ import { RecipeContext } from "../../RecipeContext";
 import { RiArrowDropDownLine as DropDownArray } from "react-icons/ri";
 import { intolerancesData } from "./Utilities";
 const Browse = () => {
-  const {        cuisineList,
+  const {
+    cuisineList,
     setCuisineList,
     typeList,
     setTypeList,
     dietList,
     setDietList,
     intoleranceList,
-    setIntoleranceList} = useContext(RecipeContext);
-  const [toggleCuisine, setToggleCuisine] = useState(false);
-  const [toggleType, setToggleType] = useState(false);
-  const [toggleIntolerances, setToggleIntolerances] = useState(false);
-  const [toggleDiet, setToggleDiet] = useState(false);
-  // const [toggles, setToggles] = useState({
-  //   cuisine: false,
-  //   type: false,
-  //   intolerances: false,
-  //   diet: false
-  // })
-  // setToggles({...toggles, diet: !toggles.diet})
+    setIntoleranceList,
+  } = useContext(RecipeContext);
+
+  const [toggles, setToggles] = useState({
+    cuisine: false,
+    type: false,
+    intolerances: false,
+    diet: false,
+  });
+
   const [cuisine, setCuisine] = useState([]);
   const [type, setType] = useState([]);
   const [intolerances, setIntolerances] = useState([]);
   const [diet, setDiet] = useState([]);
   const [keyword, setKeyword] = useState("");
 
-
   console.log(intolerances);
-
 
   const handleCuisine = (ev) => {
     ev.preventDefault();
-    setToggleCuisine(!toggleCuisine);
+    setToggles({ ...toggles, cuisine: !toggles.cuisine });
   };
   const handleType = (ev) => {
     ev.preventDefault();
-    setToggleType(!toggleType);
+    setToggles({ ...toggles, type: !toggles.type });
   };
   const handleIntolerances = (ev) => {
     ev.preventDefault();
-    setToggleIntolerances(!toggleIntolerances);
+    setToggles({ ...toggles, intolerances: !toggles.intolerances });
   };
   const handleDiet = (ev) => {
     ev.preventDefault();
-    setToggleDiet(!toggleDiet);
+    setToggles({ ...toggles, diet: !toggles.diet });
   };
 
   return (
@@ -77,10 +74,15 @@ const Browse = () => {
                   <DropDownArray size={20} />
                 </Arrow>
 
-                {toggleCuisine && (
-                  <form>
-                    <Cuisine cuisine={cuisine} setCuisine={setCuisine} />
-                  </form>
+                {toggles.cuisine && (
+                  <Fieldset>
+                    <Cuisine
+                      cuisine={cuisine}
+                      setCuisine={setCuisine}
+                      list={cuisineList}
+                      setCuisineList={setCuisineList}
+                    />
+                  </Fieldset>
                 )}
               </Column>
             </Item>
@@ -90,7 +92,16 @@ const Browse = () => {
                   Type
                   <DropDownArray size={20} />
                 </Arrow>
-                {toggleType && <Type type={type} setType={setType} />}
+                {toggles.type && (
+                  <Fieldset>
+                    <Type
+                      type={type}
+                      setType={setType}
+                      list={typeList}
+                      setTypeList={setTypeList}
+                    />
+                  </Fieldset>
+                )}
               </Column>
             </Item>
             <Item onClick={handleDiet}>
@@ -98,7 +109,16 @@ const Browse = () => {
                 <Arrow>
                   Diet <DropDownArray size={20} />
                 </Arrow>
-                {toggleDiet && <Diet diet={diet} setDiet={setDiet} />}
+                {toggles.diet && (
+                  <Fieldset>
+                    <Diet
+                      diet={diet}
+                      setDiet={setDiet}
+                      list={dietList}
+                      setDietList={setDietList}
+                    />
+                  </Fieldset>
+                )}
               </Column>
             </Item>
             <Item onClick={handleIntolerances}>
@@ -106,21 +126,17 @@ const Browse = () => {
                 <Arrow>
                   Intolerances <DropDownArray size={20} />
                 </Arrow>
-                {/* {toggleIntolerances &&
-                  intoleranceList.map(({ label, selected, id }) => {
-                    return ( */}
-                {toggleIntolerances && (
+
+                {toggles.intolerances && (
                   <Fieldset>
                     <Intolerances
                       list={intoleranceList}
                       setIntoleranceList={setIntoleranceList}
                       intolerances={intolerances}
                       setIntolerances={setIntolerances}
-                    
                     />
                   </Fieldset>
                 )}
-         
               </Column>
             </Item>
           </List>

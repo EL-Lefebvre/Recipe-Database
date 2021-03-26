@@ -2,38 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 import { typeData } from "./Utilities";
-const Type = ({ type, setType }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  console.log(type);
-
-  useEffect(()=>{
-setIsChecked(!isChecked)
-
-  },[type])
+import Filter from "./Filter";
+const Type = ({ type, setType , list, setTypeList }) => {
+  
   return (
-    <Wrapper>
-    
-      {typeData.map((data, id) => {
-          return <List
-          key={id}
-          onChanged={() => {
-            setIsChecked(true);
-          }}
-          onClick={() => {
-            setType(data.name);
-          }}
-        >
-          <label htmlFor={id}> {data.name} </label>
-          <CheckBox
-
-            type="checkbox"
-         
-            checked={data.name === type}
-          />
-        </List>
-        })}
-
-    </Wrapper>
+    <Filter
+      list={list}
+      setList={setTypeList}
+      state={type}
+      setState={setType}
+    />
   );
 };
 

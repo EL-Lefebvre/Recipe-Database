@@ -2,41 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 import { cuisinesData } from "./Utilities";
-const Cuisine = ({ cuisine, setCuisine }) => {
-  // const [selected, setSelected] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
-  console.log(cuisine);
-
-  useEffect(()=>{
-setIsChecked(!isChecked)
-
-  },[cuisine])
-  // console.log(selected)
+import Filter from "./Filter";
+const Cuisine = ({ cuisine, setCuisine, list, setCuisineList }) => {
   return (
-    <Wrapper>
-      {cuisinesData.map((data, id) => {
-        return (
-          <List
-            key={id}
-            onChanged={() => {
-              setIsChecked(true);
-            }}
-            onClick={() => {
-              setCuisine(data.name);
-            }}
-          >
-            <label htmlFor={id}> {data.name} </label>
-            <CheckBox
- 
-              type="checkbox"
-           name={data.name}
-              checked={data.name === cuisine}
-            />
-          </List>
-        );
-      })}
-    </Wrapper>
+    <Filter
+      list={list}
+      setList={setCuisineList}
+      state={cuisine}
+      setState={setCuisine}
+    />
   );
+
 };
 
 const Wrapper = styled.fieldset`

@@ -25,7 +25,7 @@ export const Filter = ({ list, setList, state, setState }) => {
                 if (newState === state) {
                   setState([...state, `+ ${label}`]);
                 } else if (newState !== state) {
-                  setState([`${label}`, ...newState]);
+                  setState([...newState, ` ${label}`]);
                 } else {
                   setState([]);
                 }
@@ -41,10 +41,6 @@ export const Filter = ({ list, setList, state, setState }) => {
                 const newFilter = state.splice(filteredFilter);
                 setState(newFilter);
               }
-
-              console.log(newState);
-              console.log(state);
-              console.log(state.length);
             }}
           />
         </label>
