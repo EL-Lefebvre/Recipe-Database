@@ -1,20 +1,73 @@
 import React, { useState, useEffect, useContext } from "react";
-import { COLORS } from "../constants";
+import { COLORS } from "../../constants";
 import styled from "styled-components";
-import Logo from "../assets/food.png";
-import { RecipeContext } from "../RecipeContext";
-const Profile = () => {
 
-
+// import { RecipeContext } from "../RecipeContext";
+const Register = () => {
+  const [username, setUserName] = useState("");
+  const [password, setPassWord] = useState("");
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    fetch("/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === 201) {
+          console.log(json);
+        } else {
+          console.log("error qwerty");
+        }
+      })
+      .catch((err) => {
+        console.error("err");
+      });
+  };
   return (
     <Wrapper>
+      <Title>
+        <h1> Register</h1>
+      </Title>
       <Layout>
-        <Title>
-          <h1>Profile</h1>
-        </Title>
-      
+        <form method="POST" action="/register">
+          <input
+            type="text"
+            name="username"
+            placeholder="username"
+            onChange={(ev) => setUserName(ev.currentTarget.value)}
+            value={username}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={(ev) => setPassWord(ev.currentTarget.value)}
+            value={password}
+          />
+          <button type="submit" onSubmit={handleSubmit}>
+            {" "}
+            Submit{" "}
+          </button>
+        </form>
+
+        <li>
+          <a href="/register">Sign Up</a>
+        </li>
+        <li>
+          <a href="/login">Login!</a>
+        </li>
+        <li>
+          <a href="/">Logout!</a>
+        </li>
       </Layout>
-      <Main>Find all the recipes you need</Main>
     </Wrapper>
   );
 };
@@ -39,7 +92,6 @@ const Layout = styled.div`
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   height: 150px;
-  width: 500px;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
@@ -90,4 +142,4 @@ const Image = styled.img`
 
 const Category = styled.div``;
 
-export default Profile;
+export default Register;

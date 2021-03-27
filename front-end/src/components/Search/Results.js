@@ -4,18 +4,11 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { RecipeContext } from "../../RecipeContext";
 const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
-
   let history = useHistory();
   const [value, setValue] = useState("");
   const [suggestion, setSuggestion] = useState([]);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(0);
 
-  const handleSelect = (suggestion) => {
-    history.push(`/recipe/${suggestion}`);
-    history.push("/temp");
-    history.goBack();
-    setValue("");
-  };
   const newSuggestion = async () => {
     try {
       const response = await fetch(
@@ -33,42 +26,45 @@ const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
   };
   useEffect(() => {
     newSuggestion();
-
   }, [keyword, cuisine, type, diet, intolerances]);
 
-
-
-  return (<Wrapper> { suggestion && suggestion.map((result, i) => {
-    return (
-      <SearchResult
-        key={i}
-        // onKeyDown={(ev) => {
-        //   switch (ev.key) {
-        //     case "ArrowUp": {
-        //       setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
-        //       return;
-        //     }
-        //     case "ArrowDown": {
-        //       setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
-        //       return;
-        //     }
-        //     case "Escape": {
-        //       setValue("");
-        //       return;
-        //     }
-        //     default:
-        //       return;
-        //   }}}     
-        
-      >
-        <NavigationLink exact to={`/recipe/${result.id}`}>
-          <SuggestionColumn>
-            <Regular>{result.title}</Regular>
-            <Image src={result.image} />
-          </SuggestionColumn>
-        </NavigationLink>
-      </SearchResult> )})}
-      </Wrapper>)
+  return (
+    <Wrapper>
+      {" "}
+      {suggestion &&
+        suggestion.map((result, i) => {
+          return (
+            <SearchResult
+              key={i}
+              // onKeyDown={(ev) => {
+              //   switch (ev.key) {
+              //     case "ArrowUp": {
+              //       setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
+              //       return;
+              //     }
+              //     case "ArrowDown": {
+              //       setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
+              //       return;
+              //     }
+              //     case "Escape": {
+              //       setValue("");
+              //       return;
+              //     }
+              //     default:
+              //       return;
+              //   }}}
+            >
+              <NavigationLink exact to={`/recipe/${result.id}`}>
+                <SuggestionColumn>
+                  <Regular>{result.title}</Regular>
+                  <Image src={result.image} />
+                </SuggestionColumn>
+              </NavigationLink>
+            </SearchResult>
+          );
+        })}
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`

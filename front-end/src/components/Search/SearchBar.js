@@ -14,15 +14,14 @@ console.log(keyword)
   useEffect(() => {}, []);
   return (
     <div>
-      <TypeheadWrapper >
+      <TypeheadWrapper>
         <Input
           value={keyword}
-          
           onChange={(ev) => {
             setKeyword(ev.target.value);
           }}
         />
-        <Icon size={20} />
+        <MainIcon size={20} />
       </TypeheadWrapper>
     </div>
   );
@@ -31,7 +30,11 @@ console.log(keyword)
 const TypeheadWrapper = styled.div`
   padding: auto;
 `;
-
+const MainIcon = styled(IconSearch)`
+  position: absolute;
+  margin-left: -35px;
+  padding-top: 8px;
+`;
 const Input = styled.input`
   width: 450px;
   height: 35px;
@@ -40,7 +43,7 @@ const Input = styled.input`
   outline: none;
   box-sizing: border-box;
   padding: 10px;
-
+ 
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 80vw;
