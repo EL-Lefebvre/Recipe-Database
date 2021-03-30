@@ -8,6 +8,7 @@ import Register from "./Profile/Register";
 import Browse from "./Search/Browse";
 import WinePairing from "./WinePairing";
 import Blog from "./Blog/Blog";
+import Confirmation from "./Profile/Confirmation";
 import IndividualRecipe from "./Recipes/IndividualRecipe";
 import { RecipeContext } from "../RecipeContext";
 const Body = () => {
@@ -27,6 +28,9 @@ const Body = () => {
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/confirmation">
+          <Confirmation />
         </Route>
         <Route exact path="/browse">
           <Browse />

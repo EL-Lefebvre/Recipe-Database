@@ -11,8 +11,11 @@ import { RecipeContext } from "./RecipeContext";
 export const RecipeProvider = ({ children }) => {
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState();
-  const [individualData, setIndividualData] = useState();
-
+  const [individualData, setIndividualData] = useState("");
+  const [registeredUserName, setRegisteredUserName] = useState("");
+  const [registeredPassword, setRegisteredPassword] = useState("");
+  const [loginUserName, setLoginUserName] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [cuisineList, setCuisineList] = useState(
     cuisinesData.map(({ name }, id) => ({
       id,
@@ -74,6 +77,16 @@ export const RecipeProvider = ({ children }) => {
         setDietList,
         intoleranceList,
         setIntoleranceList,
+        registeredUserName,
+        setRegisteredUserName,
+        registeredPassword,
+        setRegisteredPassword,
+        loginUserName,
+        setLoginUserName,
+        loginPassword,
+        setLoginPassword,
+        individualData,
+        setIndividualData,
       }}
     >
       {children}

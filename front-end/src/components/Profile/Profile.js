@@ -10,15 +10,17 @@ const Profile = () => {
         <Title>
           <h1>Profile</h1>
         </Title>
-        <li>
-          <a href="/register">Sign Up</a>
-        </li>
-        <li>
-          <a href="/login">Login!</a>
-        </li>
-        <li>
-          <a href="/">Logout!</a>
-        </li>
+        <LinkList>
+          <Item>
+            <Link href="/register">Sign Up</Link>
+          </Item>
+          <Item>
+            <Link href="/login">Login</Link>
+          </Item>
+          {/* <Item>
+            <Link href="/">Logout</Link>
+          </Item> */}
+        </LinkList>
       </Layout>
       <Main>Find all the recipes you need</Main>
     </Wrapper>
@@ -60,24 +62,19 @@ const Title = styled.div`
   color: white;
   text-decoration: underline;
 `;
-const Search = styled.div`
-  height: 150px;
-  width: 500px;
+const LinkList = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: space-evenly;
+  color: white;
 `;
-const SearchBar = styled.input`
-  width: 450px;
-  height: 35px;
-  border-radius: 15px;
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-  padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 80vw;
-  }
-  @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 80vw;
+const Item = styled.li`
+  padding-right: 20px;
+`;
+const Link = styled.a`
+  text-decoration: none;
+  &:visited {
+    color: white;
   }
 `;
 const Main = styled.div`

@@ -2,29 +2,44 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
-// import { RecipeContext } from "../RecipeContext";
+import { RecipeContext } from "../../RecipeContext";
 const Confirmation = () => {
+  const {
+    individualData,
+    setIndividualData,
+  } = useContext(RecipeContext);
+useEffect(()=>{
+  fetch('/user',{
+    method: "GET",
+    withCredentials: true,
+    url: "http://localhost:4000/user",
+
+  })
+  .then((res) => res.json())
+  .then((res) => {
+    setIndividualData(res.username);
+    console.log(res.username);
+  })
+
+
+},[])
+  
+  console.log(individualData)
   return (
     <Wrapper>
       <Title>
         <h1> Confirmation</h1>
       </Title>
       <Layout>
-        <form method="POST" action="/confirmation">
-          <input type="text" name="username" placeholder="username" />
-          <input type="password" name="password" placeholder="password" />
-          <button type="submit"> Submit </button>
-        </form>
 
-        <li>
-          <a href="/register">Sign Up</a>
-        </li>
-        <li>
-          <a href="/">Logout!</a>
-        </li>
-        <li>
-          <a href="/login">Login!</a>
-        </li>
+      
+       
+          
+     
+ 
+<div>
+        {individualData ? <h1>Welcome Back {individualData}</h1> : null}
+        </div>
       </Layout>
     </Wrapper>
   );
@@ -64,13 +79,11 @@ const Title = styled.div`
   color: white;
   text-decoration: underline;
 `;
-const Search = styled.div`
-  height: 150px;
-  width: 500px;
+const Register = styled.form`
+  display: flex;
+  flex-direction: column;
 `;
-const SearchBar = styled.input`
-  width: 450px;
-  height: 35px;
+const InputField = styled.input`
   border-radius: 15px;
   border: none;
   outline: none;
@@ -93,10 +106,7 @@ const Main = styled.div`
   min-width: 80vw;
   margin-bottom: 200px;
 `;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
-`;
+
 
 const Category = styled.div``;
 

@@ -2,12 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
-// import { RecipeContext } from "../RecipeContext";
+import { RecipeContext } from "../../RecipeContext";
 const Register = () => {
-  const [username, setUserName] = useState("");
-  const [password, setPassWord] = useState("");
+  const [data, setData] = useState(null);
+  const {
+    registeredUserName,
+    setRegisteredUserName,
+    registeredPassword,
+    setRegisteredPassword,
+  } = useContext(RecipeContext);
   const handleSubmit = (ev) => {
-    ev.preventDefault();
+
     fetch("/register", {
       method: "POST",
       headers: {
@@ -15,58 +20,46 @@ const Register = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
+        username: registeredUserName,
+        password: registeredPassword,
       }),
+
+
     })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status === 201) {
-          console.log(json);
-        } else {
-          console.log("error qwerty");
-        }
-      })
-      .catch((err) => {
-        console.error("err");
-      });
+    .then((res) => res.json())
   };
   return (
     <Wrapper>
-      <Title>
-        <h1> Register</h1>
-      </Title>
       <Layout>
-        <form method="POST" action="/register">
-          <input
+        <Title>
+          <h1> Register</h1>
+        </Title>
+        <Main method="POST" action="/register">
+          <InputField
             type="text"
             name="username"
             placeholder="username"
-            onChange={(ev) => setUserName(ev.currentTarget.value)}
-            value={username}
+            onChange={(ev) => setRegisteredUserName(ev.currentTarget.value)}
+            value={registeredUserName}
           />
-          <input
+          <InputField
             type="password"
             name="password"
             placeholder="password"
-            onChange={(ev) => setPassWord(ev.currentTarget.value)}
-            value={password}
+            onChange={(ev) => setRegisteredPassword(ev.currentTarget.value)}
+            value={registeredPassword}
           />
-          <button type="submit" onSubmit={handleSubmit}>
+          <Button type="submit" onSubmit={handleSubmit}>
             {" "}
             Submit{" "}
-          </button>
-        </form>
-
-        <li>
-          <a href="/register">Sign Up</a>
-        </li>
-        <li>
-          <a href="/login">Login!</a>
-        </li>
-        <li>
-          <a href="/">Logout!</a>
-        </li>
+          </Button>
+        </Main>
+        <LinkList>
+          <Item> (Already have an account?) </Item>
+          <Item>
+            <Link href="/login">Login</Link>
+          </Item>
+        </LinkList>
       </Layout>
     </Wrapper>
   );
@@ -82,9 +75,12 @@ const Wrapper = styled.div`
   padding-top: 50px;
 `;
 const Layout = styled.div`
+  min-width: 30vw;
+  min-height: 60vh;
   margin-top: 0px;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   border: 5px double black;
   align-items: center;
   background-color: ${COLORS.third};
@@ -102,18 +98,33 @@ const Layout = styled.div`
     margin-top: -30px;
   }
 `;
+const Main = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  min-height: 35vh;
+`;
 const Title = styled.div`
   color: white;
   text-decoration: underline;
 `;
-const Search = styled.div`
-  height: 150px;
-  width: 500px;
+
+const LinkList = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  color: white;
 `;
-const SearchBar = styled.input`
-  width: 450px;
-  height: 35px;
+const Item = styled.li``;
+const Link = styled.a`
+  &:visited {
+    color: white;
+  }
+`;
+const InputField = styled.input`
   border-radius: 15px;
+  width: 20vw;
   border: none;
   outline: none;
   box-sizing: border-box;
@@ -126,20 +137,12 @@ const SearchBar = styled.input`
     max-width: 80vw;
   }
 `;
-const Main = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  min-height: 60vh;
-  min-width: 80vw;
-  margin-bottom: 200px;
-`;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
-`;
 
-const Category = styled.div``;
+const Button = styled.button`
+  height: 30px;
+  width: 12vw;
+  background-color: ${COLORS.primary};
+  border: none;
+`;
 
 export default Register;

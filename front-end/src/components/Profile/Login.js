@@ -2,28 +2,69 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
-// import { RecipeContext } from "../RecipeContext";
+import { RecipeContext } from "../../RecipeContext";
 const Login = () => {
+  const {
+    loginUserName,
+    setLoginUserName,
+    loginPassword,
+    setLoginPassword,  individualData,
+    setIndividualData,
+  } = useContext(RecipeContext);
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: loginUserName,
+        password: loginPassword,
+      }),
+      withCredentials: true,
+      url: "http//localhost:8000/login",
+    })
+    .then((res) => console.log(res));
+  };
+
   return (
     <Wrapper>
       <Layout>
-        <form method="POST" action="/login">
-          <input type="text" name="username" placeholder="username" />
-          <input type="password" name="password" placeholder="password" />
-          <button type="submit"> Login </button>
-        </form>
-
-        <li>
-          <a href="/register">Sign Up</a>
-        </li>
-        <li>
-          <a href="/login">Login!</a>
-        </li>
+        <Title>
+          <h1> Login</h1>
+        </Title>
+        <Main method="POST" action="/login">
+          <InputField
+            type="text"
+            name="username"
+            placeholder="username"
+            onChange={(ev) => setLoginUserName(ev.currentTarget.value)}
+            value={loginUserName}
+          />
+          <InputField
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={(ev) => setLoginPassword(ev.currentTarget.value)}
+            value={loginPassword}
+          />
+          <Button type="submit" onSubmit={handleSubmit}> Login </Button>
+      
+     
+        </Main>
+        <LinkList>
+          <Item>
+            <Link href="/register">Sign Up</Link>
+          </Item>
+        </LinkList>
+ 
       </Layout>
     </Wrapper>
   );
 };
-
 const Wrapper = styled.div`
   background-color: #f0f0e8;
   display: flex;
@@ -34,9 +75,12 @@ const Wrapper = styled.div`
   padding-top: 50px;
 `;
 const Layout = styled.div`
+  min-width: 30vw;
+  min-height: 60vh;
   margin-top: 0px;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   border: 5px double black;
   align-items: center;
   background-color: ${COLORS.third};
@@ -54,18 +98,33 @@ const Layout = styled.div`
     margin-top: -30px;
   }
 `;
+const Main = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 30vh;
+`;
 const Title = styled.div`
   color: white;
   text-decoration: underline;
 `;
-const Search = styled.div`
-  height: 150px;
-  width: 500px;
+
+const LinkList = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  color: white;
 `;
-const SearchBar = styled.input`
-  width: 450px;
-  height: 35px;
+const Item = styled.li``;
+const Link = styled.a`
+  &:visited {
+    color: white;
+  }
+`;
+const InputField = styled.input`
   border-radius: 15px;
+  width: 20vw;
   border: none;
   outline: none;
   box-sizing: border-box;
@@ -78,20 +137,12 @@ const SearchBar = styled.input`
     max-width: 80vw;
   }
 `;
-const Main = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  min-height: 60vh;
-  min-width: 80vw;
-  margin-bottom: 200px;
-`;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
-`;
 
-const Category = styled.div``;
+const Button = styled.button`
+  height: 30px;
+  width: 12vw;
+  background-color: ${COLORS.primary};
+  border: none;
+`;
 
 export default Login;
