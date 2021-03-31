@@ -3,24 +3,21 @@ import { COLORS } from "../../constants";
 import styled from "styled-components";
 
 function Form({
-  userName,
   title,
   details,
   handleSubmit,
-  setUserName,
+  username,
   setTitle,
   setDetails,
+
 }) {
   return (
     <Wrapper>
       <MainForm onSubmit={handleSubmit}>
         <TextDiv>
-          <Info
-            type="text"
-            placeholder="Username"
-            onChange={(ev) => setUserName(ev.currentTarget.value)}
-            value={userName}
-          />
+          <h1 placeholder="Username" value={username}>
+            {username}
+          </h1>
           <Info
             type="text"
             placeholder="Title of your recipe"
@@ -55,11 +52,11 @@ const Info = styled.input`
   border: none;
   margin-bottom: 10px;
   font-family: Shippori Mincho, serif;
-  padding-left:20px;
+  padding-left: 20px;
 `;
 const TextArea = styled.textarea`
   border: none;
- 
+
   font-family: Shippori Mincho, serif;
   padding: 10px;
   width: 45vw;

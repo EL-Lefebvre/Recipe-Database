@@ -9,13 +9,13 @@ const options = {
 };
 
 const addingRecipe = async (req, res) => {
-  const { userName, title, details } = req.body;
+  const { username, title, details } = req.body;
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
 
   const db = await client.db("recipes");
   const data = await db.collection("postedRecipes").insertOne({
-    userName: userName,
+    username: username,
     title: title,
     details: details,
   });

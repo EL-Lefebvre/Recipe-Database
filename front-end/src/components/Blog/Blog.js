@@ -3,13 +3,20 @@ import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Form from "./Form";
 import Posts from "./Posts";
+import { RecipeContext } from "../../RecipeContext";
 const Blog = () => {
-  const [userName, setUserName] = useState("");
+  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const [username, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
   const [posts, setPosts] = useState([]);
+  const [status, setStatus] = useState("null");
   console.log(details);
-
+  useEffect(() => {
+    let currentUser = localStorage.getItem("data");
+    setUserName(currentUser);
+  }, [individualData]);
+  console.log(username);
   const postedRecipe = async () => {
     try {
       const response = await fetch(`/recipes/post`)
@@ -23,11 +30,10 @@ const Blog = () => {
     }
   };
   useEffect(() => {
-    if(posts=== []){
+    if (posts === []) {
       postedRecipe();
     }
-
-  }, []);
+  }, [posts]);
 
   console.log(posts);
   const handleSubmit = (ev) => {
@@ -39,7 +45,7 @@ const Blog = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: userName,
+        username: username,
         title: title,
         details: details,
       }),
@@ -48,8 +54,10 @@ const Blog = () => {
       .then((json) => {
         if (json.status === 201) {
           console.log(json);
+          setStatus("success");
         } else {
           console.log("error qwerty");
+          setStatus("error");
         }
       })
       .catch((err) => {
@@ -63,15 +71,16 @@ const Blog = () => {
         <Title>
           <h1>Blog</h1>
         </Title>
-        <Form
-          userName={userName}
-          details={details}
-          title={title}
-          handleSubmit={handleSubmit}
-          setUserName={setUserName}
-          setTitle={setTitle}
-          setDetails={setDetails}
-        />
+        {username && (
+          <Form
+            username={username}
+            details={details}
+            title={title}
+            handleSubmit={handleSubmit}
+            setTitle={setTitle}
+            setDetails={setDetails}
+          />
+        )}
       </Layout>
 
       <Main>

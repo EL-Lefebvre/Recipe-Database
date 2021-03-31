@@ -19,7 +19,7 @@ const Profile = () => {
       });
     let currentData = localStorage.getItem("data");
     setIndividualData(currentData);
-  }, []);
+  }, [individualData]);
   return (
     <Wrapper>
       <Layout>

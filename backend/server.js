@@ -91,7 +91,7 @@ app.post("/register", (req, res) => {
         console.log("save", err, user);
       });
 
-      res.redirect("/profile");
+      res.redirect("/");
       console.log(newUser);
       //once the user sign up
     }
@@ -106,9 +106,9 @@ passport.authenticate('local', (err,user,info)=>{
   if(!user) res.send('No User Exists')
   else{
     req.logIn(user, err=>{
-      if(err) throw err;
-      res.redirect("/profile");
+      if (err) throw err;
       console.log(req.user);
+      res.redirect("/profile");
     })
   }
 })(req, res, next);

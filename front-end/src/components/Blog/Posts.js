@@ -11,7 +11,7 @@ const Posts = ({ posts, setPosts }) => {
       <Main>
         {posts &&
           posts.map((post) => {
-            return <Layout>{post.userName}</Layout>;
+            return <Layout>{post.title}</Layout>;
           })}
         <h2>this is your recipesss</h2>
       </Main>
