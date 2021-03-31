@@ -21,7 +21,18 @@ const addingRecipe = async (req, res) => {
   });
 
   client.close();
-  res.status(200).json({ status: 200, data: data.ops });
+  res.status(201).json({ status: 201, data: data });
 };
 
-module.exports = { addingRecipe };
+const getPostedRecipes = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+  console.log("connected");
+  const db = await client.db("recipes");
+
+  const data = await db.collection("postedRecipes").find().toArray();
+
+  client.close();
+  res.status(200).json({ status: 200, data: data });
+};
+module.exports = { addingRecipe, getPostedRecipes };

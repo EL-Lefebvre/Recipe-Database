@@ -3,42 +3,21 @@ import { COLORS } from "../../constants";
 import styled from "styled-components";
 
 import { RecipeContext } from "../../RecipeContext";
-const Confirmation = () => {
-  const {
-    individualData,
-    setIndividualData,
-  } = useContext(RecipeContext);
-useEffect(()=>{
-  fetch('/user',{
-    method: "GET",
-    withCredentials: true,
-    url: "http://localhost:4000/user",
+const Logout = () => {
+  const { individualData, setIndividualData } = useContext(RecipeContext);
+  useEffect(() => {
+    localStorage.removeItem("data");
+  }, []);
 
-  })
-  .then((res) => res.json())
-  .then((res) => {
-    setIndividualData(res.username);
-    console.log(res.username);
-  })
-
-
-},[])
-  
-  console.log(individualData)
+  console.log(individualData);
   return (
     <Wrapper>
       <Title>
-        <h1> Confirmation</h1>
+        <h1> Log Out</h1>
       </Title>
       <Layout>
-
-      
-       
-          
-     
- 
-<div>
-        {individualData ? <h1>Welcome Back {individualData}</h1> : null}
+        <div>
+          <h1>You have been logged out</h1>
         </div>
       </Layout>
     </Wrapper>
@@ -107,7 +86,6 @@ const Main = styled.div`
   margin-bottom: 200px;
 `;
 
-
 const Category = styled.div``;
 
-export default Confirmation;
+export default Logout;

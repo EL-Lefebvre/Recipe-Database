@@ -2,11 +2,34 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Form from "./Form";
+import Posts from "./Posts";
 const Blog = () => {
   const [userName, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
+  const [posts, setPosts] = useState([]);
   console.log(details);
+
+  const postedRecipe = async () => {
+    try {
+      const response = await fetch(`/recipes/post`)
+        .then((res) => res.json())
+        .then((data) => data.data);
+
+      setPosts(response);
+      return response;
+    } catch (err) {
+      console.log("error");
+    }
+  };
+  useEffect(() => {
+    if(posts=== []){
+      postedRecipe();
+    }
+
+  }, []);
+
+  console.log(posts);
   const handleSubmit = (ev) => {
     ev.preventDefault();
     fetch("/recipes/post", {
@@ -33,6 +56,7 @@ const Blog = () => {
         console.error("err");
       });
   };
+
   return (
     <Wrapper>
       <Layout>
@@ -51,7 +75,7 @@ const Blog = () => {
       </Layout>
 
       <Main>
-        <h2>Share all your recipes !</h2>
+        <Posts posts={posts} setPosts={setPosts} />
       </Main>
     </Wrapper>
   );

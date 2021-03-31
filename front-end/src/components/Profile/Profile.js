@@ -4,23 +4,47 @@ import styled from "styled-components";
 import Logo from "../../assets/food.png";
 import { RecipeContext } from "../../RecipeContext";
 const Profile = () => {
+  const { individualData, setIndividualData } = useContext(RecipeContext);
+  console.log(individualData);
+  useEffect(() => {
+    fetch("/user", {
+      method: "GET",
+      withCredentials: true,
+      url: "http://localhost:4000/user",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        localStorage.setItem("data", res.username);
+        console.log(res.username);
+      });
+    let currentData = localStorage.getItem("data");
+    setIndividualData(currentData);
+  }, []);
   return (
     <Wrapper>
       <Layout>
         <Title>
           <h1>Profile</h1>
         </Title>
-        <LinkList>
-          <Item>
-            <Link href="/register">Sign Up</Link>
-          </Item>
-          <Item>
-            <Link href="/login">Login</Link>
-          </Item>
-          {/* <Item>
-            <Link href="/">Logout</Link>
-          </Item> */}
-        </LinkList>
+        {individualData ? (
+          <div>
+            hello {individualData}
+            <LinkList>
+              <Item>
+                <Link href="/logout">Logout</Link>
+              </Item>
+            </LinkList>
+          </div>
+        ) : (
+          <LinkList>
+            <Item>
+              <Link href="/register">Sign Up</Link>
+            </Item>
+            <Item>
+              <Link href="/login">Login</Link>
+            </Item>
+          </LinkList>
+        )}
       </Layout>
       <Main>Find all the recipes you need</Main>
     </Wrapper>

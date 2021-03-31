@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import { RecipeContext } from "../../RecipeContext";
 const Register = () => {
-  const [data, setData] = useState(null);
   const {
     registeredUserName,
     setRegisteredUserName,
@@ -12,7 +11,6 @@ const Register = () => {
     setRegisteredPassword,
   } = useContext(RecipeContext);
   const handleSubmit = (ev) => {
-
     fetch("/register", {
       method: "POST",
       headers: {
@@ -23,10 +21,7 @@ const Register = () => {
         username: registeredUserName,
         password: registeredPassword,
       }),
-
-
-    })
-    .then((res) => res.json())
+    }).then((res) => console.log(res));
   };
   return (
     <Wrapper>

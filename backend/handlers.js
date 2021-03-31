@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-const { addingRecipe } = require("./helpers");
+const { addingRecipe, getPostedRecipes } = require("./helpers");
 
 const apiKey = process.env.API_KEY;
 const api_url = "https://api.spoonacular.com/recipes";
@@ -78,10 +78,14 @@ const newPost = async (req, res) => {
   await addingRecipe(req, res);
 };
 
+const getPosts = async (req, res) => {
+  await getPostedRecipes(req, res);
+};
 module.exports = {
   getRandomRecipes,
   singleRecipe,
   searchRecipe,
   newPost,
   filterRecipe,
+  getPosts,
 };

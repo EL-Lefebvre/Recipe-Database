@@ -8,7 +8,8 @@ import Register from "./Profile/Register";
 import Browse from "./Search/Browse";
 import WinePairing from "./WinePairing";
 import Blog from "./Blog/Blog";
-import Confirmation from "./Profile/Confirmation";
+import Error from "./Error";
+import Logout from "./Profile/Logout";
 import IndividualRecipe from "./Recipes/IndividualRecipe";
 import { RecipeContext } from "../RecipeContext";
 const Body = () => {
@@ -20,17 +21,17 @@ const Body = () => {
       }}
     >
       <Switch>
-        <Route exact path="/profile">
-          <Profile />
-        </Route>
         <Route exact path="/register">
           <Register />
         </Route>
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/confirmation">
-          <Confirmation />
+        <Route exact path="/profile">
+          <Profile />
+        </Route>
+        <Route exact path="/logout">
+          <Logout />
         </Route>
         <Route exact path="/browse">
           <Browse />
@@ -47,6 +48,10 @@ const Body = () => {
         </Route>
         <Route exact path="/">
           <Home />
+        </Route>
+
+        <Route exact path="/error">
+          <Error />
         </Route>
       </Switch>
     </Wrapper>

@@ -21,6 +21,7 @@ const {
   searchRecipe,
   newPost,
   filterRecipe,
+  getPosts,
 } = require("./handlers");
 
 const options = {
@@ -78,18 +79,21 @@ app.get("/", (req, res) => {
 app.post("/register", (req, res) => {
   User.findOne({ username: req.body.username }, async (err, doc) => {
     if (err) throw err;
-    if (doc) res.send("User already exists");
+    if (doc) res.redirect("/error");
     if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10)
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
       const newUser = new User({
         username: req.body.username,
         password: hashedPassword,
       });
 
-    await  newUser.save(function (err, user) {
+      await newUser.save(function (err, user) {
         console.log("save", err, user);
       });
-      res.send("new User created!"); //once the user sign up
+
+      res.redirect("/profile");
+      console.log(newUser);
+      //once the user sign up
     }
   });
 });
@@ -103,7 +107,7 @@ passport.authenticate('local', (err,user,info)=>{
   else{
     req.logIn(user, err=>{
       if(err) throw err;
-      res.redirect('/confirmation');
+      res.redirect("/profile");
       console.log(req.user);
     })
   }
@@ -119,6 +123,7 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+app.get("/recipes/post", getPosts);
 app.post("/recipes/post", newPost);
 app.get("/recipes/random", getRandomRecipes);
 app.get("/recipes/:id", singleRecipe);

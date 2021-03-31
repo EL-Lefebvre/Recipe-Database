@@ -36,7 +36,9 @@ const Login = () => {
         <Title>
           <h1> Login</h1>
         </Title>
+  
         <Main method="POST" action="/login">
+        
           <InputField
             type="text"
             name="username"
