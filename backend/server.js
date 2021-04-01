@@ -22,6 +22,7 @@ const {
   newPost,
   filterRecipe,
   getPosts,
+  getFavorites,
 } = require("./handlers");
 
 const options = {
@@ -127,6 +128,7 @@ app.get("/recipes/post", getPosts);
 app.post("/recipes/post", newPost);
 app.get("/recipes/random", getRandomRecipes);
 app.get("/recipes/:id", singleRecipe);
+// app.get("/recipes/:user", getFavorites);
 app.get("/recipes/search/:food", searchRecipe);
 
 app.get("/recipes", filterRecipe).listen(PORT, () => {

@@ -15,7 +15,9 @@ const Liked = ({
   }, []);
   useEffect(() => {
     if (toggleLiked) {
-      setRecipeLiked([...recipeLiked, recipeId]);
+      const filteredRecipe = recipeLiked.filter((recipe) => recipe != recipeId);
+      console.log(filteredRecipe);
+      setRecipeLiked([...filteredRecipe, recipeId]);
       localStorage.setItem("favorites", JSON.stringify(recipeLiked));
     } else if (!toggleLiked) {
       const index = recipeLiked.indexOf(recipeId);

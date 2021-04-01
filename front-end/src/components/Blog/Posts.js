@@ -6,18 +6,26 @@ const Posts = ({ posts, setPosts }) => {
   useEffect(() => {
     console.log(posts);
   }, []);
+
+
   return (
     <Wrapper>
       <Main>
         {posts &&
           posts.map((post) => {
             return (
-              <Layout>
-                <Title>By {post.username}</Title>
+              <Layout key={post._id}>
+                <Title >
+                  
+                By {post.username}
+                
+                </Title>
                 <Recipes>
                   <Details>
+                    <Text>{post.title}</Text>
                     <Text>{post.details}</Text>
                   </Details>
+                  <Image src={post.fileUpload} />
                 </Recipes>
               </Layout>
             );
@@ -41,10 +49,8 @@ const Layout = styled.div`
   flex-direction: column;
   border: 5px double black;
   align-items: center;
-
   border-radius: 15px;
   padding: 10px;
-
   min-height: 40vh;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
@@ -69,7 +75,7 @@ const Main = styled.div`
 `;
 
 const Title = styled.div`
-  color: white;
+
   text-decoration: underline;
 `;
 
@@ -77,8 +83,10 @@ const Recipes = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const IndividualRecipe = styled.div``;
 const Details = styled.div``;
 const Text = styled.p``;
+const Image = styled.img``;
 
 export default Posts;

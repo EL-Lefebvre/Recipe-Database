@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Logo from "../../assets/food.png";
 import Posts from "../Blog/Posts";
 import { RecipeContext } from "../../RecipeContext";
-const Profile = () => {
+const Favorites = () => {
   const { individualData, setIndividualData } = useContext(RecipeContext);
   const [posts, setPosts] = useState([]);
   const [results, setResults] = useState([]);
@@ -56,7 +56,7 @@ const Profile = () => {
         <MainDiv>
           <Layout>
             <Title>
-              <h1>Profile</h1>
+              <h1>Favorites</h1>
             </Title>
             <div>
               Welcome {individualData} !
@@ -73,7 +73,7 @@ const Profile = () => {
         <MainDiv>
           <Layout>
             <Title>
-              <h1>Profile</h1>
+              <h1>Favorites</h1>
             </Title>
             <LinkList>
               <Item>
@@ -159,4 +159,4 @@ const Image = styled.img`
 
 const Category = styled.div``;
 
-export default Profile;
+export default Favorites;

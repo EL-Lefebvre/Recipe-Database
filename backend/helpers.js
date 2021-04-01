@@ -9,7 +9,7 @@ const options = {
 };
 
 const addingRecipe = async (req, res) => {
-  const { username, title, details } = req.body;
+  const { username, title, details, ingredients, fileUpload } = req.body;
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
 
@@ -17,7 +17,9 @@ const addingRecipe = async (req, res) => {
   const data = await db.collection("postedRecipes").insertOne({
     username: username,
     title: title,
+    ingredients: ingredients,
     details: details,
+    fileUpload: fileUpload,
   });
 
   client.close();
@@ -35,4 +37,19 @@ const getPostedRecipes = async (req, res) => {
   client.close();
   res.status(200).json({ status: 200, data: data });
 };
-module.exports = { addingRecipe, getPostedRecipes };
+
+const addFavorite = async (req, res) => {
+  const { username, recipeId } = req.body;
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+
+  const db = await client.db("recipes");
+  const data = await db.collection("postedRecipes").insertOne({
+    username: username,
+    recipeId: recipeId,
+  });
+
+  client.close();
+  res.status(201).json({ status: 201, data: data });
+};
+module.exports = { addingRecipe, getPostedRecipes, addFavorite };

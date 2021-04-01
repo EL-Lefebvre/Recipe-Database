@@ -11,6 +11,8 @@ const Blog = () => {
   const [details, setDetails] = useState("");
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState("null");
+  const [ingredients, setIngredients] = useState("");
+  const [fileUpload, setFileUpload] = useState("");
   console.log(details);
   useEffect(() => {
     let currentUser = localStorage.getItem("data");
@@ -48,7 +50,9 @@ const Blog = () => {
       body: JSON.stringify({
         username: username,
         title: title,
+        ingredients: ingredients,
         details: details,
+        fileUpload: fileUpload,
       }),
     })
       .then((res) => res.json())
@@ -80,6 +84,10 @@ const Blog = () => {
             handleSubmit={handleSubmit}
             setTitle={setTitle}
             setDetails={setDetails}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+            fileUpload={fileUpload}
+            setFileUpload={setFileUpload}
           />
         )}
       </Layout>

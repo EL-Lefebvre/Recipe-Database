@@ -13,6 +13,11 @@ const BigRecipe = ({ individualData }) => {
     setToggleLiked,
   } = useContext(RecipeContext);
 
+  useEffect(() => {
+    if (toggleLiked) {
+      localStorage.setItem("favorites", JSON.stringify(recipeLiked));
+    }
+  }, [toggleLiked]);
 const handleClickLike = () => {
   setToggleLiked(!toggleLiked);
   // if (toggleLiked) {

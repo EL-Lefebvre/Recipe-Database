@@ -6,7 +6,7 @@ const User = new mongoose.Schema(
     username: String,
     password: String,
   },
-  { collection: "test" }
+  { collection: "authentification" }
 );
 
 module.exports = mongoose.model("User", User);
