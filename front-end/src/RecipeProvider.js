@@ -16,6 +16,8 @@ export const RecipeProvider = ({ children }) => {
   const [registeredPassword, setRegisteredPassword] = useState("");
   const [loginUserName, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [recipeLiked, setRecipeLiked] = useState([]);
+  const [toggleLiked, setToggleLiked] = useState(false);
   const [cuisineList, setCuisineList] = useState(
     cuisinesData.map(({ name }, id) => ({
       id,
@@ -87,6 +89,10 @@ export const RecipeProvider = ({ children }) => {
         setLoginPassword,
         individualData,
         setIndividualData,
+        recipeLiked,
+        setRecipeLiked,
+        toggleLiked,
+        setToggleLiked,
       }}
     >
       {children}

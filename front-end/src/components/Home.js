@@ -8,6 +8,9 @@ import SearchBar from "./Search";
 const Home = () => {
   const { data } = useContext(RecipeContext);
   console.log(data);
+  const favorites = JSON.parse(localStorage.getItem("favorites"));
+
+  console.log(favorites);
   return (
     <Wrapper>
       <Layout>

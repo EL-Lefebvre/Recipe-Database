@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Form from "./Form";
 import Posts from "./Posts";
 import { RecipeContext } from "../../RecipeContext";
-const Blog = () => {
+const SubmitPost = () => {
   const { individualData, setIndividualData } = useContext(RecipeContext);
   const [username, setUserName] = useState("");
   const [title, setTitle] = useState("");
@@ -70,7 +70,7 @@ const Blog = () => {
     <Wrapper>
       <Layout>
         <Title>
-          <h1>Blog</h1>
+          <h1>SubmitPost</h1>
         </Title>
         {username && (
           <Form
@@ -83,10 +83,6 @@ const Blog = () => {
           />
         )}
       </Layout>
-
-      <Main>
-        <Posts posts={posts} setPosts={setPosts} />
-      </Main>
     </Wrapper>
   );
 };
@@ -144,4 +140,4 @@ const Recipes = styled.div`
 const IndividualRecipe = styled.div``;
 const Category = styled.div``;
 
-export default Blog;
+export default SubmitPost;

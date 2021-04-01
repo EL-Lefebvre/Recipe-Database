@@ -11,9 +11,17 @@ const Posts = ({ posts, setPosts }) => {
       <Main>
         {posts &&
           posts.map((post) => {
-            return <Layout>{post.title}</Layout>;
+            return (
+              <Layout>
+                <Title>By {post.username}</Title>
+                <Recipes>
+                  <Details>
+                    <Text>{post.details}</Text>
+                  </Details>
+                </Recipes>
+              </Layout>
+            );
           })}
-        <h2>this is your recipesss</h2>
       </Main>
     </Wrapper>
   );
@@ -33,11 +41,11 @@ const Layout = styled.div`
   flex-direction: column;
   border: 5px double black;
   align-items: center;
-  background-color: ${COLORS.third};
+
   border-radius: 15px;
   padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  min-height: 30vh;
+
+  min-height: 40vh;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
@@ -54,7 +62,7 @@ const Main = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid black;
+
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
@@ -70,6 +78,7 @@ const Recipes = styled.div`
   flex-direction: column;
 `;
 const IndividualRecipe = styled.div``;
-const Category = styled.div``;
+const Details = styled.div``;
+const Text = styled.p``;
 
 export default Posts;

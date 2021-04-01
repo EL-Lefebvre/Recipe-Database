@@ -31,6 +31,7 @@ function Form({
             minLength="0"
             value={details}
           />
+          <input type="file" />
         </TextDiv>
         <SubmitBar>
           <Button type="submit">Submit</Button>
