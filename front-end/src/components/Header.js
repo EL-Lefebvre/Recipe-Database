@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { COLORS } from "../constants";
@@ -7,8 +7,14 @@ import { BiWine as Wine } from "react-icons/bi";
 import { BiSearchAlt as Search } from "react-icons/bi";
 import { CgProfile as Profile } from "react-icons/cg";
 import { BsFillChatSquareDotsFill as Blog } from "react-icons/bs";
+import { RecipeContext } from "../RecipeContext";
 import Cover from "../assets/background.jpg";
+import DropDown from "./DropDown";
+
 const Header = () => {
+  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const [toggleProfile, setToggleProfile] = useState(false);
+  useEffect(() => {}, []);
   return (
     <Wrapper
       style={{
@@ -42,13 +48,37 @@ const Header = () => {
               <Wine size={20} /> <Text>Wine Pairing</Text>
             </Link>
           </Item>
-          <Item>
+          {individualData ? (
+            <Item>
             <Link to="/profile">
               {" "}
               <Profile className="icons" size={20} /> <Text>Profile</Text>
             </Link>
           </Item>
+            
+          ) : (
+            <Item>
+              <ToggleLink
+                onClick={() => {
+                  setToggleProfile(!toggleProfile);
+                }}
+              >
+                {" "}
+                <Profile className="icons" size={20} /> <Text>Profile</Text>
+              </ToggleLink>
+            </Item>
+          )}
         </Menu>
+       
+        <DropDownDiv>
+        {toggleProfile &&
+          <DropDown
+            toggleProfile={toggleProfile}
+            setToggleProfile={setToggleProfile}
+          />
+        }
+        </DropDownDiv>
+
       </Main>
     </Wrapper>
   );
@@ -85,6 +115,18 @@ const Menu = styled.ul`
 `;
 
 const Item = styled.li``;
+const ToggleLink = styled.li`
+text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  transition: 0.3s;
+  &:hover {
+    color: ${COLORS.primary};
+  }
+`;
 const Link = styled(NavLink)`
   text-decoration: none;
   color: black;
@@ -133,6 +175,14 @@ const Logo = styled.img`
   @media (max-width: 650px) and (max-height: 850px) {
     height: 200px;
   }
+`;
+const DropDownDiv = styled.div`
+
+  display: flex;
+  justify-content: flex-end;
+ 
+  height:60px;
+  background-color: #f0f0e8;
 `;
 const Icon = styled.img``;
 export default Header;

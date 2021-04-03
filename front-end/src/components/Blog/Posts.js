@@ -15,14 +15,17 @@ const Posts = ({ posts, setPosts }) => {
           posts.map((post) => {
             return (
               <Layout key={post._id}>
+
                 <Title >
-                  
+           
                 By {post.username}
                 
                 </Title>
                 <Recipes>
                   <Details>
+                  <Span>
                     <Text>{post.title}</Text>
+                    </Span>
                     <Text>{post.details}</Text>
                   </Details>
                   <Image src={post.fileUpload} />
@@ -44,6 +47,7 @@ const Wrapper = styled.div`
 `;
 const Layout = styled.div`
   width: 60vw;
+  background-color: white;
   margin-top: 0px;
   display: flex;
   flex-direction: column;
@@ -79,6 +83,9 @@ const Title = styled.div`
   text-decoration: underline;
 `;
 
+const Span = styled.span`
+font-weight:bolder;
+`;
 const Recipes = styled.div`
   display: flex;
   flex-direction: column;

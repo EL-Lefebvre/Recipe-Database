@@ -18,6 +18,8 @@ export const RecipeProvider = ({ children }) => {
   const [loginPassword, setLoginPassword] = useState("");
   const [recipeLiked, setRecipeLiked] = useState([]);
   const [toggleLiked, setToggleLiked] = useState(false);
+  const [results, setResults] = useState([]);
+  const [status, setStatus] = useState("loading");
   const [cuisineList, setCuisineList] = useState(
     cuisinesData.map(({ name }, id) => ({
       id,
@@ -47,7 +49,46 @@ export const RecipeProvider = ({ children }) => {
       selected: false,
     }))
   );
+  //Get current User
+  useEffect(() => {
+    fetch("/user", {
+      method: "GET",
+      withCredentials: true,
+      url: "http://localhost:4000/user",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        localStorage.setItem("data", res.username);
+        console.log(res.username);
+      });
+    let currentData = localStorage.getItem("data");
+    setIndividualData(currentData);
+  }, [individualData]);
+  //Get all posted recipes in blog
+  const postedRecipe = async () => {
+    try {
+      const response = await fetch(`/recipes/post`)
+        .then((res) => res.json())
+        .then((data) => data.data);
 
+      setResults(response);
+      return response;
+    } catch (err) {
+      console.log("error");
+    }
+  };
+  useEffect(() => {
+    postedRecipe();
+    setStatus("loading");
+    console.log(results);;
+  }, []);
+  useEffect(() => {
+    if (individualData) {
+      setStatus("idle");
+    }
+  },  []);
+  // -----
+  console.log(results);
   const randomRecipe = async () => {
     try {
       const response = await fetch("/recipes/random")
@@ -93,6 +134,10 @@ export const RecipeProvider = ({ children }) => {
         setRecipeLiked,
         toggleLiked,
         setToggleLiked,
+        status,
+        setStatus,
+        results,
+        setResults,
       }}
     >
       {children}

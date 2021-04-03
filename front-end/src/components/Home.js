@@ -30,6 +30,7 @@ const Home = () => {
 };
 
 const Wrapper = styled.div`
+  margin-top: -40px;
   background-color: #f0f0e8;
   display: flex;
   flex-direction: column;

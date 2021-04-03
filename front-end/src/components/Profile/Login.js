@@ -8,10 +8,11 @@ const Login = () => {
     loginUserName,
     setLoginUserName,
     loginPassword,
-    setLoginPassword,  individualData,
+    setLoginPassword,
+    individualData,
     setIndividualData,
   } = useContext(RecipeContext);
-
+  const [status, setStatus] = useState("loading");
   const handleSubmit = (ev) => {
     ev.preventDefault();
     fetch("/login", {
@@ -26,19 +27,22 @@ const Login = () => {
       }),
       withCredentials: true,
       url: "http//localhost:8000/login",
-    })
-    .then((res) => console.log(res));
+    }).then((res) => {
+      if (res.status === 404) {
+        setStatus("User non existant");
+      } else {
+        console.log(res);
+      }
+    });
   };
-
   return (
     <Wrapper>
       <Layout>
         <Title>
           <h1> Login</h1>
         </Title>
-  
+
         <Main method="POST" action="/login">
-        
           <InputField
             type="text"
             name="username"
@@ -53,16 +57,16 @@ const Login = () => {
             onChange={(ev) => setLoginPassword(ev.currentTarget.value)}
             value={loginPassword}
           />
-          <Button type="submit" onSubmit={handleSubmit}> Login </Button>
-      
-     
+          <Button type="submit" onSubmit={handleSubmit}>
+            {" "}
+            Login{" "}
+          </Button>
         </Main>
         <LinkList>
           <Item>
             <Link href="/register">Sign Up</Link>
           </Item>
         </LinkList>
- 
       </Layout>
     </Wrapper>
   );

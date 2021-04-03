@@ -3,88 +3,58 @@ import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Logo from "../../assets/food.png";
 import Posts from "../Blog/Posts";
+import ProfileBar from "./ProfileBar";
 import { RecipeContext } from "../../RecipeContext";
+import Spinner from "../Tools/Spinner";
 const Profile = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const {
+    individualData,
+    setIndividualData,
+    status,
+    setStatus,
+    results,
+    setResults,
+  } = useContext(RecipeContext);
   const [posts, setPosts] = useState([]);
-  const [results, setResults] = useState([]);
-  const [status, setStatus] = useState("null");
-  console.log(individualData);
-  useEffect(() => {
-    fetch("/user", {
-      method: "GET",
-      withCredentials: true,
-      url: "http://localhost:4000/user",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        localStorage.setItem("data", res.username);
-        console.log(res.username);
-      });
-    let currentData = localStorage.getItem("data");
-    setIndividualData(currentData);
-  }, [individualData]);
-  ///Importing posts from users
-  const postedRecipe = async () => {
-    try {
-      const response = await fetch(`/recipes/post`)
-        .then((res) => res.json())
-        .then((data) => data.data);
 
-      setResults(response);
-      return response;
-    } catch (err) {
-      console.log("error");
+  ///Importing posts from users
+
+
+  useEffect(() => {
+    if(results&& individualData){
+    setStatus('idle')
     }
-  };
+      }, []);
   useEffect(() => {
-    postedRecipe();
-  }, []);
-  useEffect(() => {
-    postedRecipe();
-    console.log(results);
-    const filteredPosts = results.filter(
-      (res) => res.username === individualData
-    );
-    console.log(filteredPosts);
-    setPosts(filteredPosts);
-  }, [status === "success"]);
+if(results&& individualData){
+  const filteredPosts = results.filter(
+    (res) => res.username === individualData
+  );
+  console.log(filteredPosts);
+  setPosts(filteredPosts);
+}
+
+  }, [individualData]);
   console.log(posts);
+  console.log(results)
+
   return (
     <Wrapper>
-      {individualData ? (
+      {individualData && status === "idle" ? (
         <MainDiv>
           <Layout>
             <Title>
               <h1>Profile</h1>
             </Title>
-            <div>
-              Welcome {individualData} !
-              <LinkList>
-                <Item>
-                  <Link href="/logout">Logout</Link>
-                </Item>
-              </LinkList>
-            </div>
-          </Layout>{" "}
+            <LinkList>Welcome back {individualData} !</LinkList>
+          </Layout>
+          <ProfileBar />
           <Main>{posts && <Posts posts={posts} setPosts={setPosts} />}</Main>
         </MainDiv>
       ) : (
         <MainDiv>
-          <Layout>
-            <Title>
-              <h1>Profile</h1>
-            </Title>
-            <LinkList>
-              <Item>
-                <Link href="/register">Sign Up</Link>
-              </Item>
-              <Item>
-                <Link href="/login">Login</Link>
-              </Item>
-            </LinkList>
-          </Layout>
-          <Main>Find all the recipes you need</Main>
+          {" "}
+          <Spinner />
         </MainDiv>
       )}
     </Wrapper>
@@ -92,12 +62,10 @@ const Profile = () => {
 };
 
 const Wrapper = styled.div`
-  background-color: #f0f0e8;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
+  background-color: #f0f0e8;
+
+  margin-top: -30px;
   padding-top: 50px;
 `;
 const Layout = styled.div`
@@ -106,11 +74,12 @@ const Layout = styled.div`
   flex-direction: column;
   border: 5px double black;
   align-items: center;
-  background-color: ${COLORS.third};
+  justify-content: center;
+  background-color: ${COLORS.primary};
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  height: 150px;
+  height: 120px;
   width: 500px;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
@@ -123,7 +92,12 @@ const Layout = styled.div`
   }
 `;
 
-const MainDiv = styled.div``;
+const MainDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 const Title = styled.div`
   color: white;
   text-decoration: underline;
