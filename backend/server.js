@@ -23,6 +23,7 @@ const {
   filterRecipe,
   getPosts,
   getFavorites,
+  newFavorite,
 } = require("./handlers");
 
 const options = {
@@ -114,19 +115,16 @@ passport.authenticate('local', (err,user,info)=>{
   }
 })(req, res, next);
 });
-
+app.post("/user/favorites", newFavorite);
 app.get("/user", (req, res) => {
 res.send(req.user);
 });
 app.get("/blog/:id", (req, res) => {
-
   const id = req.params.id;
   console.log(id);
 
-  const data = await response.json();
-
-  res.status(200).json({ status: 200, data });
-  });
+  res.status(200).json({ status: 200, id });
+});
 
 app.get("/logout", (req, res) => {
   req.logout();

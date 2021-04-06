@@ -11,7 +11,7 @@ import { RecipeContext } from "./RecipeContext";
 export const RecipeProvider = ({ children }) => {
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState();
-  const [individualData, setIndividualData] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
   const [registeredUserName, setRegisteredUserName] = useState("");
   const [registeredPassword, setRegisteredPassword] = useState("");
   const [loginUserName, setLoginUserName] = useState("");
@@ -62,8 +62,9 @@ export const RecipeProvider = ({ children }) => {
         console.log(res.username);
       });
     let currentData = localStorage.getItem("data");
-    setIndividualData(currentData);
-  }, [individualData]);
+    setCurrentUser(currentData);
+    setStatus('loaded')
+  }, [currentUser]);
   //Get all posted recipes in blog
   const postedRecipe = async () => {
     try {
@@ -80,15 +81,15 @@ export const RecipeProvider = ({ children }) => {
   useEffect(() => {
     postedRecipe();
     setStatus("loading");
-    console.log(results);;
+    console.log(results);
   }, []);
   useEffect(() => {
-    if (individualData) {
+    if (currentUser) {
       setStatus("idle");
     }
-  },  []);
+  }, []);
   // -----
-  console.log(results);
+
   const randomRecipe = async () => {
     try {
       const response = await fetch("/recipes/random")
@@ -128,8 +129,8 @@ export const RecipeProvider = ({ children }) => {
         setLoginUserName,
         loginPassword,
         setLoginPassword,
-        individualData,
-        setIndividualData,
+        currentUser,
+        setCurrentUser,
         recipeLiked,
         setRecipeLiked,
         toggleLiked,

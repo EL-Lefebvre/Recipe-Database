@@ -4,89 +4,17 @@ import styled from "styled-components";
 import Logo from "../../assets/food.png";
 import Posts from "../Blog/Posts";
 import { RecipeContext } from "../../RecipeContext";
-const Favorites = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
-  const [posts, setPosts] = useState([]);
-  const [results, setResults] = useState([]);
-  const [status, setStatus] = useState("null");
-  console.log(individualData);
-  useEffect(() => {
-    fetch("/user", {
-      method: "GET",
-      withCredentials: true,
-      url: "http://localhost:4000/user",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        localStorage.setItem("data", res.username);
-        console.log(res.username);
-      });
-    let currentData = localStorage.getItem("data");
-    setIndividualData(currentData);
-  }, [individualData]);
-  ///Importing posts from users
-  const postedRecipe = async () => {
-    try {
-      const response = await fetch(`/recipes/post`)
-        .then((res) => res.json())
-        .then((data) => data.data);
+const Favorites = ({ posts, setPosts }) => {
+  const { currentuser, setCurrentuser } = useContext(RecipeContext);
 
-      setResults(response);
-      return response;
-    } catch (err) {
-      console.log("error");
-    }
-  };
-  useEffect(() => {
-    postedRecipe();
-  }, []);
-  useEffect(() => {
-    postedRecipe();
-    console.log(results);
-    const filteredPosts = results.filter(
-      (res) => res.username === individualData
-    );
-    console.log(filteredPosts);
-    setPosts(filteredPosts);
-  }, [status === "success"]);
+  ///Importing posts from users
+  console.log(currentuser);
   console.log(posts);
   return (
     <Wrapper>
-      {individualData ? (
-        <MainDiv>
-          <Layout>
-            <Title>
-              <h1>Favorites</h1>
-            </Title>
-            <div>
-              Welcome {individualData} !
-              <LinkList>
-                <Item>
-                  <Link href="/logout">Logout</Link>
-                </Item>
-              </LinkList>
-            </div>
-          </Layout>{" "}
-          <Main>{posts && <Posts posts={posts} setPosts={setPosts} />}</Main>
-        </MainDiv>
-      ) : (
-        <MainDiv>
-          <Layout>
-            <Title>
-              <h1>Favorites</h1>
-            </Title>
-            <LinkList>
-              <Item>
-                <Link href="/register">Sign Up</Link>
-              </Item>
-              <Item>
-                <Link href="/login">Login</Link>
-              </Item>
-            </LinkList>
-          </Layout>
-          <Main>Find all the recipes you need</Main>
-        </MainDiv>
-      )}
+      <MainDiv>
+        <Main>Find all the recipes you need</Main>
+      </MainDiv>
     </Wrapper>
   );
 };

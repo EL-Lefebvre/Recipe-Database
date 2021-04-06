@@ -5,7 +5,7 @@ import Form from "./Form";
 import Posts from "./Posts";
 import { RecipeContext } from "../../RecipeContext";
 const SubmitPost = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
   const [username, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
@@ -15,7 +15,7 @@ const SubmitPost = () => {
   useEffect(() => {
     let currentUser = localStorage.getItem("data");
     setUserName(currentUser);
-  }, [individualData]);
+  }, [currentUser]);
   console.log(username);
   const postedRecipe = async () => {
     try {

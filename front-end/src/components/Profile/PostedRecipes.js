@@ -5,11 +5,11 @@ import Logo from "../../assets/food.png";
 import Posts from "../Blog/Posts";
 import { RecipeContext } from "../../RecipeContext";
 const PostedRecipes = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
   const [posts, setPosts] = useState([]);
   const [results, setResults] = useState([]);
   const [status, setStatus] = useState("null");
-  console.log(individualData);
+  console.log(currentUser);
   useEffect(() => {
     fetch("/user", {
       method: "GET",
@@ -22,8 +22,8 @@ const PostedRecipes = () => {
         console.log(res.username);
       });
     let currentData = localStorage.getItem("data");
-    setIndividualData(currentData);
-  }, [individualData]);
+    setCurrentUser(currentData);
+  }, [currentUser]);
   ///Importing posts from users
   const postedRecipe = async () => {
     try {
@@ -43,23 +43,21 @@ const PostedRecipes = () => {
   useEffect(() => {
     postedRecipe();
     console.log(results);
-    const filteredPosts = results.filter(
-      (res) => res.username === individualData
-    );
+    const filteredPosts = results.filter((res) => res.username === currentUser);
     console.log(filteredPosts);
     setPosts(filteredPosts);
   }, [status === "success"]);
   console.log(posts);
   return (
     <Wrapper>
-      {individualData ? (
+      {currentUser ? (
         <MainDiv>
           <Layout>
             <Title>
               <h1>Posted Recipes</h1>
             </Title>
             <div>
-              Welcome {individualData} !
+              Welcome {currentUser} !
               <LinkList>
                 <Item>
                   <Link href="/logout">Logout</Link>

@@ -77,7 +77,9 @@ const filterRecipe = async (req, res) => {
 const newPost = async (req, res) => {
   await addingRecipe(req, res);
 };
-
+const newFavorite = async (req, res) => {
+  await addFavorite(req, res);
+};
 const getPosts = async (req, res) => {
   await getPostedRecipes(req, res);
 };
@@ -92,4 +94,5 @@ module.exports = {
   filterRecipe,
   getPosts,
   getFavorites,
+  newFavorite,
 };

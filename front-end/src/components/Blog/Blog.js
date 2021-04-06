@@ -6,7 +6,7 @@ import Posts from "./Posts";
 import { RecipeContext } from "../../RecipeContext";
 import MainLogo from "../../assets/404.png";
 const Blog = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
   const [username, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
@@ -15,18 +15,17 @@ const Blog = () => {
   const [ingredients, setIngredients] = useState("");
   const [fileUpload, setFileUpload] = useState("");
 
-
   useEffect(() => {
-    let currentUser = localStorage.getItem("data");
-    setUserName(currentUser);
-  }, [individualData]);
+    let currentUserName = localStorage.getItem("data");
+    setUserName(currentUserName);
+  }, [currentUser]);
 
   const postedRecipe = async () => {
     try {
       const response = await fetch(`/recipes/post`)
         .then((res) => res.json())
         .then((data) => data.data);
-
+      console.log(response);
       setPosts(response);
       return response;
     } catch (err) {
@@ -39,8 +38,7 @@ const Blog = () => {
   useEffect(() => {
     postedRecipe();
   }, [status === "success"]);
-  console.log(posts);
-  console.log(posts);
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     fetch("/recipes/post", {
@@ -49,20 +47,22 @@ const Blog = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username: username,
-        title: title,
-        ingredients: ingredients,
-        details: details,
-        fileUpload: fileUpload,
-      }),
+      body: JSON.stringify(
+      {
+          username: username,
+          title: title,
+          ingredients: ingredients,
+          details: details,
+          fileUpload: fileUpload,
+        }
+    
+      ),
     })
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 201) {
           console.log(json);
           setStatus("success");
-         
         } else {
           console.log("error qwerty");
           setStatus("error");
@@ -72,8 +72,6 @@ const Blog = () => {
         console.error("err");
       });
   };
-
-
 
   return (
     <Wrapper>

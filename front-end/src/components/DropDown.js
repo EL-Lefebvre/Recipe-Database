@@ -6,7 +6,7 @@ import { COLORS } from "../constants";
 import { RecipeContext } from "../RecipeContext";
 
 const DropDown = ({ toggleProfile, setToggleProfile }) => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
 
   useEffect(() => {}, []);
   return (

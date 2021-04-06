@@ -12,7 +12,7 @@ import Cover from "../assets/background.jpg";
 import DropDown from "./DropDown";
 
 const Header = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
   const [toggleProfile, setToggleProfile] = useState(false);
   useEffect(() => {}, []);
   return (
@@ -48,14 +48,13 @@ const Header = () => {
               <Wine size={20} /> <Text>Wine Pairing</Text>
             </Link>
           </Item>
-          {individualData ? (
+          {currentUser ? (
             <Item>
-            <Link to="/profile">
-              {" "}
-              <Profile className="icons" size={20} /> <Text>Profile</Text>
-            </Link>
-          </Item>
-            
+              <Link to="/profile">
+                {" "}
+                <Profile className="icons" size={20} /> <Text>Profile</Text>
+              </Link>
+            </Item>
           ) : (
             <Item>
               <ToggleLink
@@ -69,16 +68,15 @@ const Header = () => {
             </Item>
           )}
         </Menu>
-       
-        <DropDownDiv>
-        {toggleProfile &&
-          <DropDown
-            toggleProfile={toggleProfile}
-            setToggleProfile={setToggleProfile}
-          />
-        }
-        </DropDownDiv>
 
+        <DropDownDiv>
+          {toggleProfile && (
+            <DropDown
+              toggleProfile={toggleProfile}
+              setToggleProfile={setToggleProfile}
+            />
+          )}
+        </DropDownDiv>
       </Main>
     </Wrapper>
   );

@@ -6,50 +6,59 @@ import Posts from "../Blog/Posts";
 import ProfileBar from "./ProfileBar";
 import { RecipeContext } from "../../RecipeContext";
 import Spinner from "../Tools/Spinner";
+import Favorites from "./Favorites";
 const Profile = () => {
   const {
-    individualData,
-    setIndividualData,
+    currentUser,
+    setCurrentUser,
     status,
     setStatus,
     results,
     setResults,
   } = useContext(RecipeContext);
   const [posts, setPosts] = useState([]);
-
+  const [itemClicked, setItemClicked] = useState("null");
   ///Importing posts from users
-
+console.log(currentUser);
 
   useEffect(() => {
-    if(results&& individualData){
-    setStatus('idle')
+    if (results && currentUser) {
+      setStatus("idle");
     }
       }, []);
   useEffect(() => {
-if(results&& individualData){
-  const filteredPosts = results.filter(
-    (res) => res.username === individualData
-  );
-  console.log(filteredPosts);
-  setPosts(filteredPosts);
-}
-
-  }, [individualData]);
+    if (results && currentUser) {
+      const filteredPosts = results.filter(
+        (res) => res.username === currentUser
+      );
+      console.log(filteredPosts);
+      setPosts(filteredPosts);
+    }
+  }, [results]);
   console.log(posts);
   console.log(results)
-
+console.log(itemClicked);
   return (
     <Wrapper>
-      {individualData && status === "idle" ? (
+      {currentUser ? (
         <MainDiv>
           <Layout>
             <Title>
               <h1>Profile</h1>
             </Title>
-            <LinkList>Welcome back {individualData} !</LinkList>
+            <LinkList>Welcome back {currentUser} !</LinkList>
           </Layout>
-          <ProfileBar />
-          <Main>{posts && <Posts posts={posts} setPosts={setPosts} />}</Main>
+          <ProfileBar
+            itemClicked={itemClicked}
+            setItemClicked={setItemClicked}
+          />
+          <Main>
+            {posts && itemClicked === "posts" ? (
+              <Posts posts={posts} setPosts={setPosts} />
+            ) : (
+              <Favorites posts={posts} setPosts={setPosts} />
+            )}
+          </Main>
         </MainDiv>
       ) : (
         <MainDiv>

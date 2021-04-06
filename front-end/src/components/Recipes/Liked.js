@@ -9,26 +9,25 @@ const Liked = ({
   setRecipeLiked,
   setToggleLiked,
   handleClickLike,
-  individualData,
+  currentUser,
 }) => {
   useEffect(() => {
     setToggleLiked(false);
   }, []);
+
   useEffect(() => {
-    if (toggleLiked && individualData) {
+    if (toggleLiked && currentUser) {
       const filteredRecipe = recipeLiked.filter((recipe) => recipe != recipeId);
       console.log(filteredRecipe);
       setRecipeLiked([...filteredRecipe, recipeId]);
       localStorage.setItem("favorites", JSON.stringify(recipeLiked));
-    } else if (!toggleLiked && individualData) {
+    } else if (!toggleLiked && currentUser) {
       const index = recipeLiked.indexOf(recipeId);
       if (index > -1) {
         recipeLiked.splice(index, 1);
       }
       setRecipeLiked([...recipeLiked]);
-    }
-    else if (!individualData){
-      
+    } else if (!currentUser) {
     }
   }, [toggleLiked]);
   return (

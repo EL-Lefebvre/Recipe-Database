@@ -44,7 +44,7 @@ const addFavorite = async (req, res) => {
   await client.connect();
 
   const db = await client.db("recipes");
-  const data = await db.collection("postedRecipes").insertOne({
+  const data = await db.collection("favorites").insertOne({
     username: username,
     recipeId: recipeId,
   });

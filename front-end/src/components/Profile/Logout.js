@@ -4,12 +4,12 @@ import styled from "styled-components";
 
 import { RecipeContext } from "../../RecipeContext";
 const Logout = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
   useEffect(() => {
     localStorage.removeItem("data");
   }, []);
 
-  console.log(individualData);
+  console.log(currentUser);
   return (
     <Wrapper>
       <Layout>

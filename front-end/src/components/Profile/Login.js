@@ -9,8 +9,8 @@ const Login = () => {
     setLoginUserName,
     loginPassword,
     setLoginPassword,
-    individualData,
-    setIndividualData,
+    currentUser,
+    setCurrentUser,
   } = useContext(RecipeContext);
   const [status, setStatus] = useState("loading");
   const handleSubmit = (ev) => {

@@ -4,21 +4,35 @@ import styled from "styled-components";
 import Logo from "../../assets/food.png";
 import Posts from "../Blog/Posts";
 import { RecipeContext } from "../../RecipeContext";
-const ProfileBar = () => {
-  const { individualData, setIndividualData } = useContext(RecipeContext);
+const ProfileBar = ({ itemClicked, setItemClicked }) => {
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
   const [posts, setPosts] = useState([]);
   const [results, setResults] = useState([]);
-  const [status, setStatus] = useState("null");
-  console.log(individualData);
+
+  console.log(currentUser);
 
   return (
     <Wrapper>
       <Layout>
         <Item>
-          <Link>Posted</Link>
+          <Link
+ 
+            onClick={() => {
+              setItemClicked("posts");
+            }}
+        
+          >
+            Posted
+          </Link>
         </Item>
         <Item>
-          <Link>Favorites</Link>
+          <Link
+            onClick={() => {
+              setItemClicked("favorites");
+            }}
+          >
+            Favorites
+          </Link>
         </Item>
 
         <Item>
@@ -62,6 +76,9 @@ const Link = styled.a`
   text-decoration: none;
   &:visited {
     color: black;
+  }
+  &:hover {
+    cursor: pointer;
   }
 `;
 

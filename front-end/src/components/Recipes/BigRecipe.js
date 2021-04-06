@@ -7,6 +7,7 @@ import Liked from "./Liked";
 import { RecipeContext } from "../../RecipeContext";
 const BigRecipe = ({ individualData }) => {
   const {
+    currentUser,
     recipeLiked,
     setRecipeLiked,
     toggleLiked,
@@ -18,9 +19,38 @@ const BigRecipe = ({ individualData }) => {
       localStorage.setItem("favorites", JSON.stringify(recipeLiked));
     }
   }, [toggleLiked]);
-const handleClickLike = () => {
+  console.log(individualData)
+const handleClickLike = (ev) => {
   setToggleLiked(!toggleLiked);
-};
+
+    ev.preventDefault();
+    fetch("/user/favorites", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: currentUser,
+recipeLiked : recipeLiked
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === 201) {
+          console.log(json);
+       
+         
+        } else {
+          console.log("error qwerty");
+        
+        }
+      })
+      .catch((err) => {
+        console.error("err");
+      });
+  };
+
 
 const favorites = JSON.parse(localStorage.getItem("favorites"));
 console.log(recipeLiked);
