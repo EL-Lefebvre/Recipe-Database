@@ -13,8 +13,10 @@ const Liked = ({
 }) => {
   useEffect(() => {
     setToggleLiked(false);
+    console.log(currentUser);
   }, []);
 
+  console.log(recipeId);
   useEffect(() => {
     if (toggleLiked && currentUser) {
       const filteredRecipe = recipeLiked.filter((recipe) => recipe != recipeId);
@@ -30,6 +32,33 @@ const Liked = ({
     } else if (!currentUser) {
     }
   }, [toggleLiked]);
+
+useEffect(() => {
+  if (toggleLiked) {
+    fetch("/user/favorites", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: currentUser,
+        recipeId: recipeId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === 201) {
+          console.log(json);
+        } else {
+          console.log("error qwerty");
+        }
+      })
+      .catch((err) => {
+        console.error("err");
+      });
+  }
+}, [toggleLiked]);
   return (
     <Wrapper>
       <Action color="rgb(224, 36, 94)" onClick={handleClickLike} size={40}>

@@ -13,48 +13,21 @@ const BigRecipe = ({ individualData }) => {
     toggleLiked,
     setToggleLiked,
   } = useContext(RecipeContext);
-
+  console.log(recipeLiked);
   useEffect(() => {
     if (toggleLiked) {
       localStorage.setItem("favorites", JSON.stringify(recipeLiked));
     }
   }, [toggleLiked]);
-  console.log(individualData)
-const handleClickLike = (ev) => {
-  setToggleLiked(!toggleLiked);
 
-    ev.preventDefault();
-    fetch("/user/favorites", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: currentUser,
-recipeLiked : recipeLiked
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status === 201) {
-          console.log(json);
-       
-         
-        } else {
-          console.log("error qwerty");
-        
-        }
-      })
-      .catch((err) => {
-        console.error("err");
-      });
+  const handleClickLike = (ev) => {
+    setToggleLiked(!toggleLiked);
+
   };
-
-
-const favorites = JSON.parse(localStorage.getItem("favorites"));
-console.log(recipeLiked);
-console.log(favorites);
+  console.log(currentUser);
+  const favorites = JSON.parse(localStorage.getItem("favorites"));
+  console.log(recipeLiked);
+  console.log(favorites);
   return (
     <Wrapper>
       {individualData && (
@@ -84,8 +57,8 @@ console.log(favorites);
                 recipeLiked={recipeLiked}
                 setRecipeLiked={setRecipeLiked}
                 setToggleLiked={setToggleLiked}
+                currentUser={currentUser}
               />
-    
             </Title>
             <Name>Ingredients</Name>
             <Ingredients>

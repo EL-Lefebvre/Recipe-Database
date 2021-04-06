@@ -44,10 +44,16 @@ const addFavorite = async (req, res) => {
   await client.connect();
 
   const db = await client.db("recipes");
-  const data = await db.collection("favorites").insertOne({
-    username: username,
-    recipeId: recipeId,
-  });
+
+  const data = await db.collection("authentification").updateOne(
+    {
+      username: username,
+    },
+
+    { $addToSet: { recipeList: recipeId } },
+    {upsert: true}
+    
+  );
 
   client.close();
   res.status(201).json({ status: 201, data: data });
