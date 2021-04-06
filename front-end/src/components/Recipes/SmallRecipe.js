@@ -1,13 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
-// import { RecipeContext } from "../../RecipeContext";
-// import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 const SmallRecipe = ({ data }) => {
   const history = useHistory();
+  const { id } = useParams();
+  const [singleId, setSingleId] = useState("");
   console.log(data);
+
+  useEffect(() => {
+    fetch(`blog/${id}`)
+      .then((data) => data.json())
+      .then((data) => data.data)
+      .then((res) => {
+        setSingleId(res);
+       
+      });
+  }, [singleId]);
+
   return (
     <Wrapper>
       {data &&
@@ -58,7 +70,7 @@ const Image = styled.img`
   height: 120px;
   width: 15vw;
   padding: 10px;
-  padding-top:20px;
+  padding-top: 20px;
 `;
 const Title = styled.div`
   max-width: 15vw;

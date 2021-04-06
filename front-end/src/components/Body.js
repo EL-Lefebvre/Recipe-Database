@@ -10,6 +10,7 @@ import WinePairing from "./WinePairing";
 import Blog from "./Blog/Blog";
 import Error from "./Error";
 import Logout from "./Profile/Logout";
+import SinglePost from "./Blog/SinglePost";
 import IndividualRecipe from "./Recipes/IndividualRecipe";
 import { RecipeContext } from "../RecipeContext";
 const Body = () => {
@@ -38,6 +39,9 @@ const Body = () => {
         </Route>
         <Route exact path="/blog">
           <Blog />
+        </Route>
+        <Route exact path="/blog/:id">
+          <SinglePost />
         </Route>
         <Route exact path="/wine">
           <WinePairing />

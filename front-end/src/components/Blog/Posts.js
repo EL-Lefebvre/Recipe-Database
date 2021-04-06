@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Form from "./Form";
@@ -6,34 +7,38 @@ const Posts = ({ posts, setPosts }) => {
   useEffect(() => {
     console.log(posts);
   }, []);
-
-
+  const history = useHistory();
   return (
     <Wrapper>
-      <Main>
-        {posts &&
-          posts.map((post) => {
-            return (
-              <Layout key={post._id}>
+      {posts &&
+        posts.map((post) => {
+          return (
+            <Layout key={post._id}  
+            onClick={(e) => {
+              history.replace(`blog/${post._id}`);
+            }}>
+              <DivImage>
+                {post.fileUpload && <Image src={post.fileUpload} />}
+              </DivImage>
 
-                <Title >
-           
-                By {post.username}
-                
+              <Recipes>
+                <Title>
+                  <h4>By {post.username}</h4>
                 </Title>
-                <Recipes>
-                  <Details>
-                  <Span>
-                    <Text>{post.title}</Text>
+                <Details>
+                  <div>
+                    <Span>
+                      <Text>{post.title}</Text>
                     </Span>
+                  </div>
+                  <IndividualRecipe>
                     <Text>{post.details}</Text>
-                  </Details>
-                  <Image src={post.fileUpload} />
-                </Recipes>
-              </Layout>
-            );
-          })}
-      </Main>
+                  </IndividualRecipe>
+                </Details>
+              </Recipes>
+            </Layout>
+          );
+        })}
     </Wrapper>
   );
 };
@@ -50,7 +55,7 @@ const Layout = styled.div`
   background-color: white;
   margin-top: 0px;
   display: flex;
-  flex-direction: column;
+
   border: 5px double black;
   align-items: center;
   border-radius: 15px;
@@ -67,33 +72,52 @@ const Layout = styled.div`
   }
 `;
 
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+// const Main = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-evenly;
+//   align-items: center;
 
-  min-height: 60vh;
-  min-width: 80vw;
-  margin-bottom: 200px;
-`;
+//   min-height: 60vh;
+//   min-width: 80vw;
+//   margin-bottom: 200px;
+// `;
 
 const Title = styled.div`
-
   text-decoration: underline;
+  color: ${COLORS.primary};
 `;
 
 const Span = styled.span`
-font-weight:bolder;
+  font-weight: bolder;
 `;
 const Recipes = styled.div`
+  padding-left: 50px;
+  margin-top: -20px;
+`;
+const DivImage = styled.div``;
+const IndividualRecipe = styled.div`
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+`;
+const Details = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 `;
-
-const IndividualRecipe = styled.div``;
-const Details = styled.div``;
-const Text = styled.p``;
-const Image = styled.img``;
+const Text = styled.p`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-height: 300px;
+  max-width: 500px;
+`;
+const Image = styled.img`
+  width: 140px;
+  height: 150px;
+  padding: 10px;
+  border-radius: 20px;
+`;
 
 export default Posts;

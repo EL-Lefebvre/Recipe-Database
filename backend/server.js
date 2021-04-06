@@ -118,6 +118,15 @@ passport.authenticate('local', (err,user,info)=>{
 app.get("/user", (req, res) => {
 res.send(req.user);
 });
+app.get("/blog/:id", (req, res) => {
+
+  const id = req.params.id;
+  console.log(id);
+
+  const data = await response.json();
+
+  res.status(200).json({ status: 200, data });
+  });
 
 app.get("/logout", (req, res) => {
   req.logout();

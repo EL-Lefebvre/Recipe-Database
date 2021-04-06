@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
-function Form({
+const Form = ({
   title,
   details,
   handleSubmit,
@@ -13,10 +13,22 @@ function Form({
   setIngredients,
   fileUpload,
   setFileUpload,
-}) {
+  status,
+  setStatus,
+}) => {
+  const [preview, setPreview] = useState();
+  console.log(preview);
+  useEffect(() => {
+    if (status === "success") {
+      setTitle("");
+      setDetails("");
+      setIngredients("");
+      ;
+    }
+  }, [status]);
   return (
     <Wrapper>
-      <MainForm onSubmit={handleSubmit}>
+      <MainForm onSubmit={handleSubmit}  >
         <Main>
           <TitleDiv>
             <div>
@@ -28,9 +40,9 @@ function Form({
               />
             </div>
             <div>
-              <h5 placeholder="Username" value={username}>
+              <Title placeholder="Username" value={username}>
                 By {username}
-              </h5>
+              </Title>
             </div>
           </TitleDiv>
           <TextDiv>
@@ -54,24 +66,39 @@ function Form({
             </SubText>
             <div>
               <InputImage
+                max-file-size="1024"
                 type="file"
-                value={fileUpload}
-                accept="image/*"
-                onInput={(ev) => setFileUpload(ev.target.value)}
-                onClick={(ev)=> { 
-                  ev.target.value = null
-             }}
+                accept=".png, .jpg, .jpeg"
+                // onInput={(ev)=>{ setFileUpload(ev.target.files)}}
+                onChange={(ev) => {
+                  let files = ev.target.files[0];
+                  let file_size = files.size;
+                  const reader = new FileReader();
+
+                  
+                  if (files) {
+                    reader.onload = (ev) => {
+                      setFileUpload(ev.target.result);
+                    
+                    };
+                    reader.readAsDataURL(files);
+                  } else {
+                    setFileUpload("This file is too big");
+                  }
+                }}
               />
             </div>
           </TextDiv>
           <SubmitBar>
-            <Button type="submit">Submit</Button>
+            <Button type="submit"
+           
+            >Submit</Button>
           </SubmitBar>
         </Main>
       </MainForm>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.div`
   height: 400px;

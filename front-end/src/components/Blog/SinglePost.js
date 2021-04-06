@@ -1,11 +1,36 @@
-import React, { useState, useEffect, useContext } from "react";
-import { COLORS } from "../../constants";
+import React, { useEffect, useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { COLORS } from "../../constants";
+
 import { AiOutlineCheck as CheckMark } from "react-icons/ai";
 
-import Liked from "./Liked";
+import Liked from "../Recipes/Liked";
 import { RecipeContext } from "../../RecipeContext";
-const BigRecipe = ({ individualData }) => {
+const SinglePost = ({ post }) => {
+  const history = useHistory();
+  const { id } = useParams();
+  const [singleId, setSingleId] = useState("");
+  const [posts, setPosts] = useState("");
+
+  const postedRecipe = async () => {
+    try {
+      const response = await fetch(`/recipes/post`)
+        .then((res) => res.json())
+        .then((data) => data.data);
+
+      setPosts(response);
+      return response;
+    } catch (err) {
+      console.log("error");
+    }
+  };
+  useEffect(() => {
+    postedRecipe();
+  }, []);
+  console.log(id);
+  console.log(posts);
   const {
     recipeLiked,
     setRecipeLiked,
@@ -13,70 +38,41 @@ const BigRecipe = ({ individualData }) => {
     setToggleLiked,
   } = useContext(RecipeContext);
 
-  useEffect(() => {
-    if (toggleLiked) {
-      localStorage.setItem("favorites", JSON.stringify(recipeLiked));
-    }
-  }, [toggleLiked]);
-const handleClickLike = () => {
-  setToggleLiked(!toggleLiked);
-};
-
-const favorites = JSON.parse(localStorage.getItem("favorites"));
-console.log(recipeLiked);
-console.log(favorites);
   return (
     <Wrapper>
-      {individualData && (
-        <Main key={individualData.id}>
-          <Layout>
-            <Image src={individualData.image} />
-            <Category>
-              {individualData.diets &&
-                individualData.diets.map((diet) => {
-                  return (
-                    <DietWrapper>
-                      <Diet>{diet}</Diet>
-
-                      <CheckMark size={20} fill={COLORS.primary} />
-                    </DietWrapper>
-                  );
-                })}
-            </Category>
-          </Layout>
-          <Description>
-            <Title>
-              <h3>{individualData.title}</h3>
-              <Liked
-                recipeId={individualData.id}
+      {posts &&
+        posts.map((post) => {
+          if (post._id === id) {
+            return (
+              <Main key={post[id]}>
+                <Layout>
+                  <Image src={post.fileUpload} />
+                </Layout>
+                <Description>
+                  <Title>
+                    <h3>{post.title}</h3>
+                    {/* <Liked
+                recipeId={post.id}
                 handleClickLike={handleClickLike}
                 toggleLiked={toggleLiked}
                 recipeLiked={recipeLiked}
                 setRecipeLiked={setRecipeLiked}
                 setToggleLiked={setToggleLiked}
-              />
-    
-            </Title>
-            <Name>Ingredients</Name>
-            <Ingredients>
-              {individualData.extendedIngredients.map((instruction) => {
-                return <div>- {instruction.original}</div>;
-              })}
-            </Ingredients>
-            {individualData.instructions ? (
-              <Instructions
-                dangerouslySetInnerHTML={{
-                  __html: individualData.instructions,
-                }}
-              />
-            ) : (
-              <Instructions
-                dangerouslySetInnerHTML={{ __html: individualData.summary }}
-              />
-            )}
-          </Description>
-        </Main>
-      )}
+              /> */}
+                  </Title>
+                  <User>
+                    <div>
+                      <Name>Ingredients</Name>
+                    </div>
+                    <UserName>by {post.username}</UserName>
+                  </User>
+                  <Ingredients>{post.ingredients}</Ingredients>
+                  <Instructions>{post.details}</Instructions>
+                </Description>
+              </Main>
+            );
+          }
+        })}
     </Wrapper>
   );
 };
@@ -104,19 +100,12 @@ const Main = styled.div`
   }
 `;
 const Layout = styled.div`
-  height: 400px;
-  margin-top: 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
   border: 3px double ${COLORS.primary};
-  align-items: center;
-  text-align: center;
+
   background-color: white;
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  min-height: 400px;
 
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
@@ -156,27 +145,15 @@ const Ingredients = styled.div`
 const Instructions = styled.div`
   line-height: 1.7;
 `;
-
-const Category = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  border-radius: 20px;
-  background-color: white;
-  flex-wrap: wrap;
-  height: 800px;
-  max-width: 500px;
-`;
-const DietWrapper = styled.div`
-  width: 250px;
-  height: 40px;
-
-  justify-content: center;
+const User = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
-const Diet = styled.h5``;
+const UserName = styled.div``;
 const Image = styled.img`
-  max-height: 300px;
+  max-height: 270px;
+  width: 280px;
   border-radius: 20px;
   padding: 10px;
 `;
@@ -193,4 +170,4 @@ const Title = styled.div`
   height: 40px;
   padding: 15px;
 `;
-export default BigRecipe;
+export default SinglePost;

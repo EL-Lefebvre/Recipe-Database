@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Form from "./Form";
 import Posts from "./Posts";
 import { RecipeContext } from "../../RecipeContext";
+import MainLogo from "../../assets/404.png";
 const Blog = () => {
   const { individualData, setIndividualData } = useContext(RecipeContext);
   const [username, setUserName] = useState("");
@@ -13,12 +14,13 @@ const Blog = () => {
   const [status, setStatus] = useState("null");
   const [ingredients, setIngredients] = useState("");
   const [fileUpload, setFileUpload] = useState("");
-  console.log(details);
+
+
   useEffect(() => {
     let currentUser = localStorage.getItem("data");
     setUserName(currentUser);
   }, [individualData]);
-  console.log(username);
+
   const postedRecipe = async () => {
     try {
       const response = await fetch(`/recipes/post`)
@@ -60,6 +62,7 @@ const Blog = () => {
         if (json.status === 201) {
           console.log(json);
           setStatus("success");
+         
         } else {
           console.log("error qwerty");
           setStatus("error");
@@ -69,6 +72,8 @@ const Blog = () => {
         console.error("err");
       });
   };
+
+
 
   return (
     <Wrapper>
@@ -88,6 +93,8 @@ const Blog = () => {
             setIngredients={setIngredients}
             fileUpload={fileUpload}
             setFileUpload={setFileUpload}
+            status={status}
+            setStatus={setStatus}
           />
         )}
       </Layout>
@@ -144,7 +151,11 @@ const Title = styled.div`
   color: white;
   text-decoration: underline;
 `;
-
+const DivImage = styled.div``;
+const RecipeImage = styled.img`
+  width: 50px;
+  height: 100px;
+`;
 const Recipes = styled.div`
   display: flex;
   flex-direction: column;
