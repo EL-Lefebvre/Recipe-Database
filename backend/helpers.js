@@ -58,4 +58,27 @@ const addFavorite = async (req, res) => {
   client.close();
   res.status(201).json({ status: 201, data: data });
 };
-module.exports = { addingRecipe, getPostedRecipes, addFavorite };
+
+const updateFavorite = async (req, res) => {
+  const { username, recipeId } = req.body;
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+
+  const db = await client.db("recipes");
+
+  const data = await db.collection("authentification").updateOne(
+    {
+      username: username,
+    },
+
+    { $pull: { recipeList: recipeId } }
+  );
+  client.close();
+  res.status(201).json({ status: 201, data: data });
+};
+module.exports = {
+  addingRecipe,
+  getPostedRecipes,
+  addFavorite,
+  updateFavorite,
+};

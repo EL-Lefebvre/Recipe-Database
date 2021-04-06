@@ -1,10 +1,16 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-const { addingRecipe, getPostedRecipes, addFavorite } = require("./helpers");
+const {
+  addingRecipe,
+  getPostedRecipes,
+  addFavorite,
+  updateFavorite,
+} = require("./helpers");
 
 const apiKey = process.env.API_KEY;
 const api_url = "https://api.spoonacular.com/recipes";
 const fetch = require("isomorphic-fetch");
+const { update } = require("./User");
 const options = {
   method: "GET",
   headers: {
@@ -80,6 +86,9 @@ const newPost = async (req, res) => {
 const newFavorite = async (req, res) => {
   await addFavorite(req, res);
 };
+const newFavoriteUpdate = async (req, res) => {
+  await updateFavorite(req, res);
+};
 const getPosts = async (req, res) => {
   await getPostedRecipes(req, res);
 };
@@ -95,4 +104,5 @@ module.exports = {
   getPosts,
   getFavorites,
   newFavorite,
+  newFavoriteUpdate,
 };

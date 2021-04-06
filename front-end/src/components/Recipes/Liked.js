@@ -57,7 +57,31 @@ useEffect(() => {
       .catch((err) => {
         console.error("err");
       });
+  } else if (!toggleLiked) {
+    fetch("/user/favorites", {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: currentUser,
+        recipeId: recipeId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === 201) {
+          console.log(json);
+        } else {
+          console.log("error 404");
+        }
+      })
+      .catch((err) => {
+        console.error("err");
+      });
   }
+  
 }, [toggleLiked]);
   return (
     <Wrapper>

@@ -24,6 +24,7 @@ const {
   getPosts,
   getFavorites,
   newFavorite,
+  newFavoriteUpdate,
 } = require("./handlers");
 
 const options = {
@@ -63,10 +64,9 @@ app.use(
 app.use(cookieParser("sessioncode"));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./Authentification/PassportConfig')(passport);
+require("./Authentification/PassportConfig")(passport);
 
 //----------------------------------------------------
-
 
 //ROUTES
 app.get("/", (req, res) => {
@@ -75,7 +75,6 @@ app.get("/", (req, res) => {
 // app.get("/confirmation", isLoggedIn, (req, res) => {
 //   res.send("confirmation");
 // });
-
 
 //handling user sign up
 app.post("/register", (req, res) => {
@@ -103,32 +102,37 @@ app.post("/register", (req, res) => {
 // Login Routes
 
 app.post("/login", (req, res, next) => {
-passport.authenticate('local', (err,user,info)=>{
-  if(err) throw err;
-  if (!user) res.status(404);
-  else {
-    req.logIn(user, (err) => {
-      if (err) throw err;
-      console.log(req.user);
-      res.redirect("/profile");
-    });
-  }
-})(req, res, next);
-});
-app.post("/user/favorites", newFavorite);
-app.get("/user", (req, res) => {
-res.send(req.user);
-});
-app.get("/blog/:id", (req, res) => {
-  const id = req.params.id;
-  console.log(id);
-
-  res.status(200).json({ status: 200, id });
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.status(404);
+    else {
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        console.log(req.user);
+        res.redirect("/profile");
+      });
+    }
+  })(req, res, next);
 });
 
 app.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
+});
+
+app.get("/user", (req, res) => {
+  res.send(req.user);
+});
+//Favorite recipes of current user
+app.get("/user/favorites", getFavorites);
+app.post("/user/favorites", newFavorite);
+app.patch("/user/favorites", newFavoriteUpdate);
+
+app.get("/blog/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+
+  res.status(200).json({ status: 200, id });
 });
 
 app.get("/recipes/post", getPosts);
