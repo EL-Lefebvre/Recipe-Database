@@ -7,6 +7,17 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+const apiKey = process.env.API_KEY;
+const api_url = "https://api.spoonacular.com/recipes";
+const fetch = require("isomorphic-fetch");
+
+const getOptions = {
+  method: "GET",
+  headers: {
+    apiKey: `${apiKey}`,
+    "Content-Type": "application/json",
+  },
+};
 
 const addingRecipe = async (req, res) => {
   const { username, title, details, ingredients, fileUpload } = req.body;
@@ -38,6 +49,27 @@ const getPostedRecipes = async (req, res) => {
   res.status(200).json({ status: 200, data: data });
 };
 
+const getFavorites = async (req, res) => {
+  const user = req.params.user;
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+  console.log("connected");
+  const db = await client.db("recipes");
+
+  const userData = await db
+    .collection("authentification")
+    .findOne({ username: user });
+
+  const dataArray = await userData.recipeList;
+  const response = await fetch(
+    `${api_url}/informationBulk?apiKey=${apiKey}&ids=${dataArray}`,
+    getOptions
+  );
+  const data = await response.json();
+
+  client.close();
+  res.status(200).json({ status: 200, data: data });
+};
 const addFavorite = async (req, res) => {
   const { username, recipeId } = req.body;
   const client = await MongoClient(MONGO_URI, options);
@@ -79,6 +111,7 @@ const updateFavorite = async (req, res) => {
 module.exports = {
   addingRecipe,
   getPostedRecipes,
+  getFavorites,
   addFavorite,
   updateFavorite,
 };

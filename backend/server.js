@@ -22,7 +22,7 @@ const {
   newPost,
   filterRecipe,
   getPosts,
-  getFavorites,
+  getUserFavorites,
   newFavorite,
   newFavoriteUpdate,
 } = require("./handlers");
@@ -124,7 +124,7 @@ app.get("/user", (req, res) => {
   res.send(req.user);
 });
 //Favorite recipes of current user
-app.get("/user/favorites", getFavorites);
+app.get("/favorites/:user", getUserFavorites);
 app.post("/user/favorites", newFavorite);
 app.patch("/user/favorites", newFavoriteUpdate);
 

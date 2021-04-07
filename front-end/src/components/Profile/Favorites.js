@@ -2,18 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Logo from "../../assets/food.png";
-import Posts from "../Blog/Posts";
+import SmallRecipe from "../Recipes/SmallRecipe";
 import { RecipeContext } from "../../RecipeContext";
-const Favorites = ({ posts, setPosts }) => {
-  const { currentuser, setCurrentuser } = useContext(RecipeContext);
+const Favorites = ({ favorites, setFavorites }) => {
+  const { currentUser, setCurrentUser } = useContext(RecipeContext);
 
   ///Importing posts from users
-  console.log(currentuser);
-  console.log(posts);
+  console.log(currentUser);
+  console.log(favorites);
   return (
     <Wrapper>
       <MainDiv>
-        <Main>Find all the recipes you need</Main>
+        <Main>
+   
+ 
+          <SmallRecipe data={favorites}   />
+      
+        </Main>
       </MainDiv>
     </Wrapper>
   );
@@ -52,33 +57,9 @@ const Layout = styled.div`
 `;
 
 const MainDiv = styled.div``;
-const Title = styled.div`
-  color: white;
-  text-decoration: underline;
-`;
-const LinkList = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: space-evenly;
-  color: white;
-`;
-const Item = styled.li`
-  padding-right: 20px;
-`;
-const Link = styled.a`
-  text-decoration: none;
-  &:visited {
-    color: white;
-  }
-`;
+
 const Main = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  min-height: 60vh;
-  min-width: 80vw;
-  margin-bottom: 200px;
+z-index: 1;
 `;
 const Image = styled.img`
   width: 500px;

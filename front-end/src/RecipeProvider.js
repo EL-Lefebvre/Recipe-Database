@@ -63,8 +63,17 @@ export const RecipeProvider = ({ children }) => {
       });
     let currentData = localStorage.getItem("data");
     setCurrentUser(currentData);
-    setStatus('loaded')
+
+    setStatus("loaded");
   }, [currentUser]);
+
+  useEffect(() => {
+    if (status === "loaded") {
+      console.log("good");
+    }
+  }, [status]);
+  //Get favorites from user
+
   //Get all posted recipes in blog
   const postedRecipe = async () => {
     try {
@@ -81,7 +90,7 @@ export const RecipeProvider = ({ children }) => {
   useEffect(() => {
     postedRecipe();
     setStatus("loading");
-    console.log(results);
+
   }, []);
   useEffect(() => {
     if (currentUser) {
@@ -144,4 +153,4 @@ export const RecipeProvider = ({ children }) => {
       {children}
     </RecipeContext.Provider>
   );
-};
+};;;;;

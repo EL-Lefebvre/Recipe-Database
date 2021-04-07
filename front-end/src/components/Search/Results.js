@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { RecipeContext } from "../../RecipeContext";
+import RecipePreview from "./RecipePreview";
 const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
   let history = useHistory();
   const [value, setValue] = useState("");
@@ -27,41 +28,13 @@ const Results = ({ keyword, cuisine, type, diet, intolerances }) => {
   useEffect(() => {
     newSuggestion();
   }, [keyword, cuisine, type, diet, intolerances]);
-
+console.log(suggestion);
   return (
     <Wrapper>
       {" "}
       {suggestion &&
-        suggestion.map((result, i) => {
-          return (
-            <SearchResult
-              key={i}
-              // onKeyDown={(ev) => {
-              //   switch (ev.key) {
-              //     case "ArrowUp": {
-              //       setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
-              //       return;
-              //     }
-              //     case "ArrowDown": {
-              //       setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
-              //       return;
-              //     }
-              //     case "Escape": {
-              //       setValue("");
-              //       return;
-              //     }
-              //     default:
-              //       return;
-              //   }}}
-            >
-              <NavigationLink exact to={`/recipe/${result.id}`}>
-                <SuggestionColumn>
-                  <Regular>{result.title}</Regular>
-                  <Image src={result.image} />
-                </SuggestionColumn>
-              </NavigationLink>
-            </SearchResult>
-          );
+        suggestion.map((result, index) => {
+          return <RecipePreview result={result} index={index} />;
         })}
     </Wrapper>
   );

@@ -4,25 +4,26 @@ import styled from "styled-components";
 import SmallRecipe from "./Recipes/SmallRecipe";
 import { RecipeContext } from "../RecipeContext";
 import SearchBar from "./Search";
+import Categories from "./Search/Categories";
 
 const Home = () => {
   const { data } = useContext(RecipeContext);
-  console.log(data);
-  const favorites = JSON.parse(localStorage.getItem("favorites"));
 
-  console.log(favorites);
   return (
     <Wrapper>
       <Layout>
         <Title>
-          <h1>Find a Recipe</h1>
+          <h2>Find all the recipes you need</h2>
         </Title>
+
         <Search>
           <SearchBar />
         </Search>
       </Layout>
+      <CategoryDiv>
+        <Categories />
+      </CategoryDiv>
       <Main>
-        <h2>Find all the recipes you need</h2>
         <Recipes>{data && <SmallRecipe data={data} />}</Recipes>
       </Main>
     </Wrapper>
@@ -62,7 +63,6 @@ const Layout = styled.div`
 `;
 const Title = styled.div`
   color: white;
-  text-decoration: underline;
 `;
 const Search = styled.div`
   height: 150px;
@@ -74,15 +74,11 @@ const Main = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid black;
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
 `;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
-`;
+const CategoryDiv = styled.div``;
 const Recipes = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Logo from "../../assets/food.png";
@@ -16,47 +17,69 @@ const Profile = () => {
     results,
     setResults,
   } = useContext(RecipeContext);
+
   const [posts, setPosts] = useState([]);
-  const [itemClicked, setItemClicked] = useState("null");
+  const [itemClicked, setItemClicked] = useState("favorites");
+  const [favorites, setFavorites] = useState([]);
   ///Importing posts from users
-console.log(currentUser);
+
+  useEffect(() => {
+    if(currentUser){
+
+
+    fetch(`/favorites/${currentUser}`, {
+      method: "GET",
+      withCredentials: true,
+      url: "http://localhost:4000/user",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setFavorites(res.data);
+      });
+    }
+    else {
+      setStatus('waiting')
+    }
+   
+  }, [currentUser]);
 
   useEffect(() => {
     if (results && currentUser) {
       setStatus("idle");
     }
-      }, []);
+  }, []);
   useEffect(() => {
     if (results && currentUser) {
       const filteredPosts = results.filter(
         (res) => res.username === currentUser
       );
-      console.log(filteredPosts);
+  
       setPosts(filteredPosts);
     }
   }, [results]);
-  console.log(posts);
-  console.log(results)
-console.log(itemClicked);
+  // console.log(posts);
+  // console.log(results);
+  // console.log(itemClicked);
   return (
     <Wrapper>
-      {currentUser ? (
+      { status === 'loaded' ?(
         <MainDiv>
           <Layout>
             <Title>
               <h1>Profile</h1>
             </Title>
-            <LinkList>Welcome back {currentUser} !</LinkList>
-          </Layout>
-          <ProfileBar
+            <ProfileBar
             itemClicked={itemClicked}
             setItemClicked={setItemClicked}
           />
+           
+          </Layout>
+          <UserName><Welcome>Welcome back {currentUser} !</Welcome></UserName>
           <Main>
             {posts && itemClicked === "posts" ? (
               <Posts posts={posts} setPosts={setPosts} />
             ) : (
-              <Favorites posts={posts} setPosts={setPosts} />
+              <Favorites favorites={favorites} setFavorites={setFavorites} />
             )}
           </Main>
         </MainDiv>
@@ -111,14 +134,16 @@ const Title = styled.div`
   color: white;
   text-decoration: underline;
 `;
-const LinkList = styled.div`
+const UserName = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: space-evenly;
   color: white;
+  margin-top:-20px;
 `;
-const Item = styled.li`
-  padding-right: 20px;
+const Welcome = styled.h4`
+color:${COLORS.third};
+text-decoration:underline;
 `;
 const Link = styled.a`
   text-decoration: none;

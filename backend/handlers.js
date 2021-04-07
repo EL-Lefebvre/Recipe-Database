@@ -3,10 +3,12 @@ const { MongoClient } = require("mongodb");
 const {
   addingRecipe,
   getPostedRecipes,
+  getFavorites,
   addFavorite,
   updateFavorite,
 } = require("./helpers");
 
+// https://api.spoonacular.com/recipes/informationBulk?ids=715538,716429
 const apiKey = process.env.API_KEY;
 const api_url = "https://api.spoonacular.com/recipes";
 const fetch = require("isomorphic-fetch");
@@ -54,7 +56,7 @@ const searchRecipe = async (req, res) => {
     options
   );
   const data = await response.json();
-
+console.log(data);
   res.status(200).json({ status: 200, data });
 };
 
@@ -83,6 +85,17 @@ const filterRecipe = async (req, res) => {
 const newPost = async (req, res) => {
   await addingRecipe(req, res);
 };
+const getUserFavorites = async (req, res) => {
+  const userFavorites = await getFavorites(req, res);
+
+  // const response = await fetch(
+  //   `${api_url}informationBulk?ids=${recipeIds}`,
+  //   options
+  // );
+  // const data = await response.json();
+  // console.log(data);
+  // res.status(200).json({ status: 200, data });
+};
 const newFavorite = async (req, res) => {
   await addFavorite(req, res);
 };
@@ -92,9 +105,7 @@ const newFavoriteUpdate = async (req, res) => {
 const getPosts = async (req, res) => {
   await getPostedRecipes(req, res);
 };
-const getFavorites = async (req, res) => {
-  await addFavorite(req, res);
-};
+
 module.exports = {
   getRandomRecipes,
   singleRecipe,
@@ -102,7 +113,7 @@ module.exports = {
   newPost,
   filterRecipe,
   getPosts,
-  getFavorites,
+  getUserFavorites,
   newFavorite,
   newFavoriteUpdate,
 };

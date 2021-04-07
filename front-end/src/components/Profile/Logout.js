@@ -2,14 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
-import { RecipeContext } from "../../RecipeContext";
 const Logout = () => {
-  const { currentUser, setCurrentUser } = useContext(RecipeContext);
   useEffect(() => {
     localStorage.removeItem("data");
   }, []);
 
-  console.log(currentUser);
   return (
     <Wrapper>
       <Layout>

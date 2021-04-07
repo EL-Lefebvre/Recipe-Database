@@ -8,7 +8,7 @@ const SmallRecipe = ({ data }) => {
   const history = useHistory();
   const { id } = useParams();
   const [singleId, setSingleId] = useState("");
-  console.log(data);
+
 
   useEffect(() => {
     fetch(`blog/${id}`)
@@ -34,8 +34,10 @@ const SmallRecipe = ({ data }) => {
                 history.replace(`recipe/${recipe.id}`);
               }}
             >
-              <Title>{recipe.title}</Title>
-              <Image src={recipe.image} />
+              <TitleDiv><Title>{recipe.title}</Title></TitleDiv>
+              <ImageDiv>
+                  <Image src={recipe.image} />
+              </ImageDiv>
             </Main>
           );
         })}
@@ -49,7 +51,8 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   align-items: center;
   background-color: white;
-  margin: 10px;
+border: 5px double ${COLORS.primary};
+  border-radius:40px;
 `;
 
 const Main = styled.div`
@@ -62,7 +65,7 @@ const Main = styled.div`
   width: 5/90vh;
   &:hover {
     cursor: pointer;
-    background-color: ${COLORS.primary};
+  
   }
 `;
 const Layout = styled.div``;
@@ -70,13 +73,31 @@ const Image = styled.img`
   height: 120px;
   width: 15vw;
   padding: 10px;
-  padding-top: 20px;
+  transition: 0.7s;
+  border-radius: 30px;
+  &:hover {
+    cursor: pointer;
+    background-color: #f7dc83;
+    border-radius:20px;
+  }
 `;
-const Title = styled.div`
-  max-width: 15vw;
-  max-height: 5vh;
-  text-align: center;
+const ImageDiv = styled.div``;
+const TitleDiv = styled.div`
+text-overflow: ellipsis;
+max-width: 15vw;
+max-height: 20vh;
+overflow: hidden;
+white-space: nowrap;
+
 `;
+const Title = styled.h5`
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+
+
+`;
+
 export default SmallRecipe;
 
 /// analyzedInstructions(steps) [array]
