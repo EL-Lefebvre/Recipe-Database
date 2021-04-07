@@ -31,7 +31,6 @@ const Favorites = ({ favorites, setFavorites }) => {
 };
 
 const Wrapper = styled.div`
-  background-color: #f0f0e8;
   display: flex;
   flex-direction: column;
   justify-content: center;

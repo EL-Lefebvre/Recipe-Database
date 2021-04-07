@@ -10,7 +10,7 @@ import Results from "./Results";
 import { RecipeContext } from "../../RecipeContext";
 import { RiArrowDropDownLine as DropDownArray } from "react-icons/ri";
 
-const Browse = () => {
+const Details = () => {
   const {
     cuisineList,
     setCuisineList,
@@ -56,14 +56,6 @@ const Browse = () => {
 
   return (
     <Wrapper>
-      <Layout>
-        <Title>
-          <h1>Find a Recipe</h1>
-        </Title>
-        <Search>
-          <SearchBar keyword={keyword} setKeyword={setKeyword} type="text" />
-        </Search>
-      </Layout>
       <Main>
         <ListWrapper>
           <List>
@@ -141,15 +133,6 @@ const Browse = () => {
             </Item>
           </List>
         </ListWrapper>
-        <ResultsDiv>
-          <Results
-            keyword={keyword}
-            cuisine={cuisine}
-            type={type}
-            diet={diet}
-            intolerances={intolerances}
-          />
-        </ResultsDiv>
       </Main>
     </Wrapper>
   );
@@ -253,4 +236,4 @@ const Image = styled.img`
 
 const Category = styled.div``;
 
-export default Browse;
+export default Details;

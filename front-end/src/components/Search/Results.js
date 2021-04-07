@@ -40,6 +40,7 @@ console.log(suggestion);
 
 const Wrapper = styled.div`
   z-index: 1;
+  background-color: white;
 `;
 
 export default Results;

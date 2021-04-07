@@ -74,19 +74,19 @@ const Profile = () => {
 
           <Main>
             {posts && itemClicked === "posts" ? (
-              <div>
+              <FavoriteWrapper>
                 <SubTitle>
-                  <h3>Your Own Recipes</h3>
+                  <h3>[ Your Own Recipes ] </h3>
                 </SubTitle>
                 <Posts posts={posts} setPosts={setPosts} />
-              </div>
+              </FavoriteWrapper>
             ) : (
-              <div>
+              <FavoriteWrapper>
                 <SubTitle>
-                  <h3>Favorites</h3>
+                  <h3>[ Favorites ]</h3>
                 </SubTitle>
                 <Favorites favorites={favorites} setFavorites={setFavorites} />
-              </div>
+              </FavoriteWrapper>
             )}
           </Main>
         </MainDiv>
@@ -130,7 +130,16 @@ const Layout = styled.div`
 
   }
 `;
-
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  min-height: 60vh;
+  min-width: 80vw;
+  margin-bottom: 200px;
+  background-color: white;
+`;
 const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -143,7 +152,7 @@ const SubTitle = styled.div`
 const Title = styled.div`
   color: white;
   text-decoration: underline;
- 
+
 `;
 const UserName = styled.div`
   display: flex;
@@ -158,26 +167,8 @@ color:white;
 
 font-weight:bolder;
 `;
-const Link = styled.a`
-  text-decoration: none;
-  &:visited {
-    color: white;
-  }
-`;
-const Main = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  min-height: 60vh;
-  min-width: 80vw;
-  margin-bottom: 200px;
-`;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
-`;
+const FavoriteWrapper = styled.div``;
 
-const Category = styled.div``;
+
 
 export default Profile;
