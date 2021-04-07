@@ -102,23 +102,52 @@ const Form = ({
 
 const Wrapper = styled.div`
   height: 400px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    height: 70vh;
+    width: 70vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 70vw;
+    height: 70vh;
+  }
 `;
 const MainForm = styled.form``;
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 70vw;
+    height: 70vh;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 70vw;
+    height: 70vh;
+  }
+`;
 const TitleDiv = styled.div`
   width: 40vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 768px) and (max-height: 900px) {
+    flex-direction: column;
+    align-item: center;
+    justify-content: center;
+    width: 70vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    flex-direction: column;
+    align-item: center;
+    justify-content: center;
+    width: 70vw;
+  }
 `;
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 150px;
-`;
+
 const SubWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -134,6 +163,12 @@ const Info = styled.input`
   font-family: Shippori Mincho, serif;
   padding-left: 20px;
   border-radius: 10px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 50vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 50vw;
+  }
 `;
 const TextArea = styled.textarea`
   height: 100px;
@@ -144,6 +179,14 @@ const TextArea = styled.textarea`
   border-radius: 10px;
   font-family: "Shippori Mincho", serif;
   font-size: 80%;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 70vw;
+    max-height: 50vh;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 70vw;
+    max-height: 50vh;
+  }
 `;
 const TextIngredients = styled.textarea`
   border: none;
@@ -154,6 +197,14 @@ const TextIngredients = styled.textarea`
   border-radius: 10px;
   font-family: "Shippori Mincho", serif;
   font-size: 80%;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 70vw;
+    max-height: 50vh;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 70vw;
+    max-height: 50vh;
+  }
 `;
 const SubmitBar = styled.div`
   display: flex;
@@ -167,6 +218,14 @@ const SubmitBar = styled.div`
   border: none;
   padding: 10px;
   text-indent: 10px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 70vh;
+    justify-content: center;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 65vw;
+    justify-content: center;
+  }
 `;
 
 const Button = styled.button`

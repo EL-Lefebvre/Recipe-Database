@@ -61,6 +61,15 @@ const Wrapper = styled.div`
   display: flex;
   padding-bottom: 50px;
   border-top: 1px solid ${COLORS.primary};
+
+  @media (max-width: 768px) and (max-height: 900px) {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 `;
 
 const SuggestionColumn = styled.div`
@@ -83,6 +92,15 @@ const TitleDiv = styled.div`
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 50vw;
+    max-height: 50vw;
+    margin-top: 50px;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 50vw;
+    max-height: 50vw;
+  }
 `;
 const ImageDiv = styled.div``;
 
@@ -100,6 +118,14 @@ const Image = styled.img`
   &:hover {
     cursor: pointer;
     opacity: 0.9;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 50vw;
+    height: 50vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 50vw;
+    height: 50vw;
   }
 `;
 

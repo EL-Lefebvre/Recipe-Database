@@ -13,7 +13,7 @@ const SearchBar = ({keyword, setKeyword}) => {
 console.log(keyword)
   useEffect(() => {}, []);
   return (
-    <div>
+
       <TypeheadWrapper>
         <Input
           value={keyword}
@@ -21,20 +21,36 @@ console.log(keyword)
             setKeyword(ev.target.value);
           }}
         />
-        <MainIcon size={20} />
+        <IconDiv>
+          <MainIcon size={20} />
+        </IconDiv>
       </TypeheadWrapper>
-    </div>
+  
   );
 };
 
 const TypeheadWrapper = styled.div`
   padding: auto;
+
+ 
+  
+`;
+const IconDiv = styled.div`
+
+width:500px;
+margin-left:200px;
+margin-top:-30px;
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 95vw;
+  }
 `;
 const MainIcon = styled(IconSearch)`
-  position: absolute;
-  margin-left: -35px;
-  padding-top: 8px;
+ 
+
 `;
+
 const Input = styled.input`
   width: 450px;
   height: 35px;
@@ -53,9 +69,5 @@ const Input = styled.input`
   }
 `;
 
-const Icon = styled(IconSearch)`
-  display: inline-block;
-  margin-left: -40px;
-`;
-const SuggestionWrapper = styled.div``;
+
 export default SearchBar;

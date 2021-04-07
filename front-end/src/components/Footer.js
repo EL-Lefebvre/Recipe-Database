@@ -3,19 +3,55 @@ import { COLORS } from "../constants";
 import styled from "styled-components";
 
 const Footer = () => {
-    return <Wrapper>This is my Footer</Wrapper>;
-  };
-  
-  const Wrapper = styled.div`
+  return (
+    <Wrapper>
+      <List>
+        <Item>
+          <Title>@2021 Spoonful Search,inc - [ All rights reserved ]</Title>
+        
+        </Item>
+        <Item>
+          <Title>About</Title>
+        </Item>
+        <Item>
+          <Title>Privacy</Title>
+        </Item>
+        <Item>
+          <Title>Terms</Title>
+        </Item>
+      </List>
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.div`
   position: relative;
   background-color: ${COLORS.third};
   display: flex;
   align-items: center;
-  color:white;
+  color: white;
   justify-content: center;
   border-style: solid;
   border-width: 1px;
   border-color: gray;
   height: 100px;
+  font-size:80%;
+  color:${COLORS.primary}
+
 `;
-  export default Footer;
+
+const List = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width:  100vw;
+`;
+const Item = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding-right: 5px;
+  &:hover{
+
+  }
+`;
+const Title = styled.p``;
+export default Footer;

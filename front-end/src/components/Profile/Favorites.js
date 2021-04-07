@@ -12,14 +12,17 @@ const Favorites = ({ favorites, setFavorites }) => {
   console.log(favorites);
   return (
     <Wrapper>
-      <MainDiv>
+        
+  
+  
         <Main>
+       
    
- 
+ {favorites &&
           <SmallRecipe data={favorites}   />
-      
+ }
         </Main>
-      </MainDiv>
+   
     </Wrapper>
   );
 };
@@ -33,27 +36,8 @@ const Wrapper = styled.div`
   text-align: center;
   padding-top: 50px;
 `;
-const Layout = styled.div`
-  margin-top: 0px;
-  display: flex;
-  flex-direction: column;
-  border: 5px double black;
-  align-items: center;
-  background-color: ${COLORS.third};
-  border-radius: 15px;
-  padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  height: 150px;
-  width: 500px;
-  margin-bottom: 50px;
-  @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
-    margin-top: -30px;
-  }
-  @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 85vw;
-    margin-top: -30px;
-  }
+const Title = styled.div`
+margin-top:-40px;
 `;
 
 const MainDiv = styled.div``;

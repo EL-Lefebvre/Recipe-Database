@@ -110,6 +110,13 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+  background-color:#f0f0e8;
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 100vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 100vw;
+  }
 `;
 const Layout = styled.div`
   width: 60vw;
@@ -125,12 +132,11 @@ const Layout = styled.div`
   min-height: 30vh;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
-    margin-top: -30px;
+    width: 90vw;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
-    margin-top: -30px;
+  
   }
 `;
 
@@ -143,6 +149,9 @@ const Main = styled.div`
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
+  background-color:white;
+  border-radius:20px;
+  background-color:#f0f0e8;
 `;
 
 const Title = styled.div`

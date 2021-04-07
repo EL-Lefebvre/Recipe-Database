@@ -92,9 +92,11 @@ app.post("/register", (req, res) => {
         console.log("save", err, user);
       });
 
-      res.redirect("/");
+      res.redirect("/login");
       console.log(newUser);
       //once the user sign up
+    } else {
+      res.redirect("/error");
     }
   });
 });

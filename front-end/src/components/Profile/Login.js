@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { RecipeContext } from "../../RecipeContext";
 const Login = () => {
   const {
+    status,
     loginUserName,
     setLoginUserName,
     loginPassword,
@@ -12,7 +13,7 @@ const Login = () => {
     currentUser,
     setCurrentUser,
   } = useContext(RecipeContext);
-  const [status, setStatus] = useState("loading");
+  const [subStatus, setSubStatus] = useState("loading");
   const handleSubmit = (ev) => {
     ev.preventDefault();
     fetch("/login", {
@@ -28,8 +29,8 @@ const Login = () => {
       withCredentials: true,
       url: "http//localhost:8000/login",
     }).then((res) => {
-      if (res.status === 404) {
-        setStatus("User non existant");
+      if (res.subStatus === 404) {
+        setSubStatus("User non existant");
       } else {
         console.log(res);
       }
@@ -38,6 +39,9 @@ const Login = () => {
   return (
     <Wrapper>
       <Layout>
+        {status === "new user created" && (
+          <div>You have been register successfully!</div>
+        )}
         <Title>
           <h1> Login</h1>
         </Title>

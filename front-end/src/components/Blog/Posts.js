@@ -4,9 +4,7 @@ import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Form from "./Form";
 const Posts = ({ posts, setPosts }) => {
-  useEffect(() => {
-    console.log(posts);
-  }, []);
+
   const history = useHistory();
   return (
     <Wrapper>
@@ -49,6 +47,8 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+
+
 `;
 const Layout = styled.div`
   width: 60vw;
@@ -63,29 +63,25 @@ const Layout = styled.div`
   min-height: 40vh;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
-    margin-top: -30px;
+    max-width: 60vw;
+  
+ 
+    flex-direction:  column;
+    justify-content:center;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
-    margin-top: -30px;
+
+  
   }
 `;
 
-// const Main = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-evenly;
-//   align-items: center;
 
-//   min-height: 60vh;
-//   min-width: 80vw;
-//   margin-bottom: 200px;
-// `;
 
 const Title = styled.div`
   text-decoration: underline;
   color: ${COLORS.primary};
+
 `;
 
 const Span = styled.span`
@@ -94,12 +90,32 @@ const Span = styled.span`
 const Recipes = styled.div`
   padding-left: 50px;
   margin-top: -20px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 60vw;
+    max-height: 30vh;
+margin-top:0px;
+    display: flex;
+    flex-direction: column;
+    margin-left:-100px;
+ 
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 60vw;
+    max-height: 30vh;
+    margin-top:0px;
+   margin-left:-50px;
+  }
 `;
-const DivImage = styled.div``;
+const DivImage = styled.div`
+background-color:white;
+border-radius:20px;
+`;
 const IndividualRecipe = styled.div`
   text-overflow: ellipsis;
 
   overflow: hidden;
+  white-space:nowrap;
+
 `;
 const Details = styled.div`
   display: flex;
@@ -112,6 +128,19 @@ const Text = styled.p`
   white-space: nowrap;
   max-height: 300px;
   max-width: 500px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 60vw;
+
+  
+  
+  
+    }
+    @media (max-width: 650px) and (max-height: 850px) {
+      max-width: 60vw;
+
+  
+  
+    }
 `;
 const Image = styled.img`
   width: 140px;

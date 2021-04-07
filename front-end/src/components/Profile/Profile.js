@@ -17,7 +17,7 @@ const Profile = () => {
     results,
     setResults,
   } = useContext(RecipeContext);
-
+const [subStatus, setSubStatus] = useState("loading");
   const [posts, setPosts] = useState([]);
   const [itemClicked, setItemClicked] = useState("favorites");
   const [favorites, setFavorites] = useState([]);
@@ -26,7 +26,7 @@ const Profile = () => {
   useEffect(() => {
     if(currentUser){
 
-
+      setSubStatus("user");
     fetch(`/favorites/${currentUser}`, {
       method: "GET",
       withCredentials: true,
@@ -45,9 +45,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (results && currentUser) {
-      setStatus("idle");
+      setSubStatus("loaded");
     }
-  }, []);
+  }, [status]);
   useEffect(() => {
     if (results && currentUser) {
       const filteredPosts = results.filter(
@@ -62,24 +62,32 @@ const Profile = () => {
   // console.log(itemClicked);
   return (
     <Wrapper>
-      { status === 'loaded' ?(
+      {subStatus === "loaded" || currentUser ? (
         <MainDiv>
           <Layout>
             <Title>
               <h1>Profile</h1>
             </Title>
             <ProfileBar
-            itemClicked={itemClicked}
-            setItemClicked={setItemClicked}
-          />
-           
+              itemClicked={itemClicked}
+              setItemClicked={setItemClicked}
+            />
+                 <UserName>
+            <Welcome>Welcome back {currentUser} !</Welcome>
+          </UserName>
           </Layout>
-          <UserName><Welcome>Welcome back {currentUser} !</Welcome></UserName>
+     
           <Main>
             {posts && itemClicked === "posts" ? (
+                 <div>
+                 <SubTitle><h3>Your Own Recipes</h3></SubTitle>
               <Posts posts={posts} setPosts={setPosts} />
+              </div>
             ) : (
+              <div>
+              <SubTitle><h3>Favorites</h3></SubTitle>
               <Favorites favorites={favorites} setFavorites={setFavorites} />
+              </div>
             )}
           </Main>
         </MainDiv>
@@ -109,18 +117,18 @@ const Layout = styled.div`
   justify-content: center;
   background-color: ${COLORS.primary};
   border-radius: 15px;
-  padding: 10px;
+  text-align:center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  height: 120px;
+  height: 200px;
   width: 500px;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
-    margin-top: -30px;
+
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
-    margin-top: -30px;
+
   }
 `;
 
@@ -130,20 +138,27 @@ const MainDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const SubTitle = styled.div`
+
+`;
 const Title = styled.div`
   color: white;
   text-decoration: underline;
+ 
 `;
 const UserName = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: space-evenly;
   color: white;
-  margin-top:-20px;
+  margin-top:-50px;
+  letter-spacing: 2px;
+
 `;
 const Welcome = styled.h4`
-color:${COLORS.third};
-text-decoration:underline;
+color:white;
+
+font-weight:bolder;
 `;
 const Link = styled.a`
   text-decoration: none;

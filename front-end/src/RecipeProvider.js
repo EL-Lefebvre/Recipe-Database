@@ -69,7 +69,8 @@ export const RecipeProvider = ({ children }) => {
 
   useEffect(() => {
     if (status === "loaded") {
-      console.log("good");
+   console.log(currentUser);
+   setStatus("new user created");
     }
   }, [status]);
   //Get favorites from user

@@ -11,18 +11,21 @@ const SmallRecipe = ({ data }) => {
 
 
   useEffect(() => {
-    fetch(`blog/${id}`)
+    if(data ){
+      fetch(`blog/${id}`)
       .then((data) => data.json())
       .then((data) => data.data)
       .then((res) => {
         setSingleId(res);
        
       });
+    }
+   
   }, [singleId]);
 
   return (
     <Wrapper>
-      {data &&
+      {data.length >= 1 &&
         data.map((recipe) => {
           if (!recipe.image) {
             return false;
