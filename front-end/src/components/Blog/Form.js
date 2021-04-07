@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
@@ -16,19 +16,16 @@ const Form = ({
   status,
   setStatus,
 }) => {
-  const [preview, setPreview] = useState();
-  console.log(preview);
   useEffect(() => {
     if (status === "success") {
       setTitle("");
       setDetails("");
       setIngredients("");
-      ;
     }
   }, [status]);
   return (
     <Wrapper>
-      <MainForm onSubmit={handleSubmit}  >
+      <MainForm onSubmit={handleSubmit}>
         <Main>
           <TitleDiv>
             <div>
@@ -69,17 +66,13 @@ const Form = ({
                 max-file-size="1024"
                 type="file"
                 accept=".png, .jpg, .jpeg"
-                // onInput={(ev)=>{ setFileUpload(ev.target.files)}}
                 onChange={(ev) => {
                   let files = ev.target.files[0];
-                  let file_size = files.size;
                   const reader = new FileReader();
 
-                  
                   if (files) {
                     reader.onload = (ev) => {
                       setFileUpload(ev.target.result);
-                    
                     };
                     reader.readAsDataURL(files);
                   } else {
@@ -90,9 +83,7 @@ const Form = ({
             </div>
           </TextDiv>
           <SubmitBar>
-            <Button type="submit"
-           
-            >Submit</Button>
+            <Button type="submit">Submit</Button>
           </SubmitBar>
         </Main>
       </MainForm>

@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { COLORS } from "../../constants";
-import styled from "styled-components";
-import { intolerancesData } from "./Utilities";
+import React from "react";
+
 import Filter from "./Filter";
 const Intolerances = ({
   list,

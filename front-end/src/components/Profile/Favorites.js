@@ -3,6 +3,7 @@ import { COLORS } from "../../constants";
 import styled from "styled-components";
 import Logo from "../../assets/food.png";
 import SmallRecipe from "../Recipes/SmallRecipe";
+import RecipePreview from "../Search/RecipePreview";
 import { RecipeContext } from "../../RecipeContext";
 const Favorites = ({ favorites, setFavorites }) => {
   const { currentUser, setCurrentUser } = useContext(RecipeContext);
@@ -10,19 +11,21 @@ const Favorites = ({ favorites, setFavorites }) => {
   ///Importing posts from users
   console.log(currentUser);
   console.log(favorites);
+
+  const FilteredFavorites = favorites.map((fav) => {
+    const id = fav.id;
+    const title = fav.title;
+    const image = fav.image;
+    return { id, title, image };
+  });
+  console.log(FilteredFavorites);
   return (
     <Wrapper>
+      <Main>   {favorites &&
+        FilteredFavorites.map((result, index) => { 
         
-  
-  
-        <Main>
-       
-   
- {favorites &&
-          <SmallRecipe data={favorites}   />
- }
-        </Main>
-   
+          return   <RecipePreview result={result} index={index} />
+})}</Main>
     </Wrapper>
   );
 };
@@ -36,20 +39,14 @@ const Wrapper = styled.div`
   text-align: center;
   padding-top: 50px;
 `;
-const Title = styled.div`
-margin-top:-40px;
-`;
 
-const MainDiv = styled.div``;
 
 const Main = styled.div`
-z-index: 1;
-`;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
+margin-top:-20px;
+  z-index: 1;
+  width:90vw;
+  background-color:white;
 `;
 
-const Category = styled.div``;
 
 export default Favorites;

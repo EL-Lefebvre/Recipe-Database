@@ -4,9 +4,9 @@ import styled from "styled-components";
 import Form from "./Form";
 import Posts from "./Posts";
 import { RecipeContext } from "../../RecipeContext";
-import MainLogo from "../../assets/404.png";
+
 const Blog = () => {
-  const { currentUser, setCurrentUser } = useContext(RecipeContext);
+  const { currentUser } = useContext(RecipeContext);
   const [username, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
@@ -35,9 +35,6 @@ const Blog = () => {
   useEffect(() => {
     postedRecipe();
   }, []);
-  useEffect(() => {
-    postedRecipe();
-  }, [status === "success"]);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -47,16 +44,13 @@ const Blog = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-      {
-          username: username,
-          title: title,
-          ingredients: ingredients,
-          details: details,
-          fileUpload: fileUpload,
-        }
-    
-      ),
+      body: JSON.stringify({
+        username: username,
+        title: title,
+        ingredients: ingredients,
+        details: details,
+        fileUpload: fileUpload,
+      }),
     })
       .then((res) => res.json())
       .then((json) => {
@@ -158,16 +152,6 @@ const Title = styled.div`
   color: white;
   text-decoration: underline;
 `;
-const DivImage = styled.div``;
-const RecipeImage = styled.img`
-  width: 50px;
-  height: 100px;
-`;
-const Recipes = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const IndividualRecipe = styled.div``;
-const Category = styled.div``;
+
 
 export default Blog;

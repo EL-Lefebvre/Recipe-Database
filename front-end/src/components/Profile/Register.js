@@ -5,6 +5,9 @@ import styled from "styled-components";
 import { RecipeContext } from "../../RecipeContext";
 const Register = () => {
   const {
+    status,
+    setStatus,
+    currentUser,
     registeredUserName,
     setRegisteredUserName,
     registeredPassword,
@@ -21,8 +24,19 @@ const Register = () => {
         username: registeredUserName,
         password: registeredPassword,
       }),
-    }).then((res) => console.log(res));
+    }).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        setStatus("new user");
+      }
+    });
+ 
   };
+  console.log(status);
+  useEffect(() => {
+    console.log(status);
+  }, [status]);
+
   return (
     <Wrapper>
       <Layout>
@@ -44,7 +58,11 @@ const Register = () => {
             onChange={(ev) => setRegisteredPassword(ev.currentTarget.value)}
             value={registeredPassword}
           />
-          <Button type="submit" onSubmit={handleSubmit}>
+          <Button
+            type="submit"
+            onSubmit={handleSubmit}
+            onClick={setStatus("new user")}
+          >
             {" "}
             Submit{" "}
           </Button>
@@ -82,7 +100,7 @@ const Layout = styled.div`
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  height: 150px;
+  height: 310px;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;

@@ -6,21 +6,15 @@ import Posts from "../Blog/Posts";
 import { RecipeContext } from "../../RecipeContext";
 const ProfileBar = ({ itemClicked, setItemClicked }) => {
   const { currentUser, setCurrentUser } = useContext(RecipeContext);
-  const [posts, setPosts] = useState([]);
-  const [results, setResults] = useState([]);
-
-  console.log(currentUser);
 
   return (
     <Wrapper>
       <Layout>
         <Item>
           <Link
- 
             onClick={() => {
               setItemClicked("posts");
             }}
-        
           >
             Posted
           </Link>

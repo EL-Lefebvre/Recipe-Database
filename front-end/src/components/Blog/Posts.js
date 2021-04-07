@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
-import Form from "./Form";
+
 const Posts = ({ posts, setPosts }) => {
 
   const history = useHistory();
@@ -111,11 +111,9 @@ background-color:white;
 border-radius:20px;
 `;
 const IndividualRecipe = styled.div`
-  text-overflow: ellipsis;
-
-  overflow: hidden;
-  white-space:nowrap;
-
+  display: flex;
+  flex-warp: wrap;
+  width: 500xp;
 `;
 const Details = styled.div`
   display: flex;
@@ -125,22 +123,14 @@ const Details = styled.div`
 const Text = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
-  max-height: 300px;
-  max-width: 500px;
+    max-height:   140px;
+
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 60vw;
-
-  
-  
-  
-    }
-    @media (max-width: 650px) and (max-height: 850px) {
-      max-width: 60vw;
-
-  
-  
-    }
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 60vw;
+  }
 `;
 const Image = styled.img`
   width: 140px;

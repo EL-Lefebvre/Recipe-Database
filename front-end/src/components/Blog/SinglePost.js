@@ -1,17 +1,12 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-import { AiOutlineCheck as CheckMark } from "react-icons/ai";
 
-import Liked from "../Recipes/Liked";
-import { RecipeContext } from "../../RecipeContext";
 const SinglePost = ({ post }) => {
-  const history = useHistory();
+
   const { id } = useParams();
-  const [singleId, setSingleId] = useState("");
   const [posts, setPosts] = useState("");
 
   const postedRecipe = async () => {
@@ -31,17 +26,12 @@ const SinglePost = ({ post }) => {
   }, []);
   console.log(id);
   console.log(posts);
-  const {
-    recipeLiked,
-    setRecipeLiked,
-    toggleLiked,
-    setToggleLiked,
-  } = useContext(RecipeContext);
+
 
   return (
     <Wrapper>
       {posts &&
-        posts.map((post) => {
+  posts.map((post) => {
           if (post._id === id) {
             return (
               <Main key={post[id]}>

@@ -17,30 +17,27 @@ const Profile = () => {
     results,
     setResults,
   } = useContext(RecipeContext);
-const [subStatus, setSubStatus] = useState("loading");
+  const [subStatus, setSubStatus] = useState("loading");
   const [posts, setPosts] = useState([]);
   const [itemClicked, setItemClicked] = useState("favorites");
   const [favorites, setFavorites] = useState([]);
   ///Importing posts from users
 
   useEffect(() => {
-    if(currentUser){
-
+    if (currentUser) {
       setSubStatus("user");
-    fetch(`/favorites/${currentUser}`, {
-      method: "GET",
-      withCredentials: true,
-      url: "http://localhost:4000/user",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setFavorites(res.data);
-      });
+      fetch(`/favorites/${currentUser}`, {
+        method: "GET",
+        withCredentials: true,
+        url: "http://localhost:4000/user",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setFavorites(res.data);
+        });
+    } else {
+      setStatus("waiting");
     }
-    else {
-      setStatus('waiting')
-    }
-   
   }, [currentUser]);
 
   useEffect(() => {
@@ -53,13 +50,11 @@ const [subStatus, setSubStatus] = useState("loading");
       const filteredPosts = results.filter(
         (res) => res.username === currentUser
       );
-  
+
       setPosts(filteredPosts);
     }
   }, [results]);
-  // console.log(posts);
-  // console.log(results);
-  // console.log(itemClicked);
+
   return (
     <Wrapper>
       {subStatus === "loaded" || currentUser ? (
@@ -72,21 +67,25 @@ const [subStatus, setSubStatus] = useState("loading");
               itemClicked={itemClicked}
               setItemClicked={setItemClicked}
             />
-                 <UserName>
-            <Welcome>Welcome back {currentUser} !</Welcome>
-          </UserName>
+            <UserName>
+              <Welcome>Welcome back [ {currentUser} ] !</Welcome>
+            </UserName>
           </Layout>
-     
+
           <Main>
             {posts && itemClicked === "posts" ? (
-                 <div>
-                 <SubTitle><h3>Your Own Recipes</h3></SubTitle>
-              <Posts posts={posts} setPosts={setPosts} />
+              <div>
+                <SubTitle>
+                  <h3>Your Own Recipes</h3>
+                </SubTitle>
+                <Posts posts={posts} setPosts={setPosts} />
               </div>
             ) : (
               <div>
-              <SubTitle><h3>Favorites</h3></SubTitle>
-              <Favorites favorites={favorites} setFavorites={setFavorites} />
+                <SubTitle>
+                  <h3>Favorites</h3>
+                </SubTitle>
+                <Favorites favorites={favorites} setFavorites={setFavorites} />
               </div>
             )}
           </Main>
@@ -151,9 +150,8 @@ const UserName = styled.div`
   justify-content: space-evenly;
   align-items: space-evenly;
   color: white;
-  margin-top:-50px;
-  letter-spacing: 2px;
-
+  margin-top: -50px;
+  letter-spacing: 1px;
 `;
 const Welcome = styled.h4`
 color:white;

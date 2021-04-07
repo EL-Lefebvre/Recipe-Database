@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-
 import { COLORS } from "../constants";
 
-import { RecipeContext } from "../RecipeContext";
+const DropDown = () => {
 
-const DropDown = ({ toggleProfile, setToggleProfile }) => {
-  const { currentUser, setCurrentUser } = useContext(RecipeContext);
 
-  useEffect(() => {}, []);
   return (
     <Wrapper>
       <Main>
@@ -17,7 +13,7 @@ const DropDown = ({ toggleProfile, setToggleProfile }) => {
             <Text href="http://localhost:3000/register">Register</Text>
           </Item>
           <Item>
-            <Text href="http://localhost:3000/login">Login</Text>
+            <Text href="http://localhost:3000/login" >Login</Text>
           </Item>
         </List>
       </Main>

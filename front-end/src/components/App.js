@@ -1,23 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Router } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
-import { RecipeContext } from "../RecipeContext";
+
 import { createBrowserHistory } from "history";
 import GlobalStyles from "../globalstyles";
 
 const App = () => {
-
   const historyInstance = createBrowserHistory();
   return (
     <Router history={historyInstance}>
       <Wrapper>
         <Header />
-        <Body
-        
-        />
+        <Body />
         <Footer />
       </Wrapper>
       <GlobalStyles />

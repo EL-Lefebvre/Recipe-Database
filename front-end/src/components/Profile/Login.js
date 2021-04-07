@@ -14,6 +14,7 @@ const Login = () => {
     setCurrentUser,
   } = useContext(RecipeContext);
   const [subStatus, setSubStatus] = useState("loading");
+  console.log(status);
   const handleSubmit = (ev) => {
     ev.preventDefault();
     fetch("/login", {
@@ -36,13 +37,10 @@ const Login = () => {
       }
     });
   };
+
   return (
     <Wrapper>
-      <Layout>
-        {status === "new user created" && (
-          <div>You have been register successfully!</div>
-        )}
-        <Title>
+      <Layout>       <Title>
           <h1> Login</h1>
         </Title>
 

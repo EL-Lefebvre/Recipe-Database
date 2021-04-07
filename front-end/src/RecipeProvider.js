@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-// import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import {
   intolerancesData,
   dietsData,
@@ -19,7 +19,7 @@ export const RecipeProvider = ({ children }) => {
   const [recipeLiked, setRecipeLiked] = useState([]);
   const [toggleLiked, setToggleLiked] = useState(false);
   const [results, setResults] = useState([]);
-  const [status, setStatus] = useState("loading");
+  const [status, setStatus] = useState("");
   const [cuisineList, setCuisineList] = useState(
     cuisinesData.map(({ name }, id) => ({
       id,
@@ -63,16 +63,13 @@ export const RecipeProvider = ({ children }) => {
       });
     let currentData = localStorage.getItem("data");
     setCurrentUser(currentData);
-
-    setStatus("loaded");
+if(currentData){
+  setStatus('user201')
+}
   }, [currentUser]);
 
-  useEffect(() => {
-    if (status === "loaded") {
-   console.log(currentUser);
-   setStatus("new user created");
-    }
-  }, [status]);
+
+  
   //Get favorites from user
 
   //Get all posted recipes in blog
@@ -90,14 +87,13 @@ export const RecipeProvider = ({ children }) => {
   };
   useEffect(() => {
     postedRecipe();
-    setStatus("loading");
-
+   setStatus('loaded')
   }, []);
   useEffect(() => {
     if (currentUser) {
       setStatus("idle");
     }
-  }, []);
+  }, [currentUser]);
   // -----
 
   const randomRecipe = async () => {
@@ -154,4 +150,4 @@ export const RecipeProvider = ({ children }) => {
       {children}
     </RecipeContext.Provider>
   );
-};;;;;
+};

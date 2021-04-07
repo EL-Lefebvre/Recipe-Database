@@ -9,12 +9,13 @@ import Browse from "./Search/Browse";
 import WinePairing from "./WinePairing";
 import Blog from "./Blog/Blog";
 import Error from "./Error";
+import Confirmation from "./Profile/Confirmation";
 import Logout from "./Profile/Logout";
 import SinglePost from "./Blog/SinglePost";
 import IndividualRecipe from "./Recipes/IndividualRecipe";
 import { RecipeContext } from "../RecipeContext";
 const Body = () => {
-  const { toggle, setToggle } = useContext(RecipeContext);
+  const { setToggle } = useContext(RecipeContext);
   return (
     <Wrapper
       onClick={() => {
@@ -27,6 +28,9 @@ const Body = () => {
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/confirmation">
+          <Confirmation />
         </Route>
         <Route exact path="/profile">
           <Profile />
