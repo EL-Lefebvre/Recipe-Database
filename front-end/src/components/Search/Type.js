@@ -1,9 +1,21 @@
 import React from "react";
 
 import Filter from "./Filter";
-const Type = ({ type, setType, list, setTypeList }) => {
+const Type = ({ subStatus, type, setType, list, setTypeList }) => {
   return (
-    <Filter list={list} setList={setTypeList} state={type} setState={setType} />
+    <Filter
+
+         subStatus={subStatus}
+      
+      list={list}
+     
+      setList={setTypeList}
+   
+        state={type}
+ 
+          setState={setType}
+   
+    />
   );
 };
 

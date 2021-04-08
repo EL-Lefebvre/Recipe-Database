@@ -34,24 +34,68 @@ const Browse = () => {
   const [intolerances, setIntolerances] = useState([]);
   const [diet, setDiet] = useState([]);
   const [keyword, setKeyword] = useState("");
-
+  const [suggestion, setSuggestion] = useState([]);
+  const [subStatus, setSubStatus] = useState("initial");
   console.log(intolerances);
-
+  const [selectedItems, setSelectedItems] = useState({
+    cuisine: [],
+    type: [],
+    intolerances: [],
+    diet: [],
+  });
+  const handleClear = (ev) => {
+    setSelectedItems({
+      cuisine: [],
+      type: [],
+      intolerances: [],
+      diet: [],
+    });
+    setCuisine([])
+    setType([])
+    setDiet([])
+    setIntolerances([])
+setSubStatus("clear")
+  };
   const handleCuisine = (ev) => {
     ev.preventDefault();
-    setToggles({ ...toggles, cuisine: !toggles.cuisine });
+    setToggles({
+      cuisine: !toggles.cuisine,
+      type: false,
+      intolerances: false,
+      diet: false,
+    });
+  
   };
   const handleType = (ev) => {
     ev.preventDefault();
-    setToggles({ ...toggles, type: !toggles.type });
+    setToggles({
+      cuisine: false,
+      type: !toggles.type,
+      intolerances: false,
+      diet: false,
+    });
+
+
   };
   const handleIntolerances = (ev) => {
     ev.preventDefault();
-    setToggles({ ...toggles, intolerances: !toggles.intolerances });
+    setToggles({
+      cuisine: false,
+      type: false,
+      intolerances: !toggles.intolerances,
+      diet: false,
+    });
+   
   };
   const handleDiet = (ev) => {
     ev.preventDefault();
-    setToggles({ ...toggles, diet: !toggles.diet });
+    setToggles({
+      cuisine: false,
+      type: false,
+      intolerances: false,
+      diet: !toggles.diet,
+    });
+   
   };
 
   return (
@@ -64,82 +108,79 @@ const Browse = () => {
           <SearchBar keyword={keyword} setKeyword={setKeyword} type="text" />
         </Search>
       </Layout>
+               {selectedItems.cuisine && <Button onClick={handleClear}>Clear Filters</Button>}
       <Main>
         <ListWrapper>
           <List>
             <Item onClick={handleCuisine}>
-              <Column>
-                <Arrow>
-                  Cuisine
-                  <DropDownArray size={20} />
-                </Arrow>
-
-                {toggles.cuisine && (
-                  <Fieldset>
-                    <Cuisine
-                      cuisine={cuisine}
-                      setCuisine={setCuisine}
-                      list={cuisineList}
-                      setCuisineList={setCuisineList}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
+              <Arrow>
+                Cuisine
+                <DropDownArray size={20} />
+              </Arrow>
             </Item>
+
             <Item onClick={handleType}>
-              <Column>
-                <Arrow>
-                  Type
-                  <DropDownArray size={20} />
-                </Arrow>
-                {toggles.type && (
-                  <Fieldset>
-                    <Type
-                      type={type}
-                      setType={setType}
-                      list={typeList}
-                      setTypeList={setTypeList}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
+              <Arrow>
+                Type
+                <DropDownArray size={20} />
+              </Arrow>
             </Item>
             <Item onClick={handleDiet}>
-              <Column>
-                <Arrow>
-                  Diet <DropDownArray size={20} />
-                </Arrow>
-                {toggles.diet && (
-                  <Fieldset>
-                    <Diet
-                      diet={diet}
-                      setDiet={setDiet}
-                      list={dietList}
-                      setDietList={setDietList}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
+              <Arrow>
+                Diet <DropDownArray size={20} />
+              </Arrow>
             </Item>
             <Item onClick={handleIntolerances}>
-              <Column>
-                <Arrow>
-                  Intolerances <DropDownArray size={20} />
-                </Arrow>
-
-                {toggles.intolerances && (
-                  <Fieldset>
-                    <Intolerances
-                      list={intoleranceList}
-                      setIntoleranceList={setIntoleranceList}
-                      intolerances={intolerances}
-                      setIntolerances={setIntolerances}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
+              <Arrow>
+                Intolerances <DropDownArray size={20} />
+              </Arrow>
             </Item>
           </List>
+          <Column>
+            {toggles.cuisine ? (
+              <Fieldset>
+                <Cuisine
+                  subStatus={subStatus}
+                  cuisine={cuisine}
+                  setCuisine={setCuisine}
+                  list={cuisineList}
+                  setCuisineList={setCuisineList}
+                />
+              </Fieldset>
+            ) : toggles.type ? (
+              <Fieldset>
+                <Type
+                subStatus={subStatus}
+                  type={type}
+                  setType={setType}
+                  list={typeList}
+                  setTypeList={setTypeList}
+                />
+              </Fieldset>
+            ) : toggles.diet ? (
+              <Fieldset>
+                <Diet
+                  subStatus={subStatus}
+                  diet={diet}
+                  setDiet={setDiet}
+                  list={dietList}
+                  setDietList={setDietList}
+                />
+              </Fieldset>
+            ) : toggles.intolerances ? (
+              <Fieldset>
+                <Intolerances
+                  subStatus={subStatus}
+                  list={intoleranceList}
+                  setIntoleranceList={setIntoleranceList}
+                  intolerances={intolerances}
+                  setIntolerances={setIntolerances}
+                />
+              </Fieldset>
+            ) : (
+              <div></div>
+            )}
+          </Column>
         </ListWrapper>
         <ResultsDiv>
           <Results
@@ -148,6 +189,10 @@ const Browse = () => {
             type={type}
             diet={diet}
             intolerances={intolerances}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
+            suggestion={suggestion}
+            setSuggestion={setSuggestion}
           />
         </ResultsDiv>
       </Main>
@@ -187,10 +232,11 @@ const Layout = styled.div`
 `;
 const Fieldset = styled.fieldset`
   background-color: white;
-  max-height: 30vh;
-  overflow-x: scroll;
-  scrollbar-width: thin;
-  width: 10vw;
+  max-height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  flew-flow: column wrap;
+  width: 77.5vw;
 `;
 const Title = styled.div`
   color: white;
@@ -206,7 +252,7 @@ const Main = styled.div`
   flex-direction: column;
   border: 1px solid black;
   min-height: 60vh;
-  min-width: 80vw;
+  width: 80vw;
   margin-bottom: 200px;
 `;
 const ResultsDiv = styled.div`
@@ -228,12 +274,7 @@ const List = styled.ul`
 const Item = styled.li`
   display: flex;
 `;
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-`;
+const Column = styled.div``;
 const Arrow = styled.div`
   display: flex;
   align-items: center;
@@ -243,14 +284,16 @@ const Arrow = styled.div`
     color: ${COLORS.secondary};
   }
 `;
-const BlockWrapper = styled.div`
-  width: 100%;
+const Button = styled.button`
+  background-color: ${COLORS.primary};
+  font-weight: bolder;
+  font-size: 100%;
+  color: white;
+  border-radius: 10px;
+  width: 140px;
+  height: 30px;
+  border: none;
+  margin-bottom: 20px;
 `;
-const Image = styled.img`
-  width: 500px;
-  height: 300px;
-`;
-
-const Category = styled.div``;
 
 export default Browse;

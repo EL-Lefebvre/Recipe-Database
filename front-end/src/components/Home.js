@@ -11,18 +11,20 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <Layout>
-        <Title>
-          <h2>Find all the recipes you need</h2>
-        </Title>
+      <IndividualRecipe>
+          <Layout>
+            <Title>
+              <h2>Find all the recipes you need</h2>
+            </Title>
 
-        <Search>
-          <SearchBar />
-        </Search>
-      </Layout>
-      <CategoryDiv>
-        <Categories />
-      </CategoryDiv>
+            <Search>
+              <SearchBar />
+            </Search>
+          </Layout>
+          <CategoryDiv>
+            <Categories />
+          </CategoryDiv>
+      </IndividualRecipe>
       <Main>
         <Recipes>{data && <SmallRecipe data={data} />}</Recipes>
       </Main>
@@ -79,13 +81,20 @@ const Main = styled.div`
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
+
 `;
-const CategoryDiv = styled.div``;
+const CategoryDiv = styled.div`
+
+`;
 const Recipes = styled.div`
   display: flex;
   flex-direction: column;
+  
 `;
-const IndividualRecipe = styled.div``;
+const IndividualRecipe = styled.div`
+ 
+`;
 const Category = styled.div``;
 
 export default Home;
+

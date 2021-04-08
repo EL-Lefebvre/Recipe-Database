@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
-export const Filter = ({ list, setList, state, setState }) => {
+export const Filter = ({ subStatus, list, setList, state, setState }) => {
   return list.map(({ id, label, selected }) => {
     return (
       <List>
@@ -22,23 +22,27 @@ export const Filter = ({ list, setList, state, setState }) => {
               if (copiedList[index]) {
                 copiedList[index].selected = !selected;
                 setList(copiedList);
+                
                 if (newState === state) {
                   setState([...state, `+ ${label}`]);
                 } else if (newState !== state) {
                   setState([...newState, ` ${label}`]);
-                } else {
+                } 
+               else {
                   setState([]);
                 }
               }
+              else if  (subStatus === 'clear') {
+                copiedList.forEach((list)  => list.selected = false);
+                setState([]);
+              }
               if (!copiedList[index].selected) {
-                const filterArray = state.indexOf(!copiedList[index].selected);
-                console.log(filterArray);
-                const newArray = state.splice(filterArray);
                 const filteredFilter = newState.indexOf(
                   !copiedList[index].selected
                 );
                 console.log(filteredFilter);
                 const newFilter = state.splice(filteredFilter);
+                console.log(newFilter);
                 setState(newFilter);
               }
             }}
@@ -49,24 +53,23 @@ export const Filter = ({ list, setList, state, setState }) => {
   });
 };
 
-const Wrapper = styled.fieldset`
+const Wrapper = styled.div`
   background-color: white;
-  max-height: 30vh;
-  overflow-x: scroll;
-  scrollbar-width: thin;
-  width: 10vw;
+display:flex;
+flex-wrap:wrap;
+border:none;
+max-height:300px;
+width:70vw;
+
 `;
 const List = styled.div`
-  display: flex;
-  flex-content: flex-start;
+width:15vw;
+display:flex;
+align-item:center;
+
+
 `;
-const Item = styled.li`
-  &:hover {
-    color: ${COLORS.secondary};
-    background-color: #eae2c9;
-    cursor: pointer;
-  }
-`;
+const Span = styled.div``;
 const CheckBox = styled.input`
   &:checked {
     background-color: yellow;

@@ -41,10 +41,10 @@ const Wrapper = styled.div`
 
 
 const Main = styled.div`
-margin-top:-20px;
+  margin-top: -20px;
   z-index: 1;
-  width:90vw;
-  background-color:white;
+  width: 80vw;
+  background-color: white;
 `;
 
 

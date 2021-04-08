@@ -8,6 +8,7 @@ import ProfileBar from "./ProfileBar";
 import { RecipeContext } from "../../RecipeContext";
 import Spinner from "../Tools/Spinner";
 import Favorites from "./Favorites";
+import { GiHearts as Heart } from "react-icons/gi";
 const Profile = () => {
   const {
     currentUser,
@@ -83,7 +84,7 @@ const Profile = () => {
             ) : (
               <FavoriteWrapper>
                 <SubTitle>
-                  <h3>[ Favorites ]</h3>
+                  <h3>[ Favorites ]</h3> <Heart size={20} />
                 </SubTitle>
                 <Favorites favorites={favorites} setFavorites={setFavorites} />
               </FavoriteWrapper>
@@ -116,25 +117,24 @@ const Layout = styled.div`
   justify-content: center;
   background-color: ${COLORS.primary};
   border-radius: 15px;
-  text-align:center;
+  text-align: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   height: 200px;
   width: 500px;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
-
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
-
   }
 `;
 const Main = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid ${COLORS.primary};
+  border-radius: 10px;
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
@@ -146,9 +146,7 @@ const MainDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SubTitle = styled.div`
-
-`;
+const SubTitle = styled.div``;
 const Title = styled.div`
   color: white;
   text-decoration: underline;
@@ -163,12 +161,10 @@ const UserName = styled.div`
   letter-spacing: 1px;
 `;
 const Welcome = styled.h4`
-color:white;
+  color: white;
 
-font-weight:bolder;
+  font-weight: bolder;
 `;
 const FavoriteWrapper = styled.div``;
-
-
 
 export default Profile;

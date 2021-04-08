@@ -24,7 +24,7 @@ const options = {
 // Get 10 random recipes
 const getRandomRecipes = async (req, res) => {
   const response = await fetch(
-    `${api_url}/random?apiKey=${apiKey}&number=10&tags=vegetarian,dinner`,
+    `${api_url}/random?apiKey=${apiKey}&number=10&tags=dinner`,
     options
   );
   const data = await response.json();

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { COLORS } from "../constants";
 import LogoSrc from "../assets/logo.png";
-import { BiWine as Wine } from "react-icons/bi";
+// import { BiWine as Wine } from "react-icons/bi";
+import { FaHome as HomeLogo } from "react-icons/fa";
 import { BiSearchAlt as Search } from "react-icons/bi";
 import { CgProfile as Profile } from "react-icons/cg";
 import { BsFillChatSquareDotsFill as Blog } from "react-icons/bs";
@@ -29,7 +30,14 @@ const Header = () => {
 
       <Main>
         <Menu>
-          <Item>
+
+              <Item>
+                <Link to="/">
+                  {" "}
+                  <HomeLogo size={20} /> <Text>Home</Text>
+                </Link>
+              </Item>
+              <Item>
             <Link to="/browse">
               {" "}
               <Search size={20} /> <Text>Browse</Text>
@@ -42,12 +50,7 @@ const Header = () => {
               <Blog size={20} /> <Text>Blog</Text>
             </Link>
           </Item>
-          <Item>
-            <Link to="/wine">
-              {" "}
-              <Wine size={20} /> <Text>Wine Pairing</Text>
-            </Link>
-          </Item>
+         
           {currentUser ? (
             <Item>
               <Link to="/profile">

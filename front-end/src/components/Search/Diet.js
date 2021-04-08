@@ -3,21 +3,28 @@ import { COLORS } from "../../constants";
 import styled from "styled-components";
 
 import Filter from "./Filter";
-const Diet = ({ diet, setDiet, list, setDietList }) => {
+const Diet = ({ subStatus, diet, setDiet, list, setDietList }) => {
+  return (
+    <Filter
+  
 
-  console.log(diet);
+          subStatus={subStatus}
+  
 
+              list={list}
+    
 
-
-    return (
-      <Filter
-        list={list}
-        setList={setDietList}
+            setList={setDietList}
+   
+     
         state={diet}
-        setState={setDiet}
-      />
-    );
-
+ 
+     
+          setState={setDiet}
+   
+   
+    />
+  );
 };
 
 

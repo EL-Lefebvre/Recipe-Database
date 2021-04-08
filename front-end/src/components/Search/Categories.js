@@ -59,8 +59,9 @@ const Wrapper = styled.div`
   padding-top: 10px;
   justify-content: space-between;
   display: flex;
-  padding-bottom: 50px;
-  border-top: 1px solid ${COLORS.primary};
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid ${COLORS.primary};
 
   @media (max-width: 768px) and (max-height: 900px) {
     flex-wrap: wrap;

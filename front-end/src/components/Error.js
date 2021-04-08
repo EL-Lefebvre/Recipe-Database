@@ -6,12 +6,13 @@ import ErrorLogo from "../assets/error-icon.png";
 const Error = () => {
   return (
     <Wrapper>
-      <DivTitle>
-        <Title>404: Error</Title>
-      </DivTitle>
+    
       <Main>
         <Logo src={ErrorLogo} />
       </Main>
+      <DivTitle>
+        <Title>Something went wrong...</Title>
+      </DivTitle>
     </Wrapper>
   );
 };
@@ -29,8 +30,7 @@ const Wrapper = styled.div`
 const Main = styled.div``;
 const DivTitle = styled.div``;
 const Title = styled.h1`
-color: black;
-text-decoration: underline;s
+  color: black;
 `;
 
 const Logo = styled.img`

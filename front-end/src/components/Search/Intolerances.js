@@ -2,6 +2,7 @@ import React from "react";
 
 import Filter from "./Filter";
 const Intolerances = ({
+  subStatus,
   list,
   setIntoleranceList,
   intolerances,
@@ -9,6 +10,7 @@ const Intolerances = ({
 }) => {
   return (
     <Filter
+        subStatus={subStatus}
       list={list}
       setList={setIntoleranceList}
       state={intolerances}

@@ -1,9 +1,10 @@
 import React from "react";
 
 import Filter from "./Filter";
-const Cuisine = ({ cuisine, setCuisine, list, setCuisineList }) => {
+const Cuisine = ({ subStatus, cuisine, setCuisine, list, setCuisineList }) => {
   return (
     <Filter
+        subStatus={subStatus}
       list={list}
       setList={setCuisineList}
       state={cuisine}
