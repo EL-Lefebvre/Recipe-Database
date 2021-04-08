@@ -29,9 +29,15 @@ const Wrapper = styled.div`
   height: 60px;
   display: flex;
   margin-right: 90px;
-
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 75vw;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 
 const Main = styled.div``;

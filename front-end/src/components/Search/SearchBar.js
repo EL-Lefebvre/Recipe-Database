@@ -31,9 +31,6 @@ console.log(keyword)
 
 const TypeheadWrapper = styled.div`
   padding: auto;
-
- 
-  
 `;
 const IconDiv = styled.div`
 

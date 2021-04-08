@@ -89,7 +89,7 @@ const CategoryDiv = styled.div`
 const Recipes = styled.div`
   display: flex;
   flex-direction: column;
-  
+
 `;
 const IndividualRecipe = styled.div`
  

@@ -59,11 +59,11 @@ const Suggestion = ({
 
 
   return (
-    <div>
-      {!suggestion || suggestion === [] ? (
-        <NoResults>No Results</NoResults>
+    <Wrapper>
+      {!suggestion | suggestion === [] ? (
+       <DivNoResults> <NoResults>No Results</NoResults></DivNoResults>
       ) : (
-        <Wrapper
+        <Main
           style={{
             visibility: toggle ? "visible" : "hidden",
           }}
@@ -103,19 +103,24 @@ const Suggestion = ({
               </SearchResult>
             );
           })}
-        </Wrapper>
+        </Main>
       )}
-    </div>
+    </Wrapper>
   );
 };
-
 const Wrapper = styled.div`
+display:flex;
+justify-content:center;
+`;
+const Main = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 20px;
-  padding-top: 15px;
+  padding-top: 55px;
   margin-left: 50px;
+  border-radius:  10px;
+  overflow: hidden;
   position: absolute;
   width: 45%;
   height: 50vh;
@@ -124,6 +129,22 @@ const Wrapper = styled.div`
   z-index: 100;
   overflow-y: scroll;
   scrollbar-width: thin;
+`;
+const DivNoResults = styled.div`
+display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 55px;
+  margin-left: 50px;
+  border-radius:  10px;
+  overflow: hidden;
+  position: absolute;
+  width: 45%;
+  height: 20vh;
+  box-shadow: 1px -1px 13px -1px #000000;
+  background-color: white;
+  z-index: 100;
 `;
 const SearchResult = styled.div`
   width: 100%;

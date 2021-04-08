@@ -17,14 +17,14 @@ const RecipePreview = ({ result, index }) => {
 };
 const SearchResult = styled.div`
   width: 100%;
-  height: 150px;
   padding-top: 10px;
-  border: 1px solid lightgray;
+  justify-content: space-between;
 `;
 
 const SuggestionColumn = styled.div`
   display: flex;
 
+  align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
@@ -34,8 +34,8 @@ const Regular = styled.span`
 `;
 const Image = styled.img`
   padding-top: 5px;
-  height: 110px;
-  width: 150px;
+  height: 70px;
+  width: 100px;
 `;
 
 const NavigationLink = styled(NavLink)`
@@ -54,5 +54,8 @@ const NavigationLink = styled(NavLink)`
   }
 `;
 
-
+const NoResults = styled.div`
+  height: 100px;
+  background-color: white;
+`;
 export default RecipePreview;

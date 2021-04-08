@@ -73,7 +73,7 @@ const Blog = () => {
         <Title>
           <h1>Blog</h1>
         </Title>
-        {username && (
+        {username ? (
           <Form
             username={username}
             details={details}
@@ -88,6 +88,17 @@ const Blog = () => {
             status={status}
             setStatus={setStatus}
           />
+        ):(
+          <LinkDiv>
+          <List>
+          <Item>
+            <Text href="http://localhost:3000/register">Register</Text>
+          </Item>
+          <Item>
+            <Text href="http://localhost:3000/login" >Login</Text>
+          </Item>
+        </List>
+        </LinkDiv>
         )}
       </Layout>
 
@@ -151,6 +162,31 @@ const Main = styled.div`
 const Title = styled.div`
   color: white;
   text-decoration: underline;
+`;
+const LinkDiv = styled.div`
+width:20vw;
+`;
+const List = styled.ul`
+  margin-left: -30px;
+  padding-right: 10px;
+  display: flex;
+
+  justify-content: space-between;
+`;
+const Item = styled.li`
+
+`;
+
+const Text = styled.a`
+  font-weight: bolder;
+  text-decoration: none;
+  color: ${COLORS.primary};
+  &:visited {
+    color: ${COLORS.primary};
+  }
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 

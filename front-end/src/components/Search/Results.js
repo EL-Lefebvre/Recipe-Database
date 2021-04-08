@@ -128,6 +128,7 @@ const Results = ({
 const Wrapper = styled.div`
   z-index: 1;
   background-color: white;
+  padding-top: 20px;
 `;
 const Main = styled.div`
   display: flex;
