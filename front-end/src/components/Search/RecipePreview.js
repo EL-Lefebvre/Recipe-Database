@@ -16,9 +16,15 @@ const RecipePreview = ({ result, index }) => {
   );
 };
 const SearchResult = styled.div`
-  width: 100%;
+
+
   padding-top: 10px;
   justify-content: space-between;
+  margin-bottom: 15px;
+  height: 120px;
+  &:hover {
+    background-color: hsla(50deg, 100%, 80%, 0.25);
+  }
 `;
 
 const SuggestionColumn = styled.div`
@@ -32,10 +38,11 @@ const SuggestionColumn = styled.div`
 const Regular = styled.span`
   font-weight: normal;
 `;
+const DivImage = styled.div;
 const Image = styled.img`
   padding-top: 5px;
-  height: 70px;
-  width: 100px;
+  height: 110px;
+  width: 150px;
 `;
 
 const NavigationLink = styled(NavLink)`
@@ -48,6 +55,7 @@ const NavigationLink = styled(NavLink)`
   font-size: 15px;
   font-weight: normal;
   height: 65px;
+  padding-bottom: 15px;
 
   &:hover {
     color: gray;

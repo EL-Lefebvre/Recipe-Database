@@ -4,17 +4,11 @@ import Filter from "./Filter";
 const Type = ({ subStatus, type, setType, list, setTypeList }) => {
   return (
     <Filter
-
-         subStatus={subStatus}
-      
+      subStatus={subStatus}
       list={list}
-     
       setList={setTypeList}
-   
-        state={type}
- 
-          setState={setType}
-   
+      state={type}
+      setState={setType}
     />
   );
 };

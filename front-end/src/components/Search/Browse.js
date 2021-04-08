@@ -97,7 +97,21 @@ setSubStatus("clear")
     });
    
   };
+  const newSuggestion = async () => {
+    try {
+      const response = await fetch(
+        `/recipes?keyword=${keyword}&cuisine=${selectedItems.cuisine}&type=${selectedItems.type}&diet=${selectedItems.diet}&intolerances=${selectedItems.intolerances}`
+      )
+        .then((res) => res.json())
+        .then((data) => data.data)
+        .then((data) => data.results);
 
+      setSuggestion(response);
+      return response;
+    } catch (err) {
+      console.log("error");
+    }
+  };
   return (
     <Wrapper>
       <Layout>
@@ -140,7 +154,7 @@ setSubStatus("clear")
             {toggles.cuisine ? (
               <Fieldset>
                 <Cuisine
-                  subStatus={subStatus}
+                
                   cuisine={cuisine}
                   setCuisine={setCuisine}
                   list={cuisineList}
@@ -160,7 +174,6 @@ setSubStatus("clear")
             ) : toggles.diet ? (
               <Fieldset>
                 <Diet
-                  subStatus={subStatus}
                   diet={diet}
                   setDiet={setDiet}
                   list={dietList}
@@ -170,7 +183,6 @@ setSubStatus("clear")
             ) : toggles.intolerances ? (
               <Fieldset>
                 <Intolerances
-                  subStatus={subStatus}
                   list={intoleranceList}
                   setIntoleranceList={setIntoleranceList}
                   intolerances={intolerances}
@@ -193,6 +205,7 @@ setSubStatus("clear")
             setSelectedItems={setSelectedItems}
             suggestion={suggestion}
             setSuggestion={setSuggestion}
+            newSuggestion={newSuggestion}
           />
         </ResultsDiv>
       </Main>

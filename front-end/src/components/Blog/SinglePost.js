@@ -91,7 +91,8 @@ const Main = styled.div`
 `;
 const Layout = styled.div`
   border: 3px double ${COLORS.primary};
-
+  max-height: 60vh;
+  margin-top: 0px;
   background-color: white;
   border-radius: 15px;
   padding: 10px;

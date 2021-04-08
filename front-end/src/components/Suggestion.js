@@ -109,8 +109,14 @@ const Suggestion = ({
   );
 };
 const Wrapper = styled.div`
-display:flex;
-justify-content:center;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 100vw;
+    }
+    @media (max-width: 650px) and (max-height: 850px) {
+      width: 100vw;
+    }
 `;
 const Main = styled.div`
   display: flex;
@@ -119,7 +125,7 @@ const Main = styled.div`
   margin-top: 20px;
   padding-top: 55px;
   margin-left: 50px;
-  border-radius:  10px;
+  border-radius: 10px;
   overflow: hidden;
   position: absolute;
   width: 45%;
@@ -129,6 +135,7 @@ const Main = styled.div`
   z-index: 100;
   overflow-y: scroll;
   scrollbar-width: thin;
+
 `;
 const DivNoResults = styled.div`
 display: flex;
@@ -150,6 +157,7 @@ const SearchResult = styled.div`
   width: 100%;
   padding-top: 10px;
   justify-content: space-between;
+
 `;
 
 const SuggestionColumn = styled.div`
@@ -158,6 +166,7 @@ const SuggestionColumn = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+
 `;
 
 const Regular = styled.span`

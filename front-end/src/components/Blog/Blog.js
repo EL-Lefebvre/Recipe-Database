@@ -154,9 +154,8 @@ const Main = styled.div`
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
-  background-color:white;
-  border-radius:20px;
-  background-color:#f0f0e8;
+  background-color: white;
+  border-radius: 20px;
 `;
 
 const Title = styled.div`

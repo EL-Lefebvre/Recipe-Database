@@ -48,15 +48,17 @@ const Wrapper = styled.div`
   align-items: center;
   padding-top: 20px;
 
-
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Layout = styled.div`
   width: 60vw;
-  background-color: white;
+ 
   margin-top: 0px;
   display: flex;
-
-  border: 5px double black;
+  background-color: #f0f0e8;
+  border: 5px double ${COLORS.primary};
   align-items: center;
   border-radius: 15px;
   padding: 10px;
@@ -64,15 +66,12 @@ const Layout = styled.div`
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 60vw;
-  
- 
-    flex-direction:  column;
-    justify-content:center;
+
+    flex-direction: column;
+    justify-content: center;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
-
-  
   }
 `;
 
@@ -90,12 +89,14 @@ const Span = styled.span`
 const Recipes = styled.div`
   padding-left: 50px;
   margin-top: -20px;
+  display:flex;
+  flex-direction: column;
+
+
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 60vw;
     max-height: 30vh;
 margin-top:0px;
-    display: flex;
-    flex-direction: column;
     margin-left:-100px;
  
   }
@@ -107,18 +108,22 @@ margin-top:0px;
   }
 `;
 const DivImage = styled.div`
-background-color:white;
+margin-left:20px;
 border-radius:20px;
 `;
 const IndividualRecipe = styled.div`
   display: flex;
   flex-warp: wrap;
-  width: 500xp;
+  width: 500px;
+
+
+
 `;
 const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
 `;
 const Text = styled.p`
   text-overflow: ellipsis;
@@ -135,8 +140,9 @@ const Text = styled.p`
 const Image = styled.img`
   width: 140px;
   height: 150px;
-  padding: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
+  
 `;
 
 export default Posts;

@@ -17,13 +17,25 @@ const Profile = () => {
     setStatus,
     results,
     setResults,
+    getUser,
   } = useContext(RecipeContext);
   const [subStatus, setSubStatus] = useState("loading");
   const [posts, setPosts] = useState([]);
   const [itemClicked, setItemClicked] = useState("favorites");
   const [favorites, setFavorites] = useState([]);
   ///Importing posts from users
-
+  useEffect(() => {
+    if (!currentUser) {
+      getUser();
+    } else {
+      console.log(currentUser);
+    }
+  }, []);
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem("data", currentUser);
+    }
+  }, [currentUser]);
   useEffect(() => {
     if (currentUser) {
       setSubStatus("user");
@@ -56,6 +68,10 @@ const Profile = () => {
     }
   }, [results]);
 
+  const handleClear = () => {
+    localStorage.removeItem("data");
+  };
+
   return (
     <Wrapper>
       {subStatus === "loaded" || currentUser ? (
@@ -75,12 +91,12 @@ const Profile = () => {
 
           <Main>
             {posts && itemClicked === "posts" ? (
-              <FavoriteWrapper>
+              <PostsWrapper>
                 <SubTitle>
                   <h3>[ Your Own Recipes ] </h3>
                 </SubTitle>
                 <Posts posts={posts} setPosts={setPosts} />
-              </FavoriteWrapper>
+              </PostsWrapper>
             ) : (
               <FavoriteWrapper>
                 <SubTitle>
@@ -104,7 +120,6 @@ const Profile = () => {
 const Wrapper = styled.div`
   text-align: center;
   background-color: #f0f0e8;
-
   margin-top: -30px;
   padding-top: 50px;
 `;
@@ -120,13 +135,13 @@ const Layout = styled.div`
   text-align: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   height: 200px;
-  width: 500px;
+  width: 45vw;
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
+    width: 90vw;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 85vw;
+    width: 90vw;
   }
 `;
 const Main = styled.div`
@@ -135,7 +150,8 @@ const Main = styled.div`
   align-items: center;
   border: 1px solid ${COLORS.primary};
   border-radius: 10px;
-  min-height: 60vh;
+  min-height: 40vh;
+
   min-width: 80vw;
   margin-bottom: 200px;
   background-color: white;
@@ -150,7 +166,6 @@ const SubTitle = styled.div``;
 const Title = styled.div`
   color: white;
   text-decoration: underline;
-
 `;
 const UserName = styled.div`
   display: flex;
@@ -165,6 +180,10 @@ const Welcome = styled.h4`
 
   font-weight: bolder;
 `;
-const FavoriteWrapper = styled.div``;
+const FavoriteWrapper = styled.div`
 
+
+`;
+const PostsWrapper = styled.div`
+`;
 export default Profile;

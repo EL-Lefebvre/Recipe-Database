@@ -5,8 +5,11 @@ import Logo from "../../assets/food.png";
 import Posts from "../Blog/Posts";
 import { RecipeContext } from "../../RecipeContext";
 const ProfileBar = ({ itemClicked, setItemClicked }) => {
-  const { currentUser, setCurrentUser } = useContext(RecipeContext);
-
+  const { currentUser, setCurrentUser, setStatus } = useContext(RecipeContext);
+  const handleClear = () => {
+    localStorage.clear();
+    setStatus("delete");
+  };
   return (
     <Wrapper>
       <Layout>
@@ -30,7 +33,9 @@ const ProfileBar = ({ itemClicked, setItemClicked }) => {
         </Item>
 
         <Item>
-          <Link href="http://localhost:3000/logout">Logout</Link>
+          <Link href="http://localhost:3000/logout" onClick={handleClear}>
+            Logout
+          </Link>
         </Item>
       </Layout>
     </Wrapper>

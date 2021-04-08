@@ -15,26 +15,13 @@ const Results = ({
   setSelectedItems,
   suggestion,
   setSuggestion,
+  newSuggestion,
 }) => {
   const { cuisineList, typeList, dietList, intoleranceList } = useContext(
     RecipeContext
   );
 
-  const newSuggestion = async () => {
-    try {
-      const response = await fetch(
-        `/recipes?keyword=${keyword}&cuisine=${selectedItems.cuisine}&type=${selectedItems.type}&diet=${selectedItems.diet}&intolerances=${selectedItems.intolerances}`
-      )
-        .then((res) => res.json())
-        .then((data) => data.data)
-        .then((data) => data.results);
-
-      setSuggestion(response);
-      return response;
-    } catch (err) {
-      console.log("error");
-    }
-  };
+  
   useEffect(() => {
     setSelectedItems({
       cuisine: [],
@@ -45,8 +32,10 @@ const Results = ({
   }, []);
   useEffect(() => {
     newSuggestion();
-  }, [selectedItems]);
-
+  }, [selectedItems, keyword]);
+  useEffect(() => {
+    newSuggestion();
+  }, [keyword]);
   const FilteredList = (data) => {
     const newList = data.filter((list) => list.selected);
     const LabelList = newList.map((list) => list.label);

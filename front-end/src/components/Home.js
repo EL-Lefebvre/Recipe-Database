@@ -56,13 +56,11 @@ const Layout = styled.div`
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
-    margin-top:-30px;
-z-index:4;
+    z-index: 4;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
-    z-index:4;
-       
+    z-index: 4;
   }
 `;
 const Title = styled.div`
@@ -81,11 +79,14 @@ const Main = styled.div`
   min-height: 60vh;
   min-width: 80vw;
   margin-bottom: 200px;
-
+  margin-top: 100px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    margin-top: 0px;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
-const CategoryDiv = styled.div`
-
-`;
+const CategoryDiv = styled.div``;
 const Recipes = styled.div`
   display: flex;
   flex-direction: column;

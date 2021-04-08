@@ -6,26 +6,36 @@ import SmallRecipe from "../Recipes/SmallRecipe";
 import RecipePreview from "../Search/RecipePreview";
 import { RecipeContext } from "../../RecipeContext";
 const Favorites = ({ favorites, setFavorites }) => {
-  const { currentUser, setCurrentUser } = useContext(RecipeContext);
-
+  const { currentUser } = useContext(RecipeContext);
+  const [updatedFavorites, setUpdatedFavorites] = useState([]);
   ///Importing posts from users
   console.log(currentUser);
   console.log(favorites);
+  useEffect(() => {
+    if (favorites.length >= 1) {
+      const FilteredFavorites = favorites.map((fav) => {
+        const id = fav.id;
+        const title = fav.title;
+        const image = fav.image;
+        return { id, title, image };
+      });
+      setUpdatedFavorites(FilteredFavorites);
+    }
+  }, [favorites]);
 
-  const FilteredFavorites = favorites.map((fav) => {
-    const id = fav.id;
-    const title = fav.title;
-    const image = fav.image;
-    return { id, title, image };
-  });
-  console.log(FilteredFavorites);
+  console.log(updatedFavorites);
   return (
     <Wrapper>
-      <Main>   {favorites &&
-        FilteredFavorites.map((result, index) => { 
-        
-          return   <RecipePreview result={result} index={index} />
-})}</Main>
+      <Main>
+        {" "}
+        {updatedFavorites.length >= 1 ? (
+          updatedFavorites.map((result, index) => {
+            return <RecipePreview result={result} index={index} />;
+          })
+        ) : (
+          <div></div>
+        )}
+      </Main>
     </Wrapper>
   );
 };
@@ -36,16 +46,13 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-top: 50px;
 `;
-
 
 const Main = styled.div`
-  margin-top: -20px;
   z-index: 1;
   width: 80vw;
+    border-radius:  20px;
   background-color: white;
 `;
-
 
 export default Favorites;

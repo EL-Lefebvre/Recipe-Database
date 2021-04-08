@@ -27,7 +27,7 @@ const SmallRecipe = ({ data }) => {
       setNewData(ArrayData);
     }
   }, [data]);
-  console.log(newData);
+
   return (
     <Wrapper>
       {newData &&
@@ -64,14 +64,19 @@ const Wrapper = styled.div`
   border: 5px double ${COLORS.primary};
   border-radius: 40px;
   width: 65vw;
-  padding-bottom: 20px;
-  margin-top: 40px;
+  padding: 20px;
+  margin-top: -40px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    flex-direction: column;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  padding: auto;
+    margin-bottom:  20px;
   justify-content: center;
   align-items: center;
   transition: 0.7s;
@@ -86,6 +91,13 @@ const Main = styled.div`
     background-color: #f7dc83;
     border-radius: 20px;
   }
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 60vw;
+    height: 45vh;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 60vw;
+  }
 `;
 const Layout = styled.div``;
 const Image = styled.img`
@@ -94,6 +106,12 @@ const Image = styled.img`
   padding: 10px;
   transition: 0.7s;
   border-radius: 30px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 30vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 30vw;
+  }
 `;
 const ImageDiv = styled.div``;
 const TitleDiv = styled.div`
@@ -102,11 +120,26 @@ const TitleDiv = styled.div`
   max-height: 20vh;
   overflow: hidden;
   white-space: nowrap;
+  @media (max-width: 768px) and (max-height: 900px) {
+    max-width: 60vw;
+    flex-warp: wrap;
+    padding: 10px;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    max-width: 60vw;
+    padding: 10px;
+  }
 `;
 const Title = styled.h5`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 60vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 60vw;
+  }
 `;
 
 export default SmallRecipe;

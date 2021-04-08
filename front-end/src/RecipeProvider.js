@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import {
   intolerancesData,
@@ -50,27 +50,32 @@ export const RecipeProvider = ({ children }) => {
     }))
   );
   //Get current User
-  useEffect(() => {
-    fetch("/user", {
-      method: "GET",
-      withCredentials: true,
-      url: "http://localhost:4000/user",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        localStorage.setItem("data", res.username);
-        console.log(res.username);
-      });
-    let currentData = localStorage.getItem("data");
-    setCurrentUser(currentData);
-if(currentData){
-  setStatus('user201')
-}
-  }, [currentUser]);
+  const getUser = async () => {
+    try {
+      const response = await fetch("/user", {
+        method: "GET",
+        withCredentials: true,
+        url: "http://localhost:4000/user",
+      })
+        .then((res) => res.json())
+        .then((res) => res.username);
+        console.log(response.username)
+        const user = response.username
+      // let currentData = localStorage.getItem("data");
+      if(user){
+        setCurrentUser(user);
+      }
+      
 
+    } catch (err) {
+      console.log("no user");
+    }
+  };
 
-  
   //Get favorites from user
+
+
+
 
   //Get all posted recipes in blog
   const postedRecipe = async () => {
@@ -87,13 +92,9 @@ if(currentData){
   };
   useEffect(() => {
     postedRecipe();
-   setStatus('loaded')
+    setStatus("loaded");
   }, []);
-  useEffect(() => {
-    if (currentUser) {
-      setStatus("idle");
-    }
-  }, [currentUser]);
+
   // -----
 
   const randomRecipe = async () => {
@@ -145,6 +146,7 @@ if(currentData){
         setStatus,
         results,
         setResults,
+        getUser
       }}
     >
       {children}

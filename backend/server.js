@@ -123,7 +123,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/user", (req, res) => {
-  res.send(req.user);
+  res.status(200).json({ status: 200, username: req.user });
 });
 //Favorite recipes of current user
 app.get("/favorites/:user", getUserFavorites);

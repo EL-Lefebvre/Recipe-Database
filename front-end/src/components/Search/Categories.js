@@ -8,68 +8,78 @@ import Indian from "../../assets/indianfood.jpg";
 import Appetizer from "../../assets/appetizer.jpg";
 import Dessert from "../../assets/dessert.jpg";
 import Vegan from "../../assets/vegan.jpg";
+import { RecipeContext } from "../../RecipeContext";
 
 const Categories = () => {
   return (
     <Wrapper>
-      {/* <NavigationLink exact to={`/recipe/${result.id}`}> */}
-      <SuggestionColumn>
-        <TitleDiv>
-          <Regular>Vegan</Regular>
-        </TitleDiv>
-        <Image src={Vegan} />
-      </SuggestionColumn>
-
-      {/* <NavigationLink exact to={`/recipe/${result.id}`}> */}
-      <SuggestionColumn>
-        <TitleDiv>
-          <Regular>Indian Food</Regular>
-        </TitleDiv>
-        <Image src={Indian} />
-      </SuggestionColumn>
-
-      {/* <NavigationLink exact to={`/recipe/${result.id}`}> */}
-      <SuggestionColumn>
-        <TitleDiv>
-          <Regular>Appetizer</Regular>
-        </TitleDiv>
-        <Image src={Appetizer} />
-      </SuggestionColumn>
-
-      {/* <NavigationLink exact to={`/recipe/${result.id}`}> */}
-      <SuggestionColumn>
-        <TitleDiv>
-          <Regular>Dessert</Regular>
-        </TitleDiv>
-        <Image src={Dessert} />
-      </SuggestionColumn>
-
-      {/* <NavigationLink exact to={`/recipe/${result.id}`}> */}
-      <SuggestionColumn>
-        <TitleDiv>
-          <Regular>French Food</Regular>
-        </TitleDiv>
-        <Image src={French} />
-      </SuggestionColumn>
+      <NavigationLink exact to={`/browse`}>
+        <SuggestionColumn>
+          <TitleDiv>
+            <Regular>Vegan</Regular>
+          </TitleDiv>
+          <Image src={Vegan} />
+        </SuggestionColumn>
+      </NavigationLink>
+      <NavigationLink exact to={`/browse`}>
+        <SuggestionColumn>
+          <TitleDiv>
+            <Regular>Indian Food</Regular>
+          </TitleDiv>
+          <Image src={Indian} />
+        </SuggestionColumn>
+      </NavigationLink>
+      <NavigationLink exact to={`/browse`}>
+        <SuggestionColumn>
+          <TitleDiv>
+            <Regular>Appetizer</Regular>
+          </TitleDiv>
+          <Image src={Appetizer} />
+        </SuggestionColumn>
+      </NavigationLink>
+      <NavigationLink exact to={`/browse`}>
+        <SuggestionColumn>
+          <TitleDiv>
+            <Regular>Dessert</Regular>
+          </TitleDiv>
+          <Image src={Dessert} />
+        </SuggestionColumn>
+      </NavigationLink>
+      <NavigationLink exact to={`/browse`}>
+        <SuggestionColumn>
+          <TitleDiv>
+            <Regular>French Food</Regular>
+          </TitleDiv>
+          <Image src={French} />
+        </SuggestionColumn>
+      </NavigationLink>
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 90vw;
   padding-top: 10px;
   justify-content: space-between;
   display: flex;
   margin-bottom: 50px;
   padding-bottom: 20px;
   border-bottom: 1px solid ${COLORS.primary};
+flex-wrap:wrap;
+@media (max-width: 1160px)  {
+  justify-content: center;
 
+}
   @media (max-width: 768px) and (max-height: 900px) {
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    width:  80vw;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    width:  80vw;
   }
 `;
 
@@ -78,11 +88,12 @@ const SuggestionColumn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+
+  
 `;
 
 const TitleDiv = styled.div`
-  width: 200px;
+  max-width: 12vw;
   position: absolute;
   z-index: 2;
   margin-top: 60px;
@@ -96,11 +107,14 @@ const TitleDiv = styled.div`
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 50vw;
     max-height: 50vw;
-    margin-top: 50px;
+    margin-top: 100px;
+
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 50vw;
     max-height: 50vw;
+    margin-top: 100px;
+  
   }
 `;
 const ImageDiv = styled.div``;
@@ -111,8 +125,9 @@ const Regular = styled.h3`
 `;
 const Image = styled.img`
   padding-top: 5px;
-  height: 200px;
-  border-radius: 100px;
+
+  height: 30vh;
+  border-radius: 200px;
   opacity: 0.7;
   z-index: 1;
   transition: 0.4s;
@@ -120,26 +135,24 @@ const Image = styled.img`
     cursor: pointer;
     opacity: 0.9;
   }
+  @media (max-width: 1160px)  {
+
+    margin:20px;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    width: 50vw;
-    height: 50vw;
+    width: 45vw;
+    height: 45vh;
+    border-radius: 100%;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    width: 50vw;
-    height: 50vw;
+    width: 45vw;
+    height: 45vh;
+    border-radius: 100%;
   }
 `;
 
 const NavigationLink = styled(NavLink)`
   text-decoration: none;
-  margin: 0px 0 0 5px;
-  padding: 7px 10px;
-  display: flex;
-  justify-content: flex-start;
-  color: black;
-  font-size: 15px;
-  font-weight: normal;
-  height: 65px;
 
   &:hover {
     color: gray;
