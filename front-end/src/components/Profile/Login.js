@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import { COLORS } from "../../constants";
 import styled from "styled-components";
 
@@ -13,11 +15,12 @@ const Login = () => {
     currentUser,
     setCurrentUser,
   } = useContext(RecipeContext);
+  const history = useHistory();
   const [subStatus, setSubStatus] = useState("loading");
   console.log(status);
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    await fetch('/signin', {
+    await fetch("/signin", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -31,20 +34,33 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.subStatus === 404) {
-          setSubStatus("User non existant");
-        } else {
-          console.log(res);
+        if (res.message === "success") {
+          setSubStatus("success");
+        } else if (res.message === "wrong password") {
+          setSubStatus("wrong password");
+        } else if (res.message === "no user") {
+          setSubStatus("no user");
         }
       });
   };
-
+  console.log(subStatus);
+  useEffect(() => {
+    if (subStatus === "success") {
+      history.push("/profile");
+    }
+  }, [subStatus]);
   return (
     <Wrapper>
-      <Layout>       <Title>
+      <Layout>
+        {" "}
+        <Title>
           <h1> Login</h1>
         </Title>
-
+        {subStatus === "no user" ? (
+          <ErrorMessage><h6>Wrong Password or Username. Pleaser try again </h6></ErrorMessage>
+        ) : (
+          <ErrorMessage></ErrorMessage>
+        )}
         <Main onSubmit={handleSubmit}>
           <InputField
             type="text"
@@ -60,10 +76,7 @@ const Login = () => {
             onChange={(ev) => setLoginPassword(ev.currentTarget.value)}
             value={loginPassword}
           />
-          <Button type="submit">
-            {" "}
-            Login{" "}
-          </Button>
+          <Button type="submit"> Login </Button>
         </Main>
         <LinkList>
           <Item>
@@ -81,13 +94,15 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-top: 50px;
+
+
 `;
 const Layout = styled.div`
   min-width: 30vw;
-  min-height: 60vh;
+  min-height: 100vh;
   margin-top: 0px;
   display: flex;
+
   flex-direction: column;
   justify-content: space-evenly;
   border: 5px double black;
@@ -98,12 +113,15 @@ const Layout = styled.div`
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   height: 150px;
   margin-bottom: 50px;
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 70vw;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
+    width: 80vw;
     margin-top: -30px;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 85vw;
+    width: 80vw;
     margin-top: -30px;
   }
 `;
@@ -112,7 +130,7 @@ const Main = styled.form`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  min-height: 30vh;
+  height: 40vh;
 `;
 const Title = styled.div`
   color: white;
@@ -133,18 +151,31 @@ const Link = styled.a`
 `;
 const InputField = styled.input`
   border-radius: 15px;
-  width: 20vw;
+  width: 25vw;
   border: none;
   outline: none;
   box-sizing: border-box;
   padding: 10px;
+  margin-bottom:    20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+ 
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 50vw;
+    height: 5vh;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 80vw;
+    width: 80vw;
+    height: 5vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 80vw;
+    width: 80vw;
+    height: 5vh;
   }
+`;
+const ErrorMessage = styled.div`
+  color: white;
+
+width:15vw;
 `;
 
 const Button = styled.button`
@@ -152,6 +183,18 @@ const Button = styled.button`
   width: 12vw;
   background-color: ${COLORS.primary};
   border: none;
+  border-radius: 15px;
+  font-weight: bolder;
+
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 20vw;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 50vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 50vw;
+  }
 `;
 
 export default Login;

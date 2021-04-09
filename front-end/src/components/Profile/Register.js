@@ -13,6 +13,7 @@ const Register = () => {
     registeredPassword,
     setRegisteredPassword,
   } = useContext(RecipeContext);
+  const [subStatus, setSubStatus] = useState('load');
   const handleSubmit = (ev) => {
     fetch("/register", {
       method: "POST",
@@ -24,18 +25,21 @@ const Register = () => {
         username: registeredUserName,
         password: registeredPassword,
       }),
-    }).then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-        setStatus("new user");
+      withCredentials: true,
+    })
+    .then((res) => res.json())
+    .then((res) => {
+
+      if (res.message === "no user") {
+        setSubStatus("no user");
       }
     });
  
   };
   console.log(status);
   useEffect(() => {
-    console.log(status);
-  }, [status]);
+    console.log(subStatus);
+  }, [subStatus]);
 
   return (
     <Wrapper>
@@ -64,7 +68,7 @@ const Register = () => {
             onClick={setStatus("new user")}
           >
             {" "}
-            Submit{" "}
+            SUBMIT{" "}
           </Button>
         </Main>
         <LinkList>
@@ -89,7 +93,7 @@ const Wrapper = styled.div`
 `;
 const Layout = styled.div`
   min-width: 30vw;
-  min-height: 60vh;
+ 
   margin-top: 0px;
   display: flex;
   flex-direction: column;
@@ -100,15 +104,19 @@ const Layout = styled.div`
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  height: 310px;
+  height: 70vh;
   margin-bottom: 50px;
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 70vw;
+    height: 50vh;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
-    margin-top: -30px;
+     width: 80vw;
+
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 85vw;
-    margin-top: -30px;
+   width: 80vw;
+  
   }
 `;
 const Main = styled.form`
@@ -116,7 +124,7 @@ const Main = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  min-height: 35vh;
+height: 45vh;
 `;
 const Title = styled.div`
   color: white;
@@ -143,11 +151,20 @@ const InputField = styled.input`
   box-sizing: border-box;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 50vw;
+    height:5vh;
+
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 80vw;
+     width: 75vw;
+
+  
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 80vw;
+    width: 75vw;
+
+ 
   }
 `;
 
@@ -156,6 +173,23 @@ const Button = styled.button`
   width: 12vw;
   background-color: ${COLORS.primary};
   border: none;
+  border-radius:15px;
+  font-weight: bolder;
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 20vw;
+ 
+
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 50vw;
+
+  
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 50vw;
+
+ 
+  }
 `;
 
 export default Register;

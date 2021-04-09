@@ -103,26 +103,25 @@ app.post("/register", (req, res) => {
 
 // Login Routes
 
-app.post(
-  "/signin",
-  (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
-      if (err) next(err);
-      if (!user){
-        return res.status(404).json({
-          message: 'no user'
-        })
-      }
-      else {
-        req.logIn(user, (err) => {
-          if (err) throw err;
-          console.log(req.user);
-          res.redirect("/profile");
-        });
-      }
-    })(req, res, next)
-  }
-);
+app.post("/signin", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) next(err);
+    if (!user) {
+      return res.status(404).json({
+        message: "no user",
+      });
+    } else {
+      req.logIn(user, (err) => {
+        if (err)
+          res.status(404).json({
+            message: "wrong password",
+          });
+
+        res.status(200).json({ message: "success" });
+      });
+    }
+  })(req, res, next);
+});
 
 app.get("/logout", (req, res) => {
   req.logout();
