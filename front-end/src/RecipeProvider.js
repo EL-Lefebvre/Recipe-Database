@@ -8,6 +8,30 @@ import {
 } from "./components/Search/Utilities";
 import { RecipeContext } from "./RecipeContext";
 
+
+const initialFitlerData = {
+  cuisine: [...cuisinesData].map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  })),
+  type: typeData.map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  })),
+  intolerances: intolerancesData.map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  })),
+  diet: dietsData.map(({ name }, id) => ({
+    id,
+    label: name,
+    selected: false,
+  })),
+};
+
 export const RecipeProvider = ({ children }) => {
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState();
@@ -20,34 +44,11 @@ export const RecipeProvider = ({ children }) => {
   const [toggleLiked, setToggleLiked] = useState(false);
   const [results, setResults] = useState([]);
   const [status, setStatus] = useState("");
-  const [cuisineList, setCuisineList] = useState(
-    cuisinesData.map(({ name }, id) => ({
-      id,
-      label: name,
-      selected: false,
-    }))
-  );
-  const [typeList, setTypeList] = useState(
-    typeData.map(({ name }, id) => ({
-      id,
-      label: name,
-      selected: false,
-    }))
-  );
-  const [dietList, setDietList] = useState(
-    dietsData.map(({ name }, id) => ({
-      id,
-      label: name,
-      selected: false,
-    }))
-  );
-
+  const [cuisineList, setCuisineList] = useState([...initialFitlerData.cuisine]);
+  const [typeList, setTypeList] = useState(initialFitlerData.type);
+  const [dietList, setDietList] = useState(initialFitlerData.diet);
   const [intoleranceList, setIntoleranceList] = useState(
-    intolerancesData.map(({ name }, id) => ({
-      id,
-      label: name,
-      selected: false,
-    }))
+    initialFitlerData.intolerances
   );
   //Get current User
   const getUser = async () => {
@@ -59,14 +60,12 @@ export const RecipeProvider = ({ children }) => {
       })
         .then((res) => res.json())
         .then((res) => res.username);
-        console.log(response.username)
-        const user = response.username
+      console.log(response.username);
+      const user = response.username;
       // let currentData = localStorage.getItem("data");
-      if(user){
+      if (user) {
         setCurrentUser(user);
       }
-      
-
     } catch (err) {
       console.log("no user");
     }
@@ -74,8 +73,13 @@ export const RecipeProvider = ({ children }) => {
 
   //Get favorites from user
 
-
-
+  //reset all filters
+  const resetFilters = () => {
+    setCuisineList(cuisineList.map(data => ({...data, selected: false})));
+    setTypeList(typeList.map(data => ({...data, selected: false})));
+    setDietList(dietList.map(data => ({...data, selected: false})));
+    setIntoleranceList(intoleranceList.map(data => ({...data, selected: false})));
+  };
 
   //Get all posted recipes in blog
   const postedRecipe = async () => {
@@ -114,6 +118,11 @@ export const RecipeProvider = ({ children }) => {
     randomRecipe();
   }, []);
 
+  
+  useEffect(()=>{
+    console.log({  cuisineList, typeList, dietList, intoleranceList  });
+
+  }, [cuisineList])
   return (
     <RecipeContext.Provider
       value={{
@@ -146,7 +155,8 @@ export const RecipeProvider = ({ children }) => {
         setStatus,
         results,
         setResults,
-        getUser
+        getUser,
+        resetFilters,
       }}
     >
       {children}

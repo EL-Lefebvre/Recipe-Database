@@ -15,9 +15,9 @@ const Login = () => {
   } = useContext(RecipeContext);
   const [subStatus, setSubStatus] = useState("loading");
   console.log(status);
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
-    fetch("/login", {
+    await fetch('/signin', {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -28,14 +28,15 @@ const Login = () => {
         password: loginPassword,
       }),
       withCredentials: true,
-      url: "http//localhost:8000/login",
-    }).then((res) => {
-      if (res.subStatus === 404) {
-        setSubStatus("User non existant");
-      } else {
-        console.log(res);
-      }
-    });
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.subStatus === 404) {
+          setSubStatus("User non existant");
+        } else {
+          console.log(res);
+        }
+      });
   };
 
   return (
@@ -44,7 +45,7 @@ const Login = () => {
           <h1> Login</h1>
         </Title>
 
-        <Main method="POST" action="/login">
+        <Main onSubmit={handleSubmit}>
           <InputField
             type="text"
             name="username"
@@ -59,7 +60,7 @@ const Login = () => {
             onChange={(ev) => setLoginPassword(ev.currentTarget.value)}
             value={loginPassword}
           />
-          <Button type="submit" onSubmit={handleSubmit}>
+          <Button type="submit">
             {" "}
             Login{" "}
           </Button>

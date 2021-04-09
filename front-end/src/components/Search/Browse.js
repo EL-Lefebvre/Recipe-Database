@@ -10,6 +10,7 @@ import Results from "./Results";
 import { RecipeContext } from "../../RecipeContext";
 import { RiArrowDropDownLine as DropDownArray } from "react-icons/ri";
 
+
 const Browse = () => {
   const {
     cuisineList,
@@ -20,6 +21,7 @@ const Browse = () => {
     setDietList,
     intoleranceList,
     setIntoleranceList,
+    resetFilters,
   } = useContext(RecipeContext);
 
   const [toggles, setToggles] = useState({
@@ -44,17 +46,18 @@ const Browse = () => {
     diet: [],
   });
   const handleClear = (ev) => {
+    resetFilters();
     setSelectedItems({
       cuisine: [],
       type: [],
       intolerances: [],
       diet: [],
     });
-    setCuisine([])
-    setType([])
-    setDiet([])
-    setIntolerances([])
-setSubStatus("clear")
+    setCuisine([]);
+    setType([]);
+    setDiet([]);
+    setIntolerances([]);
+    //setSubStatus("clear")
   };
   const handleCuisine = (ev) => {
     ev.preventDefault();
