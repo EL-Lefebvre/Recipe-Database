@@ -56,10 +56,12 @@ const Layout = styled.div`
   margin-bottom: 50px;
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
+    
     z-index: 4;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
+  padding-bottom:50px;
     z-index: 4;
   }
 `;

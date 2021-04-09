@@ -11,9 +11,25 @@ import Vegan from "../../assets/vegan.jpg";
 import { RecipeContext } from "../../RecipeContext";
 
 const Categories = () => {
+  const {
+    cuisineList,
+    dietList,
+    typeList,
+    intoleranceList,
+    setCuisineList,
+    setTypeList,
+    setDietList,
+    setIntoleranceList,
+    handleVegan,
+  } = useContext(RecipeContext);
+
+  const handleIndian = () => {};
+  const handleAppetizer = () => {};
+  const handleDessert = () => {};
+  const handleFrench = () => {};
   return (
     <Wrapper>
-      <NavigationLink exact to={`/browse`}>
+      <NavigationLink exact to={`/browse`} onClick={handleVegan}>
         <SuggestionColumn>
           <TitleDiv>
             <Regular>Vegan</Regular>
@@ -59,27 +75,27 @@ const Categories = () => {
 const Wrapper = styled.div`
   width: 90vw;
   padding-top: 10px;
-  justify-content: space-between;
+  justify-content: space-evenly;
+
   display: flex;
   margin-bottom: 50px;
   padding-bottom: 20px;
   border-bottom: 1px solid ${COLORS.primary};
-flex-wrap:wrap;
-@media (max-width: 1160px)  {
-  justify-content: center;
-
-}
+  flex-wrap: wrap;
+  @media (max-width: 1160px) {
+    justify-content: center;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    width:  80vw;
+    width: 80vw;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    width:  80vw;
+    width: 80vw;
   }
 `;
 
@@ -88,8 +104,6 @@ const SuggestionColumn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
-  
 `;
 
 const TitleDiv = styled.div`
@@ -108,13 +122,11 @@ const TitleDiv = styled.div`
     max-width: 50vw;
     max-height: 50vw;
     margin-top: 100px;
-
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 50vw;
     max-height: 50vw;
     margin-top: 100px;
-  
   }
 `;
 const ImageDiv = styled.div``;
@@ -126,8 +138,9 @@ const Regular = styled.h3`
 const Image = styled.img`
   padding-top: 5px;
 
-  height: 30vh;
-  border-radius: 200px;
+  height: 15rem;
+  width: 15rem;
+  border-radius: 50%;
   opacity: 0.7;
   z-index: 1;
   transition: 0.4s;
@@ -135,25 +148,17 @@ const Image = styled.img`
     cursor: pointer;
     opacity: 0.9;
   }
-  @media (max-width: 1160px)  {
-
-    margin:20px;
+  @media (max-width: 1160px) {
   }
   @media (max-width: 768px) and (max-height: 900px) {
-    width: 45vw;
-    height: 45vh;
-    border-radius: 100%;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    width: 45vw;
-    height: 45vh;
-    border-radius: 100%;
   }
 `;
 
 const NavigationLink = styled(NavLink)`
   text-decoration: none;
-
+  padding: 10px;
   &:hover {
     color: gray;
   }

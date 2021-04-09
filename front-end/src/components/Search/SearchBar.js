@@ -7,25 +7,19 @@ import { AiOutlineSearch as IconSearch } from "react-icons/ai";
 // import { COLORS } from "../../constants";
 
 const SearchBar = ({keyword, setKeyword}) => {
-
-
-
-console.log(keyword)
   useEffect(() => {}, []);
   return (
-
-      <TypeheadWrapper>
-        <Input
-          value={keyword}
-          onChange={(ev) => {
-            setKeyword(ev.target.value);
-          }}
-        />
-        <IconDiv>
-          <MainIcon size={20} />
-        </IconDiv>
-      </TypeheadWrapper>
-  
+    <TypeheadWrapper>
+      <Input
+        value={keyword}
+        onChange={(ev) => {
+          setKeyword(ev.target.value);
+        }}
+      />
+      <IconDiv>
+        <MainIcon size={20} />
+      </IconDiv>
+    </TypeheadWrapper>
   );
 };
 

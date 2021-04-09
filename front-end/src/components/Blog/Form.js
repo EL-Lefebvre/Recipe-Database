@@ -26,7 +26,7 @@ const Form = ({
   return (
     <Wrapper>
       <MainForm onSubmit={handleSubmit}>
-        <Main>
+      
           <TitleDiv>
             <div>
               <Info
@@ -43,7 +43,7 @@ const Form = ({
             </div>
           </TitleDiv>
           <TextDiv>
-            <SubWrapper>
+        
               <TextIngredients
                 type="text"
                 placeholder="Ingredients"
@@ -51,8 +51,7 @@ const Form = ({
                 minLength="0"
                 value={ingredients}
               />
-            </SubWrapper>
-            <SubText>
+           
               <TextArea
                 type="text"
                 placeholder="What's cooking?"
@@ -60,7 +59,7 @@ const Form = ({
                 minLength="0"
                 value={details}
               />
-            </SubText>
+         
             <div>
               <InputImage
                 max-file-size="1024"
@@ -85,38 +84,64 @@ const Form = ({
           <SubmitBar>
             <Button type="submit">Submit</Button>
           </SubmitBar>
-        </Main>
+  
       </MainForm>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  height: 400px;
+  height: 60vh;
+max-height:100vh;
+  @media (max-width: 1000px)  {
+    height: 75vh;
+ 
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    height: 70vh;
-    width: 70vw;
+    height: 80vh;
+
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    width: 70vw;
-    height: 70vh;
+  padding-top:20px;
+
   }
 `;
-const MainForm = styled.form``;
+const MainForm = styled.form`
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+@media (max-width: 1000px)  {
+  width: 50vw;
+
+}
+@media (max-width: 768px) and (max-height: 900px) {
+  width:100vw;
+  height: 70vh;
+}
+@media (max-width: 650px) and (max-height: 850px) {
+width:90vw;
+  height: 70vh;
+}
+`;
+
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 150px;
+  justify-content:center;
+  align-items:center;
+
+  width:50vw;
+  @media (max-width: 1000px)  {
+    width: 100vw;
+  
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    width: 70vw;
+    width:100vw;
     height: 70vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    width: 70vw;
+  width:90vw;
     height: 70vh;
   }
 `;
@@ -125,6 +150,11 @@ const TitleDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 1000px)  {
+flex-wrap:wrap;
+   flex-direction: reverse column ;
+
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     flex-direction: column;
     align-item: center;
@@ -135,7 +165,7 @@ const TitleDiv = styled.div`
     flex-direction: column;
     align-item: center;
     justify-content: center;
-    width: 70vw;
+    width: 100vw;
   }
 `;
 
@@ -154,28 +184,37 @@ const Info = styled.input`
   font-family: Shippori Mincho, serif;
   padding-left: 20px;
   border-radius: 10px;
+  @media (max-width: 1000px)  {
+    width: 40vw;
+ 
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 50vw;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 50vw;
+    width: 100vw;
   }
 `;
 const TextArea = styled.textarea`
   height: 100px;
-  width: 500px;
+  width: 40vw;
+
   border: none;
   padding: 10px;
   text-indent: 10px;
   border-radius: 10px;
   font-family: "Shippori Mincho", serif;
   font-size: 80%;
+  @media (max-width: 1000px)  {
+    width: 40vw;
+    height:20vh;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 70vw;
+       width: 70vw;
     max-height: 50vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 70vw;
+    width: 70vw;
     max-height: 50vh;
   }
 `;
@@ -184,16 +223,20 @@ const TextIngredients = styled.textarea`
   text-indent: 10px;
   padding: 10px;
   height: 100px;
-  width: 500px;
+  width: 40vw;
   border-radius: 10px;
   font-family: "Shippori Mincho", serif;
   font-size: 80%;
+  @media (max-width: 1000px)  {
+
+ height:20vh;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 70vw;
+      width: 70vw;
     max-height: 50vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 70vw;
+      width: 70vw;
     max-height: 50vh;
   }
 `;
@@ -201,8 +244,8 @@ const SubmitBar = styled.div`
   display: flex;
   align-items: center;
   margin: 10px;
-  height: 100px;
-  width: 500px;
+  height: 5vh;
+  width: 40vw;
 
   margin-top: 10px;
   justify-content: flex-end;

@@ -50,6 +50,12 @@ export const RecipeProvider = ({ children }) => {
   const [intoleranceList, setIntoleranceList] = useState(
     initialFitlerData.intolerances
   );
+  const [selectedItems, setSelectedItems] = useState({
+    cuisine: [],
+    type: [],
+    intolerances: [],
+    diet: [],
+  });
   //Get current User
   const getUser = async () => {
     try {
@@ -118,11 +124,23 @@ export const RecipeProvider = ({ children }) => {
     randomRecipe();
   }, []);
 
-  
-  useEffect(()=>{
-    console.log({  cuisineList, typeList, dietList, intoleranceList  });
+console.log(dietList);
 
-  }, [cuisineList])
+const handleVegan = (ev) => {
+  const copiedList = dietList;
+  const found = copiedList.find((element) => element.label === "Vegan");
+  if (found) {
+    const newItem = { id: found.id, label: "Vegan", selected: true };
+    console.log(found.id);
+    const newList = copiedList.splice(0, 10, newItem);
+    console.log(newList);
+    setDietList(newList);
+  }
+};
+  
+  useEffect(() => {
+    console.log({ cuisineList, typeList, dietList, intoleranceList });
+  }, [dietList]);
   return (
     <RecipeContext.Provider
       value={{
@@ -157,6 +175,9 @@ export const RecipeProvider = ({ children }) => {
         setResults,
         getUser,
         resetFilters,
+        handleVegan,
+        selectedItems,
+        setSelectedItems,
       }}
     >
       {children}

@@ -22,6 +22,8 @@ const Browse = () => {
     intoleranceList,
     setIntoleranceList,
     resetFilters,
+    selectedItems,
+    setSelectedItems,
   } = useContext(RecipeContext);
 
   const [toggles, setToggles] = useState({
@@ -38,13 +40,7 @@ const Browse = () => {
   const [keyword, setKeyword] = useState("");
   const [suggestion, setSuggestion] = useState([]);
   const [subStatus, setSubStatus] = useState("initial");
-  console.log(intolerances);
-  const [selectedItems, setSelectedItems] = useState({
-    cuisine: [],
-    type: [],
-    intolerances: [],
-    diet: [],
-  });
+
   const handleClear = (ev) => {
     resetFilters();
     setSelectedItems({
@@ -67,7 +63,6 @@ const Browse = () => {
       intolerances: false,
       diet: false,
     });
-  
   };
   const handleType = (ev) => {
     ev.preventDefault();
@@ -77,8 +72,6 @@ const Browse = () => {
       intolerances: false,
       diet: false,
     });
-
-
   };
   const handleIntolerances = (ev) => {
     ev.preventDefault();
@@ -88,7 +81,6 @@ const Browse = () => {
       intolerances: !toggles.intolerances,
       diet: false,
     });
-   
   };
   const handleDiet = (ev) => {
     ev.preventDefault();
@@ -98,7 +90,6 @@ const Browse = () => {
       intolerances: false,
       diet: !toggles.diet,
     });
-   
   };
   const newSuggestion = async () => {
     try {
@@ -125,7 +116,9 @@ const Browse = () => {
           <SearchBar keyword={keyword} setKeyword={setKeyword} type="text" />
         </Search>
       </Layout>
-               {selectedItems.cuisine && <Button onClick={handleClear}>Clear Filters</Button>}
+      {selectedItems.cuisine && (
+        <Button onClick={handleClear}>Clear Filters</Button>
+      )}
       <Main>
         <ListWrapper>
           <List>
@@ -157,7 +150,6 @@ const Browse = () => {
             {toggles.cuisine ? (
               <Fieldset>
                 <Cuisine
-                
                   cuisine={cuisine}
                   setCuisine={setCuisine}
                   list={cuisineList}
@@ -167,7 +159,7 @@ const Browse = () => {
             ) : toggles.type ? (
               <Fieldset>
                 <Type
-                subStatus={subStatus}
+                  subStatus={subStatus}
                   type={type}
                   setType={setType}
                   list={typeList}
