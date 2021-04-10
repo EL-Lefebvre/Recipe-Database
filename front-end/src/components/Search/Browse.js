@@ -245,6 +245,20 @@ const Fieldset = styled.fieldset`
   flex-wrap: wrap;
   flew-flow: column wrap;
   width: 77.5vw;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  @media (max-width: 800px) and (max-height: 1024px) {
+    flex-direction: column;
+    padding: 10px;
+    height: 40vh;
+    width: 75vw;
+  }
+
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 const Title = styled.div`
   color: white;

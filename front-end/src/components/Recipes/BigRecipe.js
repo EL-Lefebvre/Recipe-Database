@@ -22,7 +22,6 @@ const BigRecipe = ({ individualData }) => {
 
   const handleClickLike = (ev) => {
     setToggleLiked(!toggleLiked);
-
   };
   console.log(currentUser);
   const favorites = JSON.parse(localStorage.getItem("favorites"));
@@ -34,9 +33,9 @@ const BigRecipe = ({ individualData }) => {
         <Main key={individualData.id}>
           <Layout>
             <Image src={individualData.image} />
-            <Category>
-              {individualData.diets &&
-                individualData.diets.map((diet) => {
+            {individualData.diets ? (
+              <Category>
+                {individualData.diets.map((diet) => {
                   return (
                     <DietWrapper>
                       <Diet>{diet}</Diet>
@@ -45,7 +44,10 @@ const BigRecipe = ({ individualData }) => {
                     </DietWrapper>
                   );
                 })}
-            </Category>
+              </Category>
+            ) : (
+              <div></div>
+            )}
           </Layout>
           <Description>
             <Title>
@@ -87,23 +89,27 @@ const BigRecipe = ({ individualData }) => {
 const Wrapper = styled.div`
   min-height: 60vw;
   letter-spacing: 3px;
+
+  @media (max-width: 800px) and (max-height: 1024px) {
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    min-height: 100vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    min-height: 100vh;
   }
 `;
 const Main = styled.div`
   display: flex;
   justify-content: space-around;
 
+  @media (max-width: 800px) and (max-height: 1024px) {
+    flex-direction: column;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     flex-direction: column;
-    align-items: space-evenly;
+    justify-content: center;
+    align-items: center;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    flex-direction: column;
   }
 `;
 const Layout = styled.div`
@@ -119,14 +125,20 @@ const Layout = styled.div`
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  min-height: 400px;
+  padding-bottom:50px;
+  @media (max-width: 800px)  {
+    flex-direction: column;
 
+    height: 60vh;
+    min-height: 45vh;
+    max-height: 60vh;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
-    margin-top: -30px;
+    width: 90vw;
+    height:100vh;
+    padding-bottom:50px;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 85vw;
     margin-top: -30px;
   }
 `;
@@ -136,6 +148,9 @@ const Description = styled.div`
   background-color: white;
   padding: 10px;
   margin-bottom: 30px;
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 85vw;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     border-top: 1px solid black;
     padding-top: 15px;
@@ -166,8 +181,21 @@ const Category = styled.div`
   border-radius: 20px;
   background-color: white;
   flex-wrap: wrap;
-  height: 800px;
+  height: 10vh;
+  width:  60vw;
   max-width: 500px;
+
+  @media (max-width: 800px) and (max-height: 1024px) {
+    height: 20vh;
+    width:  90vw;
+    padding-bottom:20px;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+justify-content:center;
+
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 const DietWrapper = styled.div`
   width: 250px;
@@ -182,6 +210,14 @@ const Image = styled.img`
   max-height: 300px;
   border-radius: 20px;
   padding: 10px;
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 60vw;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 90vw;
+  }
 `;
 const Title = styled.div`
   display: flex;
@@ -195,5 +231,12 @@ const Title = styled.div`
   border: 3px double ${COLORS.primary};
   height: 40px;
   padding: 15px;
+  @media (max-width: 800px) {
+    height: 20vh;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 export default BigRecipe;

@@ -94,17 +94,18 @@ max-width:50vw
   flex-direction: column;
   justify-content: center;
   align-items:    center;
+
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 60vw;
     max-height: 30vh;
     margin-top: 0px;
-    margin-left: -100px;
+ 
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 60vw;
     max-height: 30vh;
     margin-top: 0px;
-    margin-left: -50px;
+
   }
 `;
 const DivImage = styled.div`
@@ -115,13 +116,20 @@ const IndividualRecipe = styled.div`
   display: flex;
   justify-content: center;
   max-height: 15vh;
-  margin-left: 10px;
-  border: 1px solid red;
 `;
 const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-left: 20px;
+
+  @media (max-width: 768px) and (max-height: 900px) {
+    justify-content: center;
+    margin-left: 0px;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    justify-content: center;
+  }
 `;
 const Text = styled.p`
   text-overflow: ellipsis;

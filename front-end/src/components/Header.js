@@ -86,7 +86,7 @@ const Header = () => {
 
 const Wrapper = styled.div`
   max-width: 100vw;
- 
+
   display: flex;
   flex-direction: column;
   background-size: cover;
@@ -115,23 +115,21 @@ const Menu = styled.ul`
   align-items: center;
 `;
 const Image = styled.div`
-
   display: flex;
   justify-content: center;
   height: 40vh;
   z-index: 100;
 
-  @media (max-width: 800px)  {
-
-    height:  20vh;
-    margin-top:5vh;
+  @media (max-width: 800px) {
+    height: 20vh;
+    margin-top: 5vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
-    height:  20vh;
-    margin-top:5vh;
+    height: 20vh;
+    margin-top: 5vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    height:  30vh;
+    height: 30vh;
   }
 `;
 const LogoLink = styled(NavLink)`
@@ -139,47 +137,40 @@ const LogoLink = styled(NavLink)`
   color: black;
   font-weight: bolder;
 
-
   transition: 0.3s;
   &:hover {
     color: ${COLORS.primary};
   }
   @media (max-width: 768px) and (max-height: 900px) {
-  
-
   }
   @media (max-width: 650px) and (max-height: 850px) {
- 
   }
 `;
 const Logo = styled.img`
   border: 5px black double;
 
-  height:  40vh;
+  height: 40vh;
   border-radius: 120%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   &:hover {
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   }
-  @media (max-width: 800px)  {
-
-    height:  30vh;
-    margin-top:5vh;
+  @media (max-width: 900px) {
+    height: 25vh;
+    margin-top: 5vh;
   }
 
   @media (max-width: 768px) and (max-height: 900px) {
- 
-    margin-top:5vh;
+    margin-top: 5vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    height:  30vh;
+    height: 30vh;
   }
-
 `;
 const Item = styled.li``;
 const ToggleLink = styled.li`
-text-decoration: none;
+  text-decoration: none;
   color: black;
   font-weight: bolder;
   display: flex;
@@ -218,13 +209,11 @@ const Text = styled.h3`
   }
 `;
 
-
 const DropDownDiv = styled.div`
-
   display: flex;
   justify-content: flex-end;
- 
-  height:60px;
+
+  height: 60px;
   background-color: #f0f0e8;
 `;
 const Icon = styled.img``;

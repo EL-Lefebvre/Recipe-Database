@@ -35,6 +35,16 @@ const IndividualRecipe = () => {
 const Wrapper = styled.div`
   background-color: #f0f0e8;
   padding-top: 50px;
+  width: 100vw;
+
+  @media (max-width: 800px) and (max-height: 1024px) {
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 
 export default IndividualRecipe;
