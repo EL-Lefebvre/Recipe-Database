@@ -106,6 +106,7 @@ const Browse = () => {
       console.log("error");
     }
   };
+  console.log(suggestion)
   return (
     <Wrapper>
       <Layout>
@@ -116,9 +117,7 @@ const Browse = () => {
           <SearchBar keyword={keyword} setKeyword={setKeyword} type="text" />
         </Search>
       </Layout>
-      {selectedItems.cuisine && (
-        <Button onClick={handleClear}>Clear Filters</Button>
-      )}
+       <Button onClick={handleClear}>Clear Filters</Button>
       <Main>
         <ListWrapper>
           <List>

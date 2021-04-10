@@ -124,23 +124,40 @@ export const RecipeProvider = ({ children }) => {
     randomRecipe();
   }, []);
 
-console.log(dietList);
-
 const handleVegan = (ev) => {
   const copiedList = dietList;
-  const found = copiedList.find((element) => element.label === "Vegan");
-  if (found) {
-    const newItem = { id: found.id, label: "Vegan", selected: true };
-    console.log(found.id);
-    const newList = copiedList.splice(0, 10, newItem);
-    console.log(newList);
-    setDietList(newList);
-  }
+
+  copiedList.find((element) => element.label === "Vegan").selected = true;
+ setDietList(copiedList);
+
 };
+
+const handleAppetizer = () => {
+  const copiedList = typeList;
+  copiedList.find((element) => element.label === "Appetizer").selected = true;
+  setTypeList(copiedList);
+};
+const handleDessert = () => {
+  const copiedList = typeList;
+  copiedList.find((element) => element.label === "Dessert").selected = true;
+  console.log(copiedList)
+
+
+ 
+};
+const handleFrench = () => {
+  const copiedList = cuisineList;
+  copiedList.find((element) => element.label === "French").selected = true;
+  setCuisineList([copiedList]);
+};
+
   
   useEffect(() => {
     console.log({ cuisineList, typeList, dietList, intoleranceList });
   }, [dietList]);
+  useEffect(() => {
+    console.log(typeList);
+  }, [typeList]);
   return (
     <RecipeContext.Provider
       value={{
@@ -176,6 +193,10 @@ const handleVegan = (ev) => {
         getUser,
         resetFilters,
         handleVegan,
+    
+        handleFrench, 
+        handleAppetizer, 
+        handleDessert,
         selectedItems,
         setSelectedItems,
       }}

@@ -21,21 +21,20 @@ const Results = ({
     RecipeContext
   );
 
-  
-  useEffect(() => {
-    setSelectedItems({
-      cuisine: [],
-      type: [],
-      intolerances: [],
-      diet: [],
-    });
-  }, []);
   useEffect(() => {
     newSuggestion();
   }, [selectedItems, keyword]);
   useEffect(() => {
+    if (selectedItems) {
+      console.log(selectedItems);
+    }
+  }, []);
+  useEffect(() => {
     newSuggestion();
   }, [keyword]);
+  useEffect(() => {
+    newSuggestion();
+  }, [cuisineList, typeList, dietList, intoleranceList]);
   const FilteredList = (data) => {
     const newList = data.filter((list) => list.selected);
     const LabelList = newList.map((list) => list.label);

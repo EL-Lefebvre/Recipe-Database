@@ -12,21 +12,21 @@ import { RecipeContext } from "../../RecipeContext";
 
 const Categories = () => {
   const {
-    cuisineList,
-    dietList,
-    typeList,
-    intoleranceList,
-    setCuisineList,
-    setTypeList,
-    setDietList,
-    setIntoleranceList,
     handleVegan,
+cuisineList,
+setCuisineList,
+    handleFrench, 
+    handleAppetizer, 
+    handleDessert,
   } = useContext(RecipeContext);
 
-  const handleIndian = () => {};
-  const handleAppetizer = () => {};
-  const handleDessert = () => {};
-  const handleFrench = () => {};
+  const handleIndian = (ev) => {
+    const copiedList = cuisineList;
+    copiedList.find((element) => element.label === "Indian").selected = true;
+    setCuisineList(copiedList);
+    
+  };
+console.log(cuisineList)
   return (
     <Wrapper>
       <NavigationLink exact to={`/browse`} onClick={handleVegan}>
@@ -37,7 +37,7 @@ const Categories = () => {
           <Image src={Vegan} />
         </SuggestionColumn>
       </NavigationLink>
-      <NavigationLink exact to={`/browse`}>
+      <NavigationLink exact to={`/browse`} onClick={handleIndian}>
         <SuggestionColumn>
           <TitleDiv>
             <Regular>Indian Food</Regular>
@@ -45,7 +45,7 @@ const Categories = () => {
           <Image src={Indian} />
         </SuggestionColumn>
       </NavigationLink>
-      <NavigationLink exact to={`/browse`}>
+      <NavigationLink exact to={`/browse`} onClick={handleAppetizer}>
         <SuggestionColumn>
           <TitleDiv>
             <Regular>Appetizer</Regular>
@@ -53,7 +53,7 @@ const Categories = () => {
           <Image src={Appetizer} />
         </SuggestionColumn>
       </NavigationLink>
-      <NavigationLink exact to={`/browse`}>
+      <NavigationLink exact to={`/browse`} onClick={handleDessert}>
         <SuggestionColumn>
           <TitleDiv>
             <Regular>Dessert</Regular>
@@ -61,7 +61,7 @@ const Categories = () => {
           <Image src={Dessert} />
         </SuggestionColumn>
       </NavigationLink>
-      <NavigationLink exact to={`/browse`}>
+      <NavigationLink exact to={`/browse`} onClick={handleFrench}>
         <SuggestionColumn>
           <TitleDiv>
             <Regular>French Food</Regular>
