@@ -63,21 +63,19 @@ width:70vw;
 
 `;
 const List = styled.div`
-width:25vw;
-display:flex;
-justify-content:space-between;
-align-item:center;
-@media (max-width: 800px) and (max-height: 1024px) {
-  width:40vw;
+  width: 25vw;
+  display: flex;
+  justify-content: space-between;
+  align-item: center;
 
-}
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 40vw;
+  }
 
-@media (max-width: 768px) and (max-height: 900px) {
-
-}
-@media (max-width: 650px) and (max-height: 850px) {
-}
-
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 const Span = styled.div``;
 const Label = styled.label`

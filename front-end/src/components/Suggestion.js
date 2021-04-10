@@ -25,7 +25,7 @@ const Suggestion = ({
       console.log("error");
     }
   };
-  
+
   useEffect(() => {
     if (value.length <= 2) {
       setSuggestion();
@@ -57,11 +57,13 @@ const Suggestion = ({
     }
   }, [suggestion]);
 
-
   return (
     <Wrapper>
-      {!suggestion | suggestion === [] ? (
-       <DivNoResults> <NoResults>No Results</NoResults></DivNoResults>
+      {!suggestion | (suggestion === []) ? (
+        <DivNoResults>
+          {" "}
+          <NoResults>No Results</NoResults>
+        </DivNoResults>
       ) : (
         <Main
           style={{
@@ -110,54 +112,73 @@ const Suggestion = ({
 };
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+  height: 80vh;
+  
+  @media (max-width: 800px) {
+    max-width: 80vw;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-    width: 100vw;
-    }
-    @media (max-width: 650px) and (max-height: 850px) {
-      width: 100vw;
-    }
+    justify-content: center;
+    padding-left: 20px;
+  
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    justify-content: flex-end;
+  }
 `;
 const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin-top: 20px;
-  padding-top: 55px;
-  margin-left: 50px;
+  padding-top: 20px;
+  padding-right:50px;
   border-radius: 10px;
   overflow: hidden;
   position: absolute;
-  width: 45%;
+
   height: 50vh;
   box-shadow: 1px -1px 13px -1px #000000;
   background-color: white;
   z-index: 100;
   overflow-y: scroll;
   scrollbar-width: thin;
-
+  @media (max-width: 800px) {
+    width: 80vw;
+    padding-right:0px;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) {
+  }
 `;
 const DivNoResults = styled.div`
-display: flex;
-  flex-direction: column;
+  display: flex;
   justify-content: center;
-  margin-top: 20px;
   padding-top: 55px;
-  margin-left: 50px;
-  border-radius:  10px;
+  border-radius: 10px;
   overflow: hidden;
   position: absolute;
-  width: 45%;
+  width: 40vw;
   height: 20vh;
   box-shadow: 1px -1px 13px -1px #000000;
   background-color: white;
   z-index: 100;
+  @media (max-width: 900px) {
+    width: 50vw;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 60vw;
+  }
+  @media (max-width: 650px) {
+    width: 75vw;
+  }
+`;
+const NoResults = styled.div`
+  background-color: white;
 `;
 const SearchResult = styled.div`
-  width: 100%;
   padding-top: 10px;
-  justify-content: space-between;
-
 `;
 
 const SuggestionColumn = styled.div`
@@ -166,7 +187,6 @@ const SuggestionColumn = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-
 `;
 
 const Regular = styled.span`
@@ -188,14 +208,9 @@ const NavigationLink = styled(NavLink)`
   font-size: 15px;
   font-weight: normal;
   height: 65px;
-
   &:hover {
     color: gray;
   }
 `;
 
-const NoResults = styled.div`
-  height: 100px;
-  background-color: white;
-`;
 export default Suggestion;

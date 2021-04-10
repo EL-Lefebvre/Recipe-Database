@@ -154,32 +154,8 @@ const Fieldset = styled.fieldset`
   scrollbar-width: thin;
   width: 10vw;
 `;
-const Title = styled.div`
-  color: white;
-  text-decoration: underline;
-`;
-const Search = styled.div`
-  height: 170px;
-  width: 500px;
-`;
 
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  min-height: 60vh;
-  min-width: 80vw;
-  margin-bottom: 200px;
-`;
-const ResultsDiv = styled.div`
-  min-height: 100vw;
-`;
-const ListWrapper = styled.div`
-  background-color: white;
-  width: 80vw;
-  height: 40px;
-  z-index: 3;
-`;
+
 
 const List = styled.ul`
   display: flex;

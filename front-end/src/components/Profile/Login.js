@@ -94,15 +94,13 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-
-
 `;
 const Layout = styled.div`
   min-width: 30vw;
-  min-height: 100vh;
-  margin-top: 0px;
+  min-height: 60vh;
+  margin-top: 10px;
   display: flex;
-
+    z-index:  10;
   flex-direction: column;
   justify-content: space-evenly;
   border: 5px double black;

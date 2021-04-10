@@ -134,6 +134,8 @@ const ImageDiv = styled.div``;
 const Regular = styled.h3`
   width: 180px;
   background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 10px;
 `;
 const Image = styled.img`
   padding-top: 5px;

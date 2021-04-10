@@ -7,10 +7,16 @@ const DropDown = () => {
     <Wrapper>
       <List>
         <Item>
-          <Text href="http://localhost:3000/register">Register</Text>
+          <Text href="http://localhost:3000/register">
+            
+            <h3>Register</h3>
+          
+          </Text>
         </Item>
         <Item>
-          <Text href="http://localhost:3000/login">Login</Text>
+          <Text href="http://localhost:3000/login">
+            <h3>Login</h3>
+          </Text>
         </Item>
       </List>
     </Wrapper>
@@ -21,17 +27,18 @@ const Wrapper = styled.div`
   position: absolute;
   background-color: ${COLORS.primary};
   color: white;
-  width: 10vw;
-  height: 15vh;
+  width: 15vw;
+
   display: flex;
   margin-right: 90px;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
-  @media (max-width: 800px) and (max-height: 1024px) {
-    width: 25vw;
+  @media (max-width: 1000px) {
+    width: 30vw;
     margin-right: 2rem;
-    height: 8vh;
+    height: 15vh;
+    justify-content: center;
   }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 80vw;
@@ -49,16 +56,15 @@ const Main = styled.div``;
 const List = styled.ul`
   margin-left: -30px;
   padding-right: 10px;
-  height: 12vh;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: white;
-
   justify-content: center;
-  @media (max-width: 800px) and (max-height: 1024px) {
+  @media (max-width: 800px) {
     width: 50vw;
-    height: 8vh;
+    height: 10vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 80vw;
@@ -72,9 +78,10 @@ const List = styled.ul`
 const Item = styled.li`
   background-color: ${COLORS.primary};
 
-  border-bottom: 1px double white;
+
   @media (max-width: 800px) and (max-height: 1024px) {
-    border-bottom: none;
+   
+    height: 15vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
   }
@@ -91,6 +98,7 @@ const Text = styled.a`
   }
   &:hover {
     text-decoration: underline;
+    
   }
 `;
 

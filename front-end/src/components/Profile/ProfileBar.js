@@ -47,7 +47,17 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100px;
-  width: 300px;
+  width: 50vw;
+  @media (max-width: 800px) and (max-height: 1024px) {
+    width: 60vw;
+  }
+
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 90vw;
+    margin-left: 30px;
+  }
 `;
 const Layout = styled.ul`
   width: 300px;

@@ -43,6 +43,7 @@ const Layout = styled.div`
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 85vw;
     margin-top: -30px;
+    height: 30vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;

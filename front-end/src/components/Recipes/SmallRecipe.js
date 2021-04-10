@@ -42,13 +42,12 @@ const SmallRecipe = ({ data }) => {
                 history.replace(`recipe/${recipe.id}`);
               }}
             >
-                   <ImageDiv>
+              <ImageDiv>
                 <Image src={recipe.image} />
               </ImageDiv>
               <TitleDiv>
                 <Title>{recipe.title}</Title>
               </TitleDiv>
-         
             </Main>
           );
         })}
@@ -67,16 +66,11 @@ const Wrapper = styled.div`
   padding: 20px;
   margin-top: -40px;
   @media (max-width: 800px) and (max-height: 1024px) {
-
-
   }
   @media (max-width: 768px) and (max-height: 900px) {
-
   }
   @media (max-width: 650px) and (max-height: 850px) {
-
   }
-
 `;
 
 const Main = styled.div`
@@ -87,9 +81,8 @@ const Main = styled.div`
   align-items: center;
   transition: 0.7s;
   width: 25vw;
-border-radius:10px;
-margin: 0px auto;
-
+  border-radius: 10px;
+  margin: 0px auto;
 
   background-color: white;
   border: 5px double ${COLORS.primary};
@@ -103,8 +96,7 @@ margin: 0px auto;
   }
 
   @media (max-width: 800px) and (max-height: 1024px) {
-width:35vw;
-
+    width: 35vw;
   }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 35vw;
@@ -116,14 +108,14 @@ width:35vw;
 `;
 const Layout = styled.div``;
 const Image = styled.img`
-height:15vh;
+  height: 15vh;
   width: 25vw;
-  max-width:25vh;
+  max-width: 25vh;
   transition: 0.7s;
   @media (max-width: 800px) and (max-height: 1024px) {
-    width:35vw;
-    max-width:35vh;
-      }
+    width: 35vw;
+    max-width: 35vh;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 35vw;
   }
@@ -133,47 +125,43 @@ height:15vh;
 `;
 const ImageDiv = styled.div``;
 const TitleDiv = styled.div`
+  width: 15vw;
+  height: 20vh;
 
-width: 15vw;
-
-max-width: 25vw;
-min-height:5vh;
-max-height:10vh;
-height:10vh;
-display:flex;
-
+  padding-bottom: 10px;
+  max-width: 25vw;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  width: 30vw;
   @media (max-width: 800px) and (max-height: 1024px) {
-    width:50vw;
-    height:10vh;
-      }
+    width: 50vw;
+    height: 10vh;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 40vw;
-  
+
     flex-warp: wrap;
-    height:2vh;
+    height: 2vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     width: 40vw;
-    height:2vh;
-
+    height: 2vh;
   }
 `;
 const Title = styled.h5`
   text-overflow: ellipsis;
   overflow: hidden;
 
+  max-height: 15vh;
+  height: 7vh;
 
   @media (max-width: 800px) and (max-height: 1024px) {
-    width:30vw;
-   
-      }
+    width: 30vw;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
-
   }
   @media (max-width: 650px) and (max-height: 850px) {
-
-
- 
   }
 `;
 

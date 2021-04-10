@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-
 const SinglePost = ({ post }) => {
-
   const { id } = useParams();
   const [posts, setPosts] = useState("");
 
@@ -27,16 +25,17 @@ const SinglePost = ({ post }) => {
   console.log(id);
   console.log(posts);
 
-
   return (
     <Wrapper>
       {posts &&
-  posts.map((post) => {
+        posts.map((post) => {
           if (post._id === id) {
             return (
               <Main key={post[id]}>
                 <Layout>
-                  <Image src={post.fileUpload} />
+                  <ImageDiv>
+                    <Image src={post.fileUpload} />
+                  </ImageDiv>
                 </Layout>
                 <Description>
                   <Title>
@@ -68,43 +67,41 @@ const SinglePost = ({ post }) => {
 };
 
 const Wrapper = styled.div`
-  min-height: 60vw;
+  display: flex;
+  justify-content: center;
   letter-spacing: 3px;
-  @media (max-width: 768px) and (max-height: 900px) {
-    min-height: 100vh;
-  }
-  @media (max-width: 650px) and (max-height: 850px) {
-    min-height: 100vh;
-  }
 `;
 const Main = styled.div`
   display: flex;
   justify-content: space-around;
 
+  @media (max-width: 800px) {
+    flex-direction: column;
+
+    align-items: center;
+    width: 100vw;
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     flex-direction: column;
-    align-items: space-evenly;
+    justify-content: center;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    flex-direction: column;
   }
 `;
 const Layout = styled.div`
-  border: 3px double ${COLORS.primary};
-  max-height: 60vh;
-  margin-top: 0px;
-  background-color: white;
-  border-radius: 15px;
-  padding: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
-  @media (max-width: 768px) and (max-height: 900px) {
-    max-width: 85vw;
-    margin-top: -30px;
+  height: 45vh;
+  padding: 20px;
+  display: flex;
+  @media (max-width: 800px) {
+    height: 70vh;
+    justify-content: center;
+    margin-bottom:   20px;
   }
-  @media (max-width: 650px) and (max-height: 850px) {
-    max-width: 85vw;
-    margin-top: -30px;
+  @media (max-width: 768px) and (max-height: 900px) {
+    height: 50vh;
+    margin-bottom:   40px;
+  }
+  @media (max-width: 650px) {
   }
 `;
 
@@ -113,16 +110,22 @@ const Description = styled.div`
   background-color: white;
   padding: 10px;
   margin-bottom: 30px;
-  @media (max-width: 768px) and (max-height: 900px) {
+
+  @media (max-width: 800px) {
+    width: 85vw;
+  }
+  @media (max-width: 768px) {
     border-top: 1px solid black;
-    padding-top: 15px;
+
     margin-top: 50px;
     padding-bottom: 15px;
+    justify-content: center;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     margin-top: 50px;
     padding-top: 15px;
     padding-bottom: 15px;
+    width: 80vw;
   }
 `;
 const Name = styled.h2`
@@ -140,13 +143,59 @@ const User = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) {
+  }
 `;
 const UserName = styled.div``;
+
+const ImageDiv = styled.div`
+  display: flex;
+
+  justify-content: center;
+  border: 3px double ${COLORS.primary};
+  padding: 10px;
+
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  @media (max-width: 800px) {
+    height: 70vh;
+    width: 60vw;
+  }
+  @media (max-width: 768px) {
+    height: 60vh;
+    width: 80vw;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 90vw;
+    height: 60vh;
+  }
+`;
 const Image = styled.img`
-  max-height: 270px;
-  width: 280px;
+  min-height: 200px;
+  min-width: 200px;
   border-radius: 20px;
   padding: 10px;
+  @media (max-width: 800px) {
+    width: 50vw;
+    height: 50vh;
+  }
+  @media (max-width: 768px) {
+    width: 70vw;
+    height: 50vh;
+  }
+  @media (max-width: 650px) {
+    width: 100vw;
+    height: 50vh;
+  }
 `;
 const Title = styled.div`
   display: flex;
@@ -160,5 +209,16 @@ const Title = styled.div`
   border: 3px double ${COLORS.primary};
   height: 40px;
   padding: 15px;
+  @media (max-width: 800px) {
+
+  }
+  @media (max-width: 768px) {
+  
+  
+  }
+  @media (max-width: 650px)  {
+   
+  
 `;
+
 export default SinglePost;

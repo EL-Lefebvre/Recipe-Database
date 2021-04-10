@@ -35,22 +35,31 @@ const Wrapper = styled.div`
   border-width: 1px;
   border-color: gray;
   height: 100px;
-  font-size:80%;
-  color:${COLORS.primary}
+  font-size: 80%;
+  color: ${COLORS.primary};
+  @media (max-width: 800px) {
 
+    height: 30vh;
+  }
 `;
 
 const List = styled.div`
   display: flex;
   justify-content: space-evenly;
-  width:  100vw;
+  width: 100vw;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    margin-bottom:10px;
+  }
+
 `;
 const Item = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding-right: 5px;
-  &:hover{
+  @media (max-width: 800px) {
 
+    margin-bottom:10px;
   }
 `;
 const Title = styled.p``;

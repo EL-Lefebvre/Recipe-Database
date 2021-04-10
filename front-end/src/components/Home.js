@@ -68,10 +68,7 @@ const Layout = styled.div`
 const Title = styled.div`
   color: white;
 `;
-const Search = styled.div`
-  height: 150px;
-  width: 500px;
-`;
+const Search = styled.div``;
 
 const Main = styled.div`
   display: flex;
@@ -89,11 +86,7 @@ const Main = styled.div`
   }
 `;
 const CategoryDiv = styled.div``;
-const Recipes = styled.div`
-  display: flex;
-  flex-direction: column;
-
-`;
+const Recipes = styled.div``;
 const IndividualRecipe = styled.div`
  
 `;

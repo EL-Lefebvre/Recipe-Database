@@ -134,5 +134,9 @@ const ListWrapper = styled.div`
   width: 15vw;
 `;
 
-const List = styled.li``;
+const List = styled.li`
+  border: 2px solid ${COLORS.primary};
+  padding: 5px;
+  border-radius: 10px;
+`;
 export default Results;

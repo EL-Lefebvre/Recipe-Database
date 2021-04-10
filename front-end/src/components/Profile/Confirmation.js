@@ -9,7 +9,7 @@ const Login = () => {
     <Wrapper>
       <Layout>
         <Title>
-          <h1> You have been register successfully!</h1>
+          <h1> You have been registered successfully!</h1>
         </Title>
 
         <LinkList>
@@ -31,8 +31,9 @@ const Wrapper = styled.div`
   padding-top: 50px;
 `;
 const Layout = styled.div`
+    padding: 10px;
   min-width: 30vw;
-  min-height: 60vh;
+  min-height: 40vh;
   margin-top: 0px;
   display: flex;
   flex-direction: column;

@@ -229,10 +229,11 @@ const Title = styled.div`
 
   border-radius: 15px;
   border: 3px double ${COLORS.primary};
-  height: 40px;
+  height: 10vh;
+  max-height: 10vh;
   padding: 15px;
-  @media (max-width: 800px) {
-    height: 20vh;
+  @media (max-width: 1000px) {
+    height: 25vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
   }

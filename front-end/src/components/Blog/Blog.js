@@ -88,17 +88,21 @@ const Blog = () => {
             status={status}
             setStatus={setStatus}
           />
-        ):(
+        ) : (
           <LinkDiv>
-          <List>
-          <Item>
-            <Text href="http://localhost:3000/register">Register</Text>
-          </Item>
-          <Item>
-            <Text href="http://localhost:3000/login" >Login</Text>
-          </Item>
-        </List>
-        </LinkDiv>
+            <List>
+              <Item>
+                <Text href="http://localhost:3000/register">
+                  <h2>Register</h2>
+                </Text>
+              </Item>
+              <Item>
+                <Text href="http://localhost:3000/login">
+                  <h2>Login</h2>
+                </Text>
+              </Item>
+            </List>
+          </LinkDiv>
         )}
       </Layout>
 
@@ -115,7 +119,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 20px;
-  background-color:#f0f0e8;
+  background-color: #f0f0e8;
   @media (max-width: 768px) and (max-height: 900px) {
     width: 100vw;
   }
@@ -141,7 +145,6 @@ const Layout = styled.div`
   }
   @media (max-width: 650px) and (max-height: 850px) {
     max-width: 85vw;
-  
   }
 `;
 
@@ -163,7 +166,7 @@ const Title = styled.div`
   text-decoration: underline;
 `;
 const LinkDiv = styled.div`
-width:20vw;
+  width: 20vw;
 `;
 const List = styled.ul`
   margin-left: -30px;
@@ -172,9 +175,7 @@ const List = styled.ul`
 
   justify-content: space-between;
 `;
-const Item = styled.li`
-
-`;
+const Item = styled.li``;
 
 const Text = styled.a`
   font-weight: bolder;
@@ -187,6 +188,5 @@ const Text = styled.a`
     text-decoration: underline;
   }
 `;
-
 
 export default Blog;
