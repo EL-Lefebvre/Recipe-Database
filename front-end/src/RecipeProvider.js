@@ -44,7 +44,9 @@ export const RecipeProvider = ({ children }) => {
   const [toggleLiked, setToggleLiked] = useState(false);
   const [results, setResults] = useState([]);
   const [status, setStatus] = useState("");
-  const [cuisineList, setCuisineList] = useState([...initialFitlerData.cuisine]);
+  const [cuisineList, setCuisineList] = useState([
+    ...initialFitlerData.cuisine,
+  ]);
   const [typeList, setTypeList] = useState(initialFitlerData.type);
   const [dietList, setDietList] = useState(initialFitlerData.diet);
   const [intoleranceList, setIntoleranceList] = useState(
@@ -65,7 +67,11 @@ export const RecipeProvider = ({ children }) => {
         url: "http://localhost:4000/user",
       })
         .then((res) => res.json())
-        .then((res) => res.username);
+        .then((res)  => {
+          console.log(res);
+          return res;
+        })
+        .then((res) => res.username)
       console.log(response.username);
       const user = response.username;
       // let currentData = localStorage.getItem("data");
@@ -78,13 +84,31 @@ export const RecipeProvider = ({ children }) => {
   };
 
   //Get favorites from user
+  const getFavorites = async () => {
+    return fetch(`/favorites/${currentUser}`, {
+      method: "GET",
+      withCredentials: true,
+      
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        if(res.data.type ==='array'){
+                   const newArray = res.data.map(recipe => recipe.id)
+          setRecipeLiked(newArray)
+        }
+    
+      })
+  }
 
   //reset all filters
   const resetFilters = () => {
-    setCuisineList(cuisineList.map(data => ({...data, selected: false})));
-    setTypeList(typeList.map(data => ({...data, selected: false})));
-    setDietList(dietList.map(data => ({...data, selected: false})));
-    setIntoleranceList(intoleranceList.map(data => ({...data, selected: false})));
+    setCuisineList(cuisineList.map((data) => ({ ...data, selected: false })));
+    setTypeList(typeList.map((data) => ({ ...data, selected: false })));
+    setDietList(dietList.map((data) => ({ ...data, selected: false })));
+    setIntoleranceList(
+      intoleranceList.map((data) => ({ ...data, selected: false }))
+    );
   };
 
   //Get all posted recipes in blog
@@ -124,40 +148,50 @@ export const RecipeProvider = ({ children }) => {
     randomRecipe();
   }, []);
 
-const handleVegan = (ev) => {
-  const copiedList = dietList;
+  const handleVegan = (ev) => {
+    const copiedList = dietList;
 
-  copiedList.find((element) => element.label === "Vegan").selected = true;
- setDietList(copiedList);
+    copiedList.find((element) => element.label === "Vegan").selected = true;
+    setDietList(copiedList);
+  };
 
-};
+  const handleAppetizer = () => {
+    const copiedList = typeList;
+    copiedList.find((element) => element.label === "Appetizer").selected = true;
+    setTypeList(copiedList);
+  };
+  const handleDessert = () => {
+    const copiedList = typeList;
+    copiedList.find((element) => element.label === "Dessert").selected = true;
+    console.log(copiedList);
+  };
+  const handleFrench = () => {
+    const copiedList = cuisineList;
+    copiedList.find((element) => element.label === "French").selected = true;
+    setCuisineList([copiedList]);
+  };
 
-const handleAppetizer = () => {
-  const copiedList = typeList;
-  copiedList.find((element) => element.label === "Appetizer").selected = true;
-  setTypeList(copiedList);
-};
-const handleDessert = () => {
-  const copiedList = typeList;
-  copiedList.find((element) => element.label === "Dessert").selected = true;
-  console.log(copiedList)
-
-
- 
-};
-const handleFrench = () => {
-  const copiedList = cuisineList;
-  copiedList.find((element) => element.label === "French").selected = true;
-  setCuisineList([copiedList]);
-};
-
-  
   useEffect(() => {
     console.log({ cuisineList, typeList, dietList, intoleranceList });
   }, [dietList]);
   useEffect(() => {
     console.log(typeList);
   }, [typeList]);
+
+  useEffect(()=>{
+    if(currentUser){
+      getFavorites()
+    }
+  }, [currentUser])
+  useEffect(()=>{
+    const newUser = localStorage.getItem("data");
+    if(newUser){
+      setCurrentUser(newUser)
+    }
+    else{
+      localStorage.removeItem('data')
+    }
+  }, [])
   return (
     <RecipeContext.Provider
       value={{
@@ -193,9 +227,9 @@ const handleFrench = () => {
         getUser,
         resetFilters,
         handleVegan,
-    
-        handleFrench, 
-        handleAppetizer, 
+
+        handleFrench,
+        handleAppetizer,
         handleDessert,
         selectedItems,
         setSelectedItems,

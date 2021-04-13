@@ -27,6 +27,8 @@ const Profile = () => {
   useEffect(() => {
     if (!currentUser) {
       getUser();
+      const newUser = localStorage.getItem("data");
+      setCurrentUser(newUser);
     } else {
       console.log(currentUser);
     }
@@ -42,7 +44,6 @@ const Profile = () => {
       fetch(`/favorites/${currentUser}`, {
         method: "GET",
         withCredentials: true,
-        url: "http://localhost:4000/user",
       })
         .then((res) => res.json())
         .then((res) => {

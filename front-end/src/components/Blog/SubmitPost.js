@@ -11,12 +11,12 @@ const SubmitPost = () => {
   const [details, setDetails] = useState("");
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState("null");
-  console.log(details);
+
   useEffect(() => {
     let currentUser = localStorage.getItem("data");
     setUserName(currentUser);
   }, [currentUser]);
-  console.log(username);
+
   const postedRecipe = async () => {
     try {
       const response = await fetch(`/recipes/post`)
@@ -35,8 +35,7 @@ const SubmitPost = () => {
   useEffect(() => {
     postedRecipe();
   }, [status === "success"]);
-  console.log(posts);
-  console.log(posts);
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     fetch("/recipes/post", {

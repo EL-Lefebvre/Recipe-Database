@@ -13,10 +13,10 @@ import { RecipeContext } from "../../RecipeContext";
 const Categories = () => {
   const {
     handleVegan,
-cuisineList,
-setCuisineList,
-    handleFrench, 
-    handleAppetizer, 
+    cuisineList,
+    setCuisineList,
+    handleFrench,
+    handleAppetizer,
     handleDessert,
   } = useContext(RecipeContext);
 
@@ -24,9 +24,8 @@ setCuisineList,
     const copiedList = cuisineList;
     copiedList.find((element) => element.label === "Indian").selected = true;
     setCuisineList(copiedList);
-    
   };
-console.log(cuisineList)
+
   return (
     <Wrapper>
       <NavigationLink exact to={`/browse`} onClick={handleVegan}>
@@ -89,13 +88,13 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    width: 80vw;
+    width: 90vw;
   }
   @media (max-width: 650px) and (max-height: 850px) {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    width: 80vw;
+  
   }
 `;
 

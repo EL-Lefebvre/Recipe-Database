@@ -6,27 +6,21 @@ import { AiOutlineCheck as CheckMark } from "react-icons/ai";
 import Liked from "./Liked";
 import { RecipeContext } from "../../RecipeContext";
 const BigRecipe = ({ individualData }) => {
-  const {
-    currentUser,
-    recipeLiked,
-    setRecipeLiked,
-    toggleLiked,
-    setToggleLiked,
-  } = useContext(RecipeContext);
-  console.log(recipeLiked);
-  useEffect(() => {
-    if (toggleLiked) {
-      localStorage.setItem("favorites", JSON.stringify(recipeLiked));
-    }
-  }, [toggleLiked]);
+  const { currentUser, recipeLiked, setRecipeLiked } = useContext(
+    RecipeContext
+  );
+  const [toggleLiked, setToggleLiked] = useState(
+    recipeLiked.includes(individualData.id)
+  );
+
 
   const handleClickLike = (ev) => {
+    // setRecipeLiked([...recipeLiked, individualData.id])
     setToggleLiked(!toggleLiked);
   };
-  console.log(currentUser);
-  const favorites = JSON.parse(localStorage.getItem("favorites"));
-  console.log(recipeLiked);
-  console.log(favorites);
+
+  console.log(currentUser, recipeLiked);
+
   return (
     <Wrapper>
       {individualData && (
@@ -52,15 +46,17 @@ const BigRecipe = ({ individualData }) => {
           <Description>
             <Title>
               <h3>{individualData.title}</h3>
-              <Liked
-                recipeId={individualData.id}
-                handleClickLike={handleClickLike}
-                toggleLiked={toggleLiked}
-                recipeLiked={recipeLiked}
-                setRecipeLiked={setRecipeLiked}
-                setToggleLiked={setToggleLiked}
-                currentUser={currentUser}
-              />
+              {currentUser && (
+                <Liked
+                  recipeId={individualData.id}
+                  handleClickLike={handleClickLike}
+                  toggleLiked={toggleLiked}
+                  recipeLiked={recipeLiked}
+                  setRecipeLiked={setRecipeLiked}
+                  setToggleLiked={setToggleLiked}
+                  currentUser={currentUser}
+                />
+              )}
             </Title>
             <Name>Ingredients</Name>
             <Ingredients>

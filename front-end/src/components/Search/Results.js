@@ -44,7 +44,7 @@ const Results = ({
   useEffect(() => {
     const newList = cuisineList;
     const result = FilteredList(newList);
-    console.log(result);
+
     setSelectedItems({
       cuisine: result,
       type: [...type],
@@ -55,7 +55,7 @@ const Results = ({
   useEffect(() => {
     const newList = typeList;
     const result = FilteredList(newList);
-    console.log(result);
+
     setSelectedItems({
       cuisine: [...cuisine],
       type: result,
@@ -117,6 +117,10 @@ const Wrapper = styled.div`
   z-index: 1;
   background-color: white;
   padding-top: 20px;
+  @media (max-width: 768px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 const Main = styled.div`
   display: flex;

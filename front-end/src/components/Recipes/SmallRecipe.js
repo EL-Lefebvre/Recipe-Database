@@ -97,10 +97,11 @@ const Main = styled.div`
 
   @media (max-width: 800px) and (max-height: 1024px) {
     width: 35vw;
+    height: 60vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 35vw;
-    height: 40vh;
+
   }
   @media (max-width: 650px) and (max-height: 850px) {
     width: 60vw;
@@ -108,19 +109,19 @@ const Main = styled.div`
 `;
 const Layout = styled.div``;
 const Image = styled.img`
-  height: 15vh;
+  height: 25vh;
   width: 25vw;
-  max-width: 25vh;
+  max-width: 25vw;
   transition: 0.7s;
   @media (max-width: 800px) and (max-height: 1024px) {
     width: 35vw;
     max-width: 35vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
-    width: 35vw;
+    width: 50vw;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    width: 35vw;
+    width: 50vw;
   }
 `;
 const ImageDiv = styled.div``;

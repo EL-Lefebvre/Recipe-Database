@@ -22,8 +22,6 @@ const SinglePost = ({ post }) => {
   useEffect(() => {
     postedRecipe();
   }, []);
-  console.log(id);
-  console.log(posts);
 
   return (
     <Wrapper>

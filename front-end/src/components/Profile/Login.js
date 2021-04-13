@@ -18,6 +18,9 @@ const Login = () => {
   const history = useHistory();
   const [subStatus, setSubStatus] = useState("loading");
   console.log(status);
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     await fetch("/signin", {

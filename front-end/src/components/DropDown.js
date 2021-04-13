@@ -40,14 +40,16 @@ const Wrapper = styled.div`
     height: 15vh;
     justify-content: center;
   }
-  @media (max-width: 768px) and (max-height: 900px) {
+  @media (max-width: 768px)  {
     width: 80vw;
     justify-content: center;
-    height: 10vh;
+    height: 20vh;
+
   }
   @media (max-width: 650px) and (max-height: 850px) {
     width: 80vw;
-    height: 10vh;
+   
+    padding-top:25px;
     justify-content: center;
   }
 `;
@@ -78,12 +80,11 @@ const List = styled.ul`
 const Item = styled.li`
   background-color: ${COLORS.primary};
 
-
   @media (max-width: 800px) and (max-height: 1024px) {
-   
     height: 15vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
+        font-size:   80%;
   }
   @media (max-width: 650px) and (max-height: 850px) {
   }

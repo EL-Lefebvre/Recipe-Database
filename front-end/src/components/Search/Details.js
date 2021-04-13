@@ -35,8 +35,6 @@ const Details = () => {
   const [diet, setDiet] = useState([]);
   const [keyword, setKeyword] = useState("");
 
-  console.log(intolerances);
-
   const handleCuisine = (ev) => {
     ev.preventDefault();
     setToggles({ ...toggles, cuisine: !toggles.cuisine });
@@ -56,83 +54,80 @@ const Details = () => {
 
   return (
     <Wrapper>
-    
-          <List>
-            <Item onClick={handleCuisine}>
-              <Column>
-                <Arrow>
-                  Cuisine
-                  <DropDownArray size={20} />
-                </Arrow>
+      <List>
+        <Item onClick={handleCuisine}>
+          <Column>
+            <Arrow>
+              Cuisine
+              <DropDownArray size={20} />
+            </Arrow>
 
-                {toggles.cuisine && (
-                  <Fieldset>
-                    <Cuisine
-                      cuisine={cuisine}
-                      setCuisine={setCuisine}
-                      list={cuisineList}
-                      setCuisineList={setCuisineList}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
-            </Item>
-            <Item onClick={handleType}>
-              <Column>
-                <Arrow>
-                  Type
-                  <DropDownArray size={20} />
-                </Arrow>
-                {toggles.type && (
-                  <Fieldset>
-                    <Type
-                      type={type}
-                      setType={setType}
-                      list={typeList}
-                      setTypeList={setTypeList}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
-            </Item>
-            <Item onClick={handleDiet}>
-              <Column>
-                <Arrow>
-                  Diet <DropDownArray size={20} />
-                </Arrow>
-                {toggles.diet && (
-                  <Fieldset>
-                    <Diet
-                      diet={diet}
-                      setDiet={setDiet}
-                      list={dietList}
-                      setDietList={setDietList}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
-            </Item>
-            <Item onClick={handleIntolerances}>
-              <Column>
-                <Arrow>
-                  Intolerances <DropDownArray size={20} />
-                </Arrow>
+            {toggles.cuisine && (
+              <Fieldset>
+                <Cuisine
+                  cuisine={cuisine}
+                  setCuisine={setCuisine}
+                  list={cuisineList}
+                  setCuisineList={setCuisineList}
+                />
+              </Fieldset>
+            )}
+          </Column>
+        </Item>
+        <Item onClick={handleType}>
+          <Column>
+            <Arrow>
+              Type
+              <DropDownArray size={20} />
+            </Arrow>
+            {toggles.type && (
+              <Fieldset>
+                <Type
+                  type={type}
+                  setType={setType}
+                  list={typeList}
+                  setTypeList={setTypeList}
+                />
+              </Fieldset>
+            )}
+          </Column>
+        </Item>
+        <Item onClick={handleDiet}>
+          <Column>
+            <Arrow>
+              Diet <DropDownArray size={20} />
+            </Arrow>
+            {toggles.diet && (
+              <Fieldset>
+                <Diet
+                  diet={diet}
+                  setDiet={setDiet}
+                  list={dietList}
+                  setDietList={setDietList}
+                />
+              </Fieldset>
+            )}
+          </Column>
+        </Item>
+        <Item onClick={handleIntolerances}>
+          <Column>
+            <Arrow>
+              Intolerances <DropDownArray size={20} />
+            </Arrow>
 
-                {toggles.intolerances && (
-                  <Fieldset>
-                    <Intolerances
-                      list={intoleranceList}
-                      setIntoleranceList={setIntoleranceList}
-                      intolerances={intolerances}
-                      setIntolerances={setIntolerances}
-                    />
-                  </Fieldset>
-                )}
-              </Column>
-            </Item>
-          </List>
-     
-   
+            {toggles.intolerances && (
+              <Fieldset>
+                <Intolerances
+                  list={intoleranceList}
+                  setIntoleranceList={setIntoleranceList}
+                  intolerances={intolerances}
+                  setIntolerances={setIntolerances}
+                />
+              </Fieldset>
+            )}
+          </Column>
+        </Item>
+      </List>
     </Wrapper>
   );
 };

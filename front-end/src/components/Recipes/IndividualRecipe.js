@@ -25,6 +25,9 @@ const IndividualRecipe = () => {
     }
   }, [individualData]);
 
+  if (!individualData) {
+    return <Wrapper>No recipe found</Wrapper>;
+  }
   return (
     <Wrapper>
       <BigRecipe individualData={individualData} />

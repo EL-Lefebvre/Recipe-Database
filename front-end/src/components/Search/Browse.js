@@ -106,7 +106,7 @@ const Browse = () => {
       console.log("error");
     }
   };
-  console.log(suggestion)
+
   return (
     <Wrapper>
       <Layout>
@@ -117,7 +117,7 @@ const Browse = () => {
           <SearchBar keyword={keyword} setKeyword={setKeyword} type="text" />
         </Search>
       </Layout>
-       <Button onClick={handleClear}>Clear Filters</Button>
+      <Button onClick={handleClear}>Clear Filters</Button>
       <Main>
         <ListWrapper>
           <List>
@@ -246,6 +246,7 @@ const Fieldset = styled.fieldset`
   width: 77.5vw;
   border: none;
   border-radius: 10px;
+
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   @media (max-width: 800px) and (max-height: 1024px) {
     flex-direction: column;
@@ -255,6 +256,7 @@ const Fieldset = styled.fieldset`
   }
 
   @media (max-width: 768px) and (max-height: 900px) {
+    height:  100vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
   }

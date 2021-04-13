@@ -73,22 +73,7 @@ const Blog = () => {
         <Title>
           <h1>Blog</h1>
         </Title>
-        {username ? (
-          <Form
-            username={username}
-            details={details}
-            title={title}
-            handleSubmit={handleSubmit}
-            setTitle={setTitle}
-            setDetails={setDetails}
-            ingredients={ingredients}
-            setIngredients={setIngredients}
-            fileUpload={fileUpload}
-            setFileUpload={setFileUpload}
-            status={status}
-            setStatus={setStatus}
-          />
-        ) : (
+        {!username ? (
           <LinkDiv>
             <List>
               <Item>
@@ -103,6 +88,21 @@ const Blog = () => {
               </Item>
             </List>
           </LinkDiv>
+        )  :  (
+          <Form
+            username={username}
+            details={details}
+            title={title}
+            handleSubmit={handleSubmit}
+            setTitle={setTitle}
+            setDetails={setDetails}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+            fileUpload={fileUpload}
+            setFileUpload={setFileUpload}
+            status={status}
+            setStatus={setStatus}
+          />
         )}
       </Layout>
 
@@ -167,6 +167,14 @@ const Title = styled.div`
 `;
 const LinkDiv = styled.div`
   width: 20vw;
+
+  @media (max-width: 768px)  {
+    width:50vw;
+  }
+  @media (max-width: 450px)  {
+    width:90vw;
+  }
+
 `;
 const List = styled.ul`
   margin-left: -30px;
@@ -174,6 +182,7 @@ const List = styled.ul`
   display: flex;
 
   justify-content: space-between;
+
 `;
 const Item = styled.li``;
 

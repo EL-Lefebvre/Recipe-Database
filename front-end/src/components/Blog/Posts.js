@@ -79,6 +79,7 @@ const Layout = styled.div`
 const Title = styled.div`
   text-decoration: underline;
   color: ${COLORS.primary};
+  margin-left: 20px;
 `;
 
 const Span = styled.span`
@@ -93,8 +94,12 @@ max-width:50vw
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:    center;
+  align-items:    flex-start;
 
+  @media (max-width: 1000px)  {
+align-items:center;
+
+  }
   @media (max-width: 768px) and (max-height: 900px) {
     max-width: 60vw;
     max-height: 30vh;

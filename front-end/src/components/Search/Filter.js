@@ -60,7 +60,12 @@ flex-wrap:wrap;
 border:none;
 max-height:300px;
 width:70vw;
+@media (max-width: 768px) and (max-height: 900px) {
 
+}
+@media (max-width: 650px) and (max-height: 850px) {
+
+}
 `;
 const List = styled.div`
   width: 25vw;
@@ -75,6 +80,7 @@ const List = styled.div`
   @media (max-width: 768px) and (max-height: 900px) {
   }
   @media (max-width: 650px) and (max-height: 850px) {
+ 
   }
 `;
 const Span = styled.div``;
