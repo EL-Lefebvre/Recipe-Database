@@ -54,11 +54,7 @@ const Profile = () => {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    if (results && currentUser) {
-      setSubStatus("loaded");
-    }
-  }, [status]);
+
   useEffect(() => {
     if (results && currentUser) {
       const filteredPosts = results.filter(
@@ -67,15 +63,25 @@ const Profile = () => {
 
       setPosts(filteredPosts);
     }
-  }, [results]);
+  }, [currentUser]);
 
-  const handleClear = () => {
-    localStorage.removeItem("data");
-  };
 
+  useEffect(() => {
+    if (currentUser && results) {
+      setSubStatus("loaded");
+      if(posts){
+        setSubStatus('profile')
+      }
+      
+    }
+  }, []);
+  useEffect(() => {
+   console.log(posts)
+    
+  }, [posts]);
   return (
     <Wrapper>
-      {subStatus === "loaded" || currentUser ? (
+      { currentUser && posts  ? (
         <MainDiv>
           <Layout>
             <Title>
@@ -91,31 +97,38 @@ const Profile = () => {
           </Layout>
 
           <Main>
-            {posts && itemClicked === "posts" ? (
+            {posts && favorites &&  (
+            itemClicked === "posts" ? (
               <PostsWrapper>
                 <SubTitle>
                   <h3>[ Your Own Recipes ] </h3>
                 </SubTitle>
-                <Posts posts={posts} setPosts={setPosts} />
+               {results && <Posts posts={posts} setPosts={setPosts} />}
               </PostsWrapper>
-            ) : (
+            ) :  itemClicked === "favorites" ? (
               <FavoriteWrapper>
                 <SubTitle>
                   <h3>[ Favorites ]</h3> <Heart size={20} />
                 </SubTitle>
-                <Favorites favorites={favorites} setFavorites={setFavorites} />
+                {favorites && <Favorites favorites={favorites} setFavorites={setFavorites} />}
               </FavoriteWrapper>
-            )}
+            ): (
+              <MainDiv>
+                {" "}
+                <Spinner />
+              </MainDiv>
+            ))}
+            
           </Main>
         </MainDiv>
-      ) : (
+      ): (
         <MainDiv>
           {" "}
           <Spinner />
         </MainDiv>
       )}
     </Wrapper>
-  );
+      )
 };
 
 const Wrapper = styled.div`

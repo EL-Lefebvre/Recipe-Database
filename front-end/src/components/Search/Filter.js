@@ -22,18 +22,16 @@ export const Filter = ({ subStatus, list, setList, state, setState }) => {
               if (copiedList[index]) {
                 copiedList[index].selected = !selected;
                 setList(copiedList);
-                
+
                 if (newState === state) {
                   setState([...state, `+ ${label}`]);
                 } else if (newState !== state) {
                   setState([...newState, ` ${label}`]);
-                } 
-               else {
+                } else {
                   setState([]);
                 }
-              }
-              else if  (subStatus === 'clear') {
-                copiedList.forEach((list)  => list.selected = false);
+              } else if (subStatus === "clear") {
+                copiedList.forEach((list) => (list.selected = false));
                 setState([]);
               }
               if (!copiedList[index].selected) {
@@ -55,17 +53,15 @@ export const Filter = ({ subStatus, list, setList, state, setState }) => {
 
 const Wrapper = styled.div`
   background-color: white;
-display:flex;
-flex-wrap:wrap;
-border:none;
-max-height:300px;
-width:70vw;
-@media (max-width: 768px) and (max-height: 900px) {
-
-}
-@media (max-width: 650px) and (max-height: 850px) {
-
-}
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  max-height: 300px;
+  width: 70vw;
+  @media (max-width: 768px) and (max-height: 900px) {
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+  }
 `;
 const List = styled.div`
   width: 25vw;
@@ -73,14 +69,11 @@ const List = styled.div`
   justify-content: space-between;
   align-item: center;
 
-  @media (max-width: 800px) and (max-height: 1024px) {
+  @media (max-width: 800px) {
     width: 40vw;
   }
-
-  @media (max-width: 768px) and (max-height: 900px) {
-  }
-  @media (max-width: 650px) and (max-height: 850px) {
- 
+  @media (max-width: 650px) {
+    width: 45vw;
   }
 `;
 const Span = styled.div``;

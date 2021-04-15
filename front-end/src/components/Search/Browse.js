@@ -10,7 +10,6 @@ import Results from "./Results";
 import { RecipeContext } from "../../RecipeContext";
 import { RiArrowDropDownLine as DropDownArray } from "react-icons/ri";
 
-
 const Browse = () => {
   const {
     cuisineList,
@@ -255,10 +254,11 @@ const Fieldset = styled.fieldset`
     width: 75vw;
   }
 
-  @media (max-width: 768px) and (max-height: 900px) {
-    height:  100vh;
+  @media (max-width: 768px) {
+    font-size: 90%;
   }
-  @media (max-width: 650px) and (max-height: 850px) {
+  @media (max-width: 650px) {
+    height: 70vh;
   }
 `;
 const Title = styled.div`
@@ -276,23 +276,32 @@ const Main = styled.div`
   border: 1px solid black;
   min-height: 60vh;
   width: 80vw;
-  margin-bottom: 200px;
+  border-radius: 10px;
 `;
 const ResultsDiv = styled.div`
   min-height: 100vw;
 `;
 const ListWrapper = styled.div`
-  background-color: white;
   width: 80vw;
-  height: 40px;
+
   z-index: 3;
 `;
 
 const List = styled.ul`
   display: flex;
-
+  background-color: white;
   justify-content: space-around;
   align-items: flex-start;
+  border-radius: 10px;
+  @media (max-width: 650px) {
+    flex-flow: column wrap;
+    height: 10vh;
+    justify-content: space-around;
+    padding-right: 10px;
+    align-items: center;
+  }
+  @media (max-width: 650px) {
+  }
 `;
 const Item = styled.li`
   display: flex;

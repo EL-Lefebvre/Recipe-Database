@@ -117,6 +117,7 @@ const Wrapper = styled.div`
   z-index: 1;
   background-color: white;
   padding-top: 20px;
+  
   @media (max-width: 768px) {
   }
   @media (max-width: 650px) and (max-height: 850px) {
@@ -138,8 +139,19 @@ const ListWrapper = styled.div`
 `;
 
 const List = styled.li`
+display: flex;
+align-items: center;
+justify-content: center;
   border: 2px solid ${COLORS.primary};
   padding: 5px;
   border-radius: 10px;
+  width: 10vw;
+  height: 7vh;
+  @media (max-width: 650px) {
+
+    width: 100px;
+    height: 40px;
+    font-size: 70%;
+  }
 `;
 export default Results;
