@@ -23,6 +23,7 @@ const SearchBar = () => {
   return (
     <div>
       <TypeheadWrapper onClick={() => setToggle(true)}>
+        {" "}
         <Input
           value={value}
           onKeyDown={(ev) => {

@@ -56,15 +56,10 @@ const Suggestion = ({
       setToggle(true);
     }
   }, [suggestion]);
-
+console.log(suggestion);
   return (
     <Wrapper>
-      {!suggestion | (suggestion === []) ? (
-        <DivNoResults>
-          {" "}
-          <NoResults>No Results</NoResults>
-        </DivNoResults>
-      ) : (
+      {suggestion && suggestion.length >=1  ? (
         <Main
           style={{
             visibility: toggle ? "visible" : "hidden",
@@ -105,8 +100,12 @@ const Suggestion = ({
               </SearchResult>
             );
           })}
-        </Main>
-      )}
+        </Main>): (
+          <DivNoResults>
+            <NoResults>No Results</NoResults>
+          </DivNoResults>
+        )}
+
     </Wrapper>
   );
 };
@@ -132,7 +131,7 @@ const Wrapper = styled.div`
 const Main = styled.div`
   margin-top: 20px;
   padding-top: 20px;
-  padding-right:50px;
+
   border-radius: 10px;
   overflow: hidden;
   position: absolute;
@@ -144,13 +143,16 @@ const Main = styled.div`
   overflow-y: scroll;
   scrollbar-width: thin;
   @media (max-width: 800px) {
-    width: 80vw;
-    padding-right:0px;
+    width: 60vw;
+ 
   }
-  @media (max-width: 768px) and (max-height: 900px) {
-  }
-  @media (max-width: 650px) {
-  }
+  @media (max-width: 768px)  {
+
+      }
+      @media (max-width: 650px) {
+        width: 70vw;
+      }
+
 `;
 const DivNoResults = styled.div`
   display: flex;
@@ -158,11 +160,11 @@ const DivNoResults = styled.div`
   padding-top: 55px;
   border-radius: 10px;
   overflow: hidden;
-  position: absolute;
-  width: 40vw;
-  height: 20vh;
+  position:absolute;
+
+
   box-shadow: 1px -1px 13px -1px #000000;
-  background-color: white;
+  background-color:white;
   z-index: 100;
   @media (max-width: 900px) {
     width: 50vw;
@@ -175,7 +177,12 @@ const DivNoResults = styled.div`
   }
 `;
 const NoResults = styled.div`
-  background-color: white;
+
+
+background-color:white;
+  width: 40vw;
+  height: 20vh;
+
 `;
 const SearchResult = styled.div`
   padding-top: 10px;
@@ -186,7 +193,13 @@ const SuggestionColumn = styled.div`
 
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 30vw;
+  @media (max-width: 768px)  {
+width:60vw;
+  }
+  @media (max-width: 650px) {
+    width: 70vw;
+  }
 `;
 
 const Regular = styled.span`
