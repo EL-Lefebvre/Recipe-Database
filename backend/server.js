@@ -25,6 +25,7 @@ const {
   getUserFavorites,
   newFavorite,
   newFavoriteUpdate,
+  infoBulk,
 } = require("./handlers");
 
 const options = {
@@ -142,7 +143,7 @@ app.get("/blog/:id", (req, res) => {
 
   res.status(200).json({ status: 200, id });
 });
-
+app.get("/user/favorites/:ids", infoBulk);
 app.get("/recipes/post", getPosts);
 app.post("/recipes/post", newPost);
 app.get("/recipes/random", getRandomRecipes);

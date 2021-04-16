@@ -13,7 +13,9 @@ const BigRecipe = ({ individualData }) => {
     recipeLiked.includes(individualData.id)
   );
 
-
+  useEffect(() => {
+    console.log(recipeLiked);
+  }, [recipeLiked]);
   const handleClickLike = (ev) => {
     // setRecipeLiked([...recipeLiked, individualData.id])
     setToggleLiked(!toggleLiked);

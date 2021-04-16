@@ -5,15 +5,14 @@ import Logo from "../../assets/food.png";
 import SmallRecipe from "../Recipes/SmallRecipe";
 import RecipePreview from "../Search/RecipePreview";
 import { RecipeContext } from "../../RecipeContext";
-const Favorites = ({ favorites, setFavorites }) => {
+const Favorites = ({ recipeFavorite, setRecipeFavorite }) => {
   const { currentUser } = useContext(RecipeContext);
   const [updatedFavorites, setUpdatedFavorites] = useState([]);
   ///Importing posts from users
-  console.log(currentUser);
-  console.log(favorites);
+
   useEffect(() => {
-    if (favorites.length >= 1) {
-      const FilteredFavorites = favorites.map((fav) => {
+    if (recipeFavorite && recipeFavorite.length >= 1) {
+      const FilteredFavorites = recipeFavorite.map((fav) => {
         const id = fav.id;
         const title = fav.title;
         const image = fav.image;
@@ -21,9 +20,9 @@ const Favorites = ({ favorites, setFavorites }) => {
       });
       setUpdatedFavorites(FilteredFavorites);
     }
-  }, [favorites]);
+  }, [recipeFavorite]);
 
-  console.log(updatedFavorites);
+
   return (
     <Wrapper>
       <Main>

@@ -136,6 +136,7 @@ const ListWrapper = styled.div`
   justify-content: center;
   flex-flow: row wrap;
   width: 15vw;
+  padding-bottom: 10px;
 `;
 
 const List = styled.li`

@@ -13,10 +13,10 @@ const Profile = () => {
   const {
     currentUser,
     setCurrentUser,
-    status,
-    setStatus,
+    recipeLiked,
     results,
-    setResults,
+    recipeFavorite,
+    setRecipeFavorite,
     getUser,
   } = useContext(RecipeContext);
   const [subStatus, setSubStatus] = useState("loading");
@@ -24,6 +24,25 @@ const Profile = () => {
   const [itemClicked, setItemClicked] = useState("favorites");
   const [favorites, setFavorites] = useState([]);
   ///Importing posts from users
+
+  const getFavorites = async () => {
+ 
+    if(recipeLiked){
+      fetch(`/user/favorites/${recipeLiked.toString()}`, {
+        method: "GET",
+        withCredentials: true,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          setRecipeFavorite(res.data);
+        });
+    }
+    
+       
+          
+        
+      };
   useEffect(() => {
     if (!currentUser) {
       getUser();
@@ -36,24 +55,45 @@ const Profile = () => {
   useEffect(() => {
     if (currentUser) {
       localStorage.setItem("data", currentUser);
+      console.log(recipeLiked);
     }
   }, [currentUser]);
   useEffect(() => {
-    if (currentUser) {
-      setSubStatus("user");
-      fetch(`/favorites/${currentUser}`, {
-        method: "GET",
-        withCredentials: true,
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setFavorites(res.data);
-        });
-    } else {
-      setStatus("waiting");
-    }
+
+    getFavorites();
+  },[recipeLiked])
+  console.log(recipeFavorite)
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     setSubStatus("user");
+  //     fetch(`/favorites/${currentUser}`, {
+  //       method: "GET",
+  //       withCredentials: true,
+  //     })
+  //       .then((res) => res.json())
+  //       .then((res) => {
+  //         setFavorites(res.data);
+  //       });
+  //   } else {
+  //     setStatus("waiting");
+  //   }
+  // }, [currentUser]);
+  console.log(favorites);
+  useEffect(() => {
+  
+     console.log(recipeFavorite)
+    
+
   }, [currentUser]);
 
+  useEffect(() => {
+    if (currentUser && results) {
+      setSubStatus("loaded");
+      if (posts) {
+        setSubStatus("profile");
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (results && currentUser) {
@@ -66,22 +106,11 @@ const Profile = () => {
   }, [currentUser]);
 
 
-  useEffect(() => {
-    if (currentUser && results) {
-      setSubStatus("loaded");
-      if(posts){
-        setSubStatus('profile')
-      }
-      
-    }
-  }, []);
-  useEffect(() => {
-   console.log(posts)
-    
-  }, [posts]);
+
+
   return (
     <Wrapper>
-      { currentUser && posts  ? (
+      {currentUser && posts ? (
         <MainDiv>
           <Layout>
             <Title>
@@ -97,38 +126,43 @@ const Profile = () => {
           </Layout>
 
           <Main>
-            {posts && favorites &&  (
-            itemClicked === "posts" ? (
-              <PostsWrapper>
-                <SubTitle>
-                  <h3>[ Your Own Recipes ] </h3>
-                </SubTitle>
-               {results && <Posts posts={posts} setPosts={setPosts} />}
-              </PostsWrapper>
-            ) :  itemClicked === "favorites" ? (
-              <FavoriteWrapper>
-                <SubTitle>
-                  <h3>[ Favorites ]</h3> <Heart size={20} />
-                </SubTitle>
-                {favorites && <Favorites favorites={favorites} setFavorites={setFavorites} />}
-              </FavoriteWrapper>
-            ): (
-              <MainDiv>
-                {" "}
-                <Spinner />
-              </MainDiv>
-            ))}
-            
+            {posts &&
+              recipeFavorite &&
+              (itemClicked === "posts" ? (
+                <PostsWrapper>
+                  <SubTitle>
+                    <h3>[ Your Own Recipes ] </h3>
+                  </SubTitle>
+                  {results && <Posts posts={posts} setPosts={setPosts} />}
+                </PostsWrapper>
+              ) : itemClicked === "favorites" ? (
+                <FavoriteWrapper>
+                  <SubTitle>
+                    <h3>[ Favorites ]</h3> <Heart size={20} />
+                  </SubTitle>
+                  {recipeFavorite && (
+                    <Favorites
+                      recipeFavorite={recipeFavorite}
+                      setRecipeFavorite={setRecipeFavorite}
+                    />
+                  )}
+                </FavoriteWrapper>
+              ) : (
+                <MainDiv>
+                  {" "}
+                  <Spinner />
+                </MainDiv>
+              ))}
           </Main>
         </MainDiv>
-      ): (
+      ) : (
         <MainDiv>
           {" "}
           <Spinner />
         </MainDiv>
       )}
     </Wrapper>
-      )
+  );
 };
 
 const Wrapper = styled.div`
@@ -194,10 +228,6 @@ const Welcome = styled.h4`
 
   font-weight: bolder;
 `;
-const FavoriteWrapper = styled.div`
-
-
-`;
-const PostsWrapper = styled.div`
-`;
+const FavoriteWrapper = styled.div``;
+const PostsWrapper = styled.div``;
 export default Profile;

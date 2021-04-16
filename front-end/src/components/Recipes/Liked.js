@@ -13,6 +13,10 @@ const Liked = ({
 }) => {
   console.log(recipeId);
   useEffect(() => {
+    console.log(recipeLiked);
+  }, [currentUser]);
+
+  useEffect(() => {
     if (toggleLiked && currentUser) {
       const filteredRecipe = recipeLiked.filter((recipe) => recipe != recipeId);
       console.log(filteredRecipe);

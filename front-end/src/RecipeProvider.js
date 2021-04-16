@@ -8,7 +8,6 @@ import {
 } from "./components/Search/Utilities";
 import { RecipeContext } from "./RecipeContext";
 
-
 const initialFitlerData = {
   cuisine: [...cuisinesData].map(({ name }, id) => ({
     id,
@@ -43,6 +42,7 @@ export const RecipeProvider = ({ children }) => {
   const [recipeLiked, setRecipeLiked] = useState([]);
   const [toggleLiked, setToggleLiked] = useState(false);
   const [results, setResults] = useState([]);
+  const [recipeFavorite, setRecipeFavorite] = useState([]);
   const [status, setStatus] = useState("");
   const [cuisineList, setCuisineList] = useState([
     ...initialFitlerData.cuisine,
@@ -67,14 +67,11 @@ export const RecipeProvider = ({ children }) => {
         url: "http://localhost:4000/user",
       })
         .then((res) => res.json())
-        .then((res)  => {
-          console.log(res);
+        .then((res) => {
           return res;
         })
-        .then((res) => res.username)
-      console.log(response.username);
+        .then((res) => res.username);
       const user = response.username;
-      // let currentData = localStorage.getItem("data");
       if (user) {
         setCurrentUser(user);
       }
@@ -83,23 +80,24 @@ export const RecipeProvider = ({ children }) => {
     }
   };
 
-  //Get favorites from user
-  const getFavorites = async () => {
+  //Get data from user//
+  const getUserData = async () => {
     return fetch(`/favorites/${currentUser}`, {
       method: "GET",
       withCredentials: true,
-      
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res)
-        if(res.data.type ==='array'){
-                   const newArray = res.data.map(recipe => recipe.id)
-          setRecipeLiked(newArray)
+        console.log(res);
+        if (res.data) {
+          const newArray = res.data.map((recipe) => recipe.id);
+
+          setRecipeLiked(newArray);
         }
-    
-      })
-  }
+      });
+  };
+  //Get favorites from current user//
+
 
   //reset all filters
   const resetFilters = () => {
@@ -148,6 +146,7 @@ export const RecipeProvider = ({ children }) => {
     randomRecipe();
   }, []);
 
+  //Handles for Filter
   const handleVegan = (ev) => {
     const copiedList = dietList;
 
@@ -178,20 +177,24 @@ export const RecipeProvider = ({ children }) => {
     console.log(typeList);
   }, [typeList]);
 
-  useEffect(()=>{
-    if(currentUser){
-      getFavorites()
+  useEffect(() => {
+    if (currentUser) {
+      getUserData();
+   
     }
-  }, [currentUser])
-  useEffect(()=>{
+  }, [currentUser]);
+  useEffect(() => {
     const newUser = localStorage.getItem("data");
-    if(newUser){
-      setCurrentUser(newUser)
+    if (newUser) {
+      setCurrentUser(newUser);
+    } else {
+      localStorage.removeItem("data");
     }
-    else{
-      localStorage.removeItem('data')
-    }
-  }, [])
+  }, []);
+
+
+  console.log(recipeFavorite);
+  console.log(recipeLiked);
   return (
     <RecipeContext.Provider
       value={{
@@ -227,7 +230,8 @@ export const RecipeProvider = ({ children }) => {
         getUser,
         resetFilters,
         handleVegan,
-
+recipeFavorite,
+setRecipeFavorite,
         handleFrench,
         handleAppetizer,
         handleDessert,

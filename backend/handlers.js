@@ -37,7 +37,7 @@ const getRandomRecipes = async (req, res) => {
 //Get single Recipe information (ingredients/nurtition/diet)
 const singleRecipe = async (req, res) => {
   const id = req.params.id;
-  console.log(id);
+
   const response = await fetch(
     `${api_url}/${id}/information?apiKey=${apiKey}&includeNutrition=true`,
     options
@@ -56,13 +56,12 @@ const searchRecipe = async (req, res) => {
     options
   );
   const data = await response.json();
-console.log(data);
+  console.log(data);
   res.status(200).json({ status: 200, data });
 };
 
 const filterRecipe = async (req, res) => {
-
-  const keyword= req.query.keyword;
+  const keyword = req.query.keyword;
   const cuisine = req.query.cuisine;
   const type = req.query.type;
   const diet = req.query.diet;
@@ -86,15 +85,7 @@ const newPost = async (req, res) => {
   await addingRecipe(req, res);
 };
 const getUserFavorites = async (req, res) => {
-  const userFavorites = await getFavorites(req, res);
-
-  // const response = await fetch(
-  //   `${api_url}informationBulk?ids=${recipeIds}`,
-  //   options
-  // );
-  // const data = await response.json();
-  // console.log(data);
-  // res.status(200).json({ status: 200, data });
+  await getFavorites(req, res);
 };
 const newFavorite = async (req, res) => {
   await addFavorite(req, res);
@@ -105,7 +96,17 @@ const newFavoriteUpdate = async (req, res) => {
 const getPosts = async (req, res) => {
   await getPostedRecipes(req, res);
 };
-
+const infoBulk = async (req, res) => {
+  const ids = req.params.ids;
+  const api_url = "https://api.spoonacular.com/recipes";
+  const response = await fetch(
+    `${api_url}/informationBulk?apiKey=${apiKey}&ids=${ids}`,
+    options
+  );
+  const data = await response.json();
+  console.log(data);
+  res.status(200).json({ status: 200, data });
+};
 module.exports = {
   getRandomRecipes,
   singleRecipe,
@@ -116,4 +117,5 @@ module.exports = {
   getUserFavorites,
   newFavorite,
   newFavoriteUpdate,
+  infoBulk,
 };

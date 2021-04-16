@@ -9,7 +9,7 @@ const PostedRecipes = () => {
   const [posts, setPosts] = useState([]);
   const [results, setResults] = useState([]);
   const [status, setStatus] = useState("null");
-  console.log(currentUser);
+
   useEffect(() => {
     fetch("/user", {
       method: "GET",
@@ -19,7 +19,7 @@ const PostedRecipes = () => {
       .then((res) => res.json())
       .then((res) => {
         localStorage.setItem("data", res.username);
-        console.log(res.username);
+  
       });
     let currentData = localStorage.getItem("data");
     setCurrentUser(currentData);
@@ -42,7 +42,7 @@ const PostedRecipes = () => {
   }, []);
   useEffect(() => {
     postedRecipe();
-    console.log(results);
+ 
     const filteredPosts = results.filter((res) => res.username === currentUser);
     console.log(filteredPosts);
     setPosts(filteredPosts);
