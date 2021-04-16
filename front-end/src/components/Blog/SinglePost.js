@@ -38,14 +38,6 @@ const SinglePost = ({ post }) => {
                 <Description>
                   <Title>
                     <h3>{post.title}</h3>
-                    {/* <Liked
-                recipeId={post.id}
-                handleClickLike={handleClickLike}
-                toggleLiked={toggleLiked}
-                recipeLiked={recipeLiked}
-                setRecipeLiked={setRecipeLiked}
-                setToggleLiked={setToggleLiked}
-              /> */}
                   </Title>
                   <User>
                     <div>

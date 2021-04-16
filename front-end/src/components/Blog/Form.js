@@ -36,16 +36,16 @@ const Form = ({
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 201) {
-          console.log(json);
-          setStatus("success");
           const newPostSuccess = {
             username: username,
             title: title,
             ingredients: ingredients,
             details: details,
             fileUpload: fileUpload,
-          };;
-          addNewPost(newPostSuccess);;
+          };
+          addNewPost(newPostSuccess);
+          console.log(json);
+          setStatus("success");
         } else {
           console.log("error qwerty");
           setStatus("error");
@@ -144,22 +144,22 @@ max-height:100vh;
   }
 `;
 const MainForm = styled.form`
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-@media (max-width: 1000px)  {
-  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-}
-@media (max-width: 768px) and (max-height: 900px) {
-  width:100vw;
-  height: 70vh;
-}
-@media (max-width: 650px) and (max-height: 850px) {
-width:90vw;
-  height: 70vh;
-}
+  @media (max-width: 1000px) {
+    width: 50vw;
+  }
+  @media (max-width: 768px) and (max-height: 900px) {
+    width: 100vw;
+    height: 70vh;
+  }
+  @media (max-width: 650px) and (max-height: 850px) {
+    width: 90vw;
+    height: 70vh;
+  }
 `;
 
 const TextDiv = styled.div`

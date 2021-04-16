@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 // import { COLORS } from "../../constants";
 import styled from "styled-components";
 import BigRecipe from "./BigRecipe";
+import Spinner from "../Tools/Spinner";
 // import { RecipeContext } from "../../RecipeContext";
 const IndividualRecipe = () => {
   const [individualData, setIndividualData] = useState();
@@ -26,7 +27,12 @@ const IndividualRecipe = () => {
   }, [individualData]);
 
   if (!individualData) {
-    return <Wrapper>No recipe found</Wrapper>;
+    return (
+      <NoWrapper>
+        {" "}
+        <Spinner />
+      </NoWrapper>
+    );
   }
   return (
     <Wrapper>
@@ -48,6 +54,9 @@ const Wrapper = styled.div`
   }
   @media (max-width: 650px) and (max-height: 850px) {
   }
+`;
+const NoWrapper = styled.div`
+  height: 100vh;
 `;
 
 export default IndividualRecipe;

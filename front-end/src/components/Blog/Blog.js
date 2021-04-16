@@ -6,18 +6,16 @@ import Posts from "./Posts";
 import { RecipeContext } from "../../RecipeContext";
 
 const Blog = () => {
-  const { currentUser } = useContext(RecipeContext);
+  const { currentUser, posts, setPosts, addNewPost } = useContext(RecipeContext);
   const [username, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
-  const [posts, setPosts] = useState([]);
+
   const [status, setStatus] = useState("null");
   const [ingredients, setIngredients] = useState("");
   const [fileUpload, setFileUpload] = useState("");
 
-  const addNewPost = (post) => {
-    setPosts([{ ...post }, ...posts]);
-  };
+
   useEffect(() => {
     let currentUserName = localStorage.getItem("data");
     setUserName(currentUserName);
@@ -38,8 +36,6 @@ const Blog = () => {
   useEffect(() => {
     postedRecipe();
   }, []);
-
-
 
   return (
     <Wrapper>
@@ -68,7 +64,6 @@ const Blog = () => {
             username={username}
             details={details}
             title={title}
-        
             setTitle={setTitle}
             setDetails={setDetails}
             ingredients={ingredients}
@@ -115,6 +110,7 @@ const Layout = styled.div`
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   min-height: 30vh;
   margin-bottom: 50px;
+  padding-bottom: 40px;
   @media (max-width: 768px) and (max-height: 900px) {
     width: 90vw;
   }

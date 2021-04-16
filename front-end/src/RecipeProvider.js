@@ -44,6 +44,7 @@ export const RecipeProvider = ({ children }) => {
   const [results, setResults] = useState([]);
   const [recipeFavorite, setRecipeFavorite] = useState([]);
   const [status, setStatus] = useState("");
+  const [posts, setPosts] = useState([]);
   const [cuisineList, setCuisineList] = useState([
     ...initialFitlerData.cuisine,
   ]);
@@ -98,7 +99,6 @@ export const RecipeProvider = ({ children }) => {
   };
   //Get favorites from current user//
 
-
   //reset all filters
   const resetFilters = () => {
     setCuisineList(cuisineList.map((data) => ({ ...data, selected: false })));
@@ -126,7 +126,10 @@ export const RecipeProvider = ({ children }) => {
     postedRecipe();
     setStatus("loaded");
   }, []);
-
+  useEffect(() => {
+    postedRecipe();
+    setStatus("loaded");
+  }, [posts]);
   // -----
 
   const randomRecipe = async () => {
@@ -171,16 +174,8 @@ export const RecipeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log({ cuisineList, typeList, dietList, intoleranceList });
-  }, [dietList]);
-  useEffect(() => {
-    console.log(typeList);
-  }, [typeList]);
-
-  useEffect(() => {
     if (currentUser) {
       getUserData();
-   
     }
   }, [currentUser]);
   useEffect(() => {
@@ -191,14 +186,17 @@ export const RecipeProvider = ({ children }) => {
       localStorage.removeItem("data");
     }
   }, []);
+  const addNewPost = (post) => {
+    setPosts([{ ...post }, ...posts]);
+  };
 
-
-  console.log(recipeFavorite);
-  console.log(recipeLiked);
   return (
     <RecipeContext.Provider
       value={{
         data,
+        posts,
+        setPosts,
+        addNewPost,
         toggle,
         setToggle,
         cuisineList,
@@ -230,8 +228,8 @@ export const RecipeProvider = ({ children }) => {
         getUser,
         resetFilters,
         handleVegan,
-recipeFavorite,
-setRecipeFavorite,
+        recipeFavorite,
+        setRecipeFavorite,
         handleFrench,
         handleAppetizer,
         handleDessert,

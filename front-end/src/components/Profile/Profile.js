@@ -26,8 +26,7 @@ const Profile = () => {
   ///Importing posts from users
 
   const getFavorites = async () => {
- 
-    if(recipeLiked){
+    if (recipeLiked) {
       fetch(`/user/favorites/${recipeLiked.toString()}`, {
         method: "GET",
         withCredentials: true,
@@ -38,11 +37,7 @@ const Profile = () => {
           setRecipeFavorite(res.data);
         });
     }
-    
-       
-          
-        
-      };
+  };
   useEffect(() => {
     if (!currentUser) {
       getUser();
@@ -59,31 +54,13 @@ const Profile = () => {
     }
   }, [currentUser]);
   useEffect(() => {
-
     getFavorites();
-  },[recipeLiked])
-  console.log(recipeFavorite)
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     setSubStatus("user");
-  //     fetch(`/favorites/${currentUser}`, {
-  //       method: "GET",
-  //       withCredentials: true,
-  //     })
-  //       .then((res) => res.json())
-  //       .then((res) => {
-  //         setFavorites(res.data);
-  //       });
-  //   } else {
-  //     setStatus("waiting");
-  //   }
-  // }, [currentUser]);
+  }, [recipeLiked]);
+  console.log(recipeFavorite);
+
   console.log(favorites);
   useEffect(() => {
-  
-     console.log(recipeFavorite)
-    
-
+    console.log(recipeFavorite);
   }, [currentUser]);
 
   useEffect(() => {
@@ -104,10 +81,7 @@ const Profile = () => {
       setPosts(filteredPosts);
     }
   }, [currentUser]);
-
-
-
-
+console.log(posts);
   return (
     <Wrapper>
       {currentUser && posts ? (

@@ -23,7 +23,14 @@ const SmallRecipe = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      const ArrayData = data.slice(0, 6);
+      console.log(data);
+      const filteredArray = data.map((dt) => {
+        if (dt.image) {
+          return dt;
+        }
+      });
+
+      const ArrayData = filteredArray.slice(0, 6);
       setNewData(ArrayData);
     }
   }, [data]);

@@ -44,10 +44,10 @@ const PostedRecipes = () => {
     postedRecipe();
  
     const filteredPosts = results.filter((res) => res.username === currentUser);
-    console.log(filteredPosts);
+ 
     setPosts(filteredPosts);
   }, [status === "success"]);
-  console.log(posts);
+
   return (
     <Wrapper>
       {currentUser ? (
