@@ -72,11 +72,13 @@ const Wrapper = styled.div`
   width: 80vw;
   padding: 20px;
   margin-top: -40px;
+
   @media (max-width: 800px) and (max-height: 1024px) {
   }
   @media (max-width: 768px) and (max-height: 900px) {
   }
   @media (max-width: 650px) and (max-height: 850px) {
+    
   }
 `;
 
@@ -90,8 +92,8 @@ const Main = styled.div`
   width: 25vw;
   border-radius: 10px;
   margin: 0px auto;
+  background-color:white;
 
-  background-color: white;
   border: 5px double ${COLORS.primary};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin-top: 10px;
@@ -104,14 +106,15 @@ const Main = styled.div`
 
   @media (max-width: 800px) and (max-height: 1024px) {
     width: 35vw;
-    height: 60vh;
+    height: 40vh;
   }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 35vw;
-
+    height:40vh;
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    width: 60vw;
+    width: 80vw;
+    height:40vh;
   }
 `;
 const Layout = styled.div``;
@@ -135,7 +138,7 @@ const ImageDiv = styled.div``;
 const TitleDiv = styled.div`
   width: 15vw;
   height: 20vh;
-
+  
   padding-bottom: 10px;
   max-width: 25vw;
   height: 15vh;
@@ -148,13 +151,14 @@ const TitleDiv = styled.div`
   }
   @media (max-width: 768px) and (max-height: 900px) {
     width: 40vw;
-
+    max-width:80vw;
     flex-warp: wrap;
     height: 2vh;
   }
-  @media (max-width: 650px) and (max-height: 850px) {
-    width: 40vw;
-    height: 2vh;
+  @media (max-width: 650px)  {
+    width: 100vw;
+    height: 10vh;
+ 
   }
 `;
 const Title = styled.h5`
@@ -170,6 +174,8 @@ const Title = styled.h5`
   @media (max-width: 768px) and (max-height: 900px) {
   }
   @media (max-width: 650px) and (max-height: 850px) {
+    width:100vw;
+    height:10vh;
   }
 `;
 

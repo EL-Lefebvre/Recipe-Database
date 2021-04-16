@@ -42,7 +42,7 @@ const BigRecipe = ({ individualData }) => {
                 })}
               </Category>
             ) : (
-              <div></div>
+              <NoResults></NoResults>
             )}
           </Layout>
           <Description>
@@ -123,21 +123,22 @@ const Layout = styled.div`
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding-bottom:50px;
-  @media (max-width: 800px)  {
+  padding-bottom: 50px;
+  @media (max-width: 800px) {
     flex-direction: column;
+padding-top:50px;
 
-    height: 60vh;
-    min-height: 45vh;
+min-height:40vh;
     max-height: 60vh;
   }
-  @media (max-width: 768px) and (max-height: 900px) {
+  @media (max-width: 768px)  {
     width: 90vw;
-    height:100vh;
-    padding-bottom:50px;
+padding-top:20vh;
+
   }
   @media (max-width: 650px) and (max-height: 850px) {
-    margin-top: -30px;
+ min-height:20vh;
+ max-height:45vh;
   }
 `;
 
@@ -163,6 +164,9 @@ const Description = styled.div`
 `;
 const Name = styled.h2`
   text-decoration: underline;
+`;
+const NoResults = styled.div`
+height:1vh;
 `;
 const Ingredients = styled.div`
   border-bottom: 1px solid black;
@@ -192,7 +196,9 @@ const Category = styled.div`
 justify-content:center;
 
   }
-  @media (max-width: 650px) and (max-height: 850px) {
+  @media (max-width: 650px) {
+    margin-bottom:10vh;
+    
   }
 `;
 const DietWrapper = styled.div`
