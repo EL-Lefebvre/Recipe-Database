@@ -15,6 +15,9 @@ const Blog = () => {
   const [ingredients, setIngredients] = useState("");
   const [fileUpload, setFileUpload] = useState("");
 
+  const addNewPost = (post) => {
+    setPosts([{ ...post }, ...posts]);
+  };
   useEffect(() => {
     let currentUserName = localStorage.getItem("data");
     setUserName(currentUserName);
@@ -36,36 +39,7 @@ const Blog = () => {
     postedRecipe();
   }, []);
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    fetch("/recipes/post", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        title: title,
-        ingredients: ingredients,
-        details: details,
-        fileUpload: fileUpload,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status === 201) {
-          console.log(json);
-          setStatus("success");
-        } else {
-          console.log("error qwerty");
-          setStatus("error");
-        }
-      })
-      .catch((err) => {
-        console.error("err");
-      });
-  };
+
 
   return (
     <Wrapper>
@@ -88,12 +62,13 @@ const Blog = () => {
               </Item>
             </List>
           </LinkDiv>
-        )  :  (
+        ) : (
           <Form
+            addNewPost={addNewPost}
             username={username}
             details={details}
             title={title}
-            handleSubmit={handleSubmit}
+        
             setTitle={setTitle}
             setDetails={setDetails}
             ingredients={ingredients}

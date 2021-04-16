@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Form = ({
   title,
   details,
-  handleSubmit,
+
   username,
   setTitle,
   setDetails,
@@ -15,7 +15,47 @@ const Form = ({
   setFileUpload,
   status,
   setStatus,
+  addNewPost,
 }) => {
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    fetch("/recipes/post", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        title: title,
+        ingredients: ingredients,
+        details: details,
+        fileUpload: fileUpload,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === 201) {
+          console.log(json);
+          setStatus("success");
+          const newPostSuccess = {
+            username: username,
+            title: title,
+            ingredients: ingredients,
+            details: details,
+            fileUpload: fileUpload,
+          };;
+          addNewPost(newPostSuccess);;
+        } else {
+          console.log("error qwerty");
+          setStatus("error");
+        }
+      })
+      .catch((err) => {
+        console.error("err");
+      });
+  };
+
   useEffect(() => {
     if (status === "success") {
       setTitle("");
@@ -26,65 +66,62 @@ const Form = ({
   return (
     <Wrapper>
       <MainForm onSubmit={handleSubmit}>
-      
-          <TitleDiv>
-            <div>
-              <Info
-                type="text"
-                placeholder="Title of your recipe"
-                onChange={(ev) => setTitle(ev.currentTarget.value)}
-                value={title}
-              />
-            </div>
-            <div>
-              <Title placeholder="Username" value={username}>
-                By {username}
-              </Title>
-            </div>
-          </TitleDiv>
-          <TextDiv>
-        
-              <TextIngredients
-                type="text"
-                placeholder="Ingredients"
-                onChange={(ev) => setIngredients(ev.currentTarget.value)}
-                minLength="0"
-                value={ingredients}
-              />
-           
-              <TextArea
-                type="text"
-                placeholder="What's cooking?"
-                onChange={(ev) => setDetails(ev.currentTarget.value)}
-                minLength="0"
-                value={details}
-              />
-         
-            <div>
-              <InputImage
-                max-file-size="1024"
-                type="file"
-                accept=".png, .jpg, .jpeg"
-                onChange={(ev) => {
-                  let files = ev.target.files[0];
-                  const reader = new FileReader();
+        <TitleDiv>
+          <div>
+            <Info
+              type="text"
+              placeholder="Title of your recipe"
+              onChange={(ev) => setTitle(ev.currentTarget.value)}
+              value={title}
+            />
+          </div>
+          <div>
+            <Title placeholder="Username" value={username}>
+              By {username}
+            </Title>
+          </div>
+        </TitleDiv>
+        <TextDiv>
+          <TextIngredients
+            type="text"
+            placeholder="Ingredients"
+            onChange={(ev) => setIngredients(ev.currentTarget.value)}
+            minLength="0"
+            value={ingredients}
+          />
 
-                  if (files) {
-                    reader.onload = (ev) => {
-                      setFileUpload(ev.target.result);
-                    };
-                    reader.readAsDataURL(files);
-                  } else {
-                    setFileUpload("This file is too big");
-                  }
-                }}
-              />
-            </div>
-          </TextDiv>
-          <SubmitBar>
-            <Button type="submit">Submit</Button>
-          </SubmitBar>
-  
+          <TextArea
+            type="text"
+            placeholder="What's cooking?"
+            onChange={(ev) => setDetails(ev.currentTarget.value)}
+            minLength="0"
+            value={details}
+          />
+
+          <div>
+            <InputImage
+              max-file-size="1024"
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              onChange={(ev) => {
+                let files = ev.target.files[0];
+                const reader = new FileReader();
+
+                if (files) {
+                  reader.onload = (ev) => {
+                    setFileUpload(ev.target.result);
+                  };
+                  reader.readAsDataURL(files);
+                } else {
+                  setFileUpload("This file is too big");
+                }
+              }}
+            />
+          </div>
+        </TextDiv>
+        <SubmitBar>
+          <Button type="submit">Submit</Button>
+        </SubmitBar>
       </MainForm>
     </Wrapper>
   );
